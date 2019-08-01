@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>MMA Countdown</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+          content="games, modding, mods, mod, mod support, modio, steamworks, workshop, service, api, sdk, tool, plugin, wrapper, platform, windows, linux, mac, addons, addons, development, engine, unity, unreal, community, hosting, cdn">
+    <meta name="description"
+          content="Ignite a world of creativity with mod.io, a cross platform mod API and SDK for game developers.">
+
+    <!--    <link rel="stylesheet" type="text/css" href="./style.css"  />-->
+    <link rel="shortcut icon" href="https://cdn.iconscout.com/icon/premium/png-256-thumb/clock-220-155041.png"/>
+    <link rel="icon" href="https://cdn.iconscout.com/icon/premium/png-256-thumb/clock-220-155041.png"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+    <style>
+        .has-background-dark-shade {
+            background-color:#1D1D2B;
+        }
+
+        .vertical-align-text-div {
+            position:relative;
+        }
+
+        .vertical-align-text-p {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .big-text {
+            font-family:'Work Sans';
+            font-weight:400;
+        }
+
+        .full-column {
+            width:100%;
+        }
+
+
+
+.work__list-item {
+transform:translateY(0);
+color:black!important;
+padding:18px 0% 20px;
+border-bottom:1px solid #dadada;
+box-shadow:0 0 0 rgba(93,93,93,.16);
+background:linear-gradient(#fbfbfb,#fbfbfb);
+transition:all .3s ease!important;
+}
+.work__list-item .work__list-item--first{
+border-top:1px solid #dadada
+}
+.work__list-item:active,.work__list-item:focus,
+.work__list-item:hover{
+transform:translateY(-3px);
+border-color:transparent;
+box-shadow:0 1px 6px rgba(93,93,93,.16);
+background:linear-gradient(90deg,#2fe0c5,#3bdcc4,#2fe0c5);
+color:#fff!important;
+}
+.work__list-item:active .work-detail,.work__list-item:active .work-title,.work__list-item:focus .work-detail,.work__list-item:focus .work-title,.work__list-item:hover .work-detail,.work__list-item:hover .work-title{
+color:#fff!important;
+}.work__list-item-link{
+display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;max-width:1400px;margin-right:auto;margin-left:auto
+}
+
+
+
+
+
+
+
+.boxes {
+  text-align: center;
+  position: relative;
+  width: 1260px;
+  margin: 0 auto;
+}
+.boxes .box {
+  display: block;
+  float: left;
+  position: relative;
+  width: 400px;
+  height: 350px;
+  text-align: center;
+  border-collapse: collapse;
+  text-decoration: none;
+  color: black;
+  margin: 0 10px;
+}
+.boxes .box h3 {
+  transition: all 0.5s;
+  padding-top: 50px;
+  padding-bottom: 60px;
+  margin: 0;
+  font-size: 2em;
+  text-transform: uppercase;
+}
+.boxes .box i {
+  transition: all 0.4s;
+  font-size: 4em;
+}
+.boxes .box p {
+  transition: all 0.5s;
+  margin-top: 70px;
+}
+.boxes .box:before {
+  transition: all 0.4s;
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 50%;
+  left: 50%;
+  margin-left: -50%;
+  top: 25%;
+  border-color: rgba(200, 200, 200, 0);
+  border-style: solid;
+  border-width: 0 1px;
+}
+.boxes .box:after {
+  transition: all 0.4s;
+  position: absolute;
+  content: "";
+  width: 50%;
+  height: 100%;
+  left: 50%;
+  margin-left: -25%;
+  top: 0;
+  border-color: rgba(200, 200, 200, 0);
+  border-style: solid;
+  border-width: 1px 0;
+}
+.boxes .box:hover {
+  color: #4099ff;
+}
+.boxes .box:hover h3 {
+  padding-top: 80px;
+  padding-bottom: 30px;
+}
+.boxes .box:hover p {
+  margin-top: 30px;
+}
+.boxes .box:hover:after {
+  width: 402px;
+  margin-left: -50%;
+  border-color: rgba(90, 90, 90, 1);
+}
+.boxes .box:hover:before {
+  height: 352px;
+  top: 0%;
+  border-color: rgba(90, 90, 90, 1);
+}
+
+
+    </style>
+
+</head>
+<body id="home">
+<section class="hero is-medium is-bold has-background-dark-shade">
+
+
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item has-text-white-bis">
+                    MMA
+                </a>
+
+                <a class="navbar-item has-text-white-bis">
+                    UFC
+                </a>
+
+                <a class="navbar-item has-text-white-bis">
+                    Bellator
+                </a>
+
+                <a class="navbar-item has-text-white-bis">
+                    PFL
+                </a>
+
+                <a class="navbar-item has-text-white-bis">
+                    Rizen FF
+                </a>
+
+                <a class="navbar-item has-text-white-bis">
+                    ONE Championship
+                </a>
+
+            </div>
+            <div class="navbar-end">
+                <a class="navbar-item has-text-white-bis">
+                    Time Zone
+                </a>
+
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title has-text-light big-text">
+                A <span class="has-text-primary">Website</span> that provides the exact <span class="has-text-primary">time</span>,
+                regardless of <span class="has-text-primary">time zone</span>, of every <span class="has-text-primary">MMA Event</span>
+            </h1>
+            <h2 class="subtitle">
+                Primary bold subtitle
+            </h2>
+        </div>
+    </div>
+
+
+</section>
+
+<section class="hero is-medium is-bold">
+
+
+
+            <div class="work__list-item">
+                <h2 class="work-title">SteelSeries</h2><span>Development, Design, UX </span><span class="work-detail work-company">SteelSeries </span><span
+                    class="work-detail work-date">2017</span></div>
+
+
+
+
+            <div class="hero-body">
+                <div class="container">
+
+
+
+
+                    <div class="work__list">
+
+
+                        <div class="boxes" style="margin-bottom:30px;">
+                        <div class="columns" style="text-align:center;">
+
+                            <div class="box">
+                            <div class="column">
+
+                                <h3>This is the box</h3>
+                                Hello
+                                <p>This is some content for the box</p>
+
+                            </div>
+
+                            </div>
+
+
+                            <div class="box">
+                                <div class="column">
+
+                                    <h3>This is the box</h3>
+                                    Hello
+                                    <p>This is some content for the box</p>
+
+                                </div>
+
+                            </div>
+                            <div class="box">
+                                <div class="column">
+
+                                    <h3>This is the box</h3>
+                                    Hello
+                                    <p>This is some content for the box</p>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        </div>
+
+
+                    <% results.forEach(function(result) { %>
+
+                    <div class="columns is-vcentered work__list-item" style="text-align:center;">
+                        <div class="column big-text">   <!-- Add here the class to make effects on single column -->
+                            <div class="" style="margin-bottom:40px;">Honda Center, Anaheim, California, United States</div>
+                            <h1 class="title has-text-black-bis big-text work-title" style="margin-bottom:40px;"><%= result.name %></h1>
+                            <div class=""><%= result.title %> </div>
+                        </div>
+                        <div class="column is-two-fifths"><p class="title big-text full-column">01M 04D 02H 02MI 47S</p>
+                        </div>
+                        <div class="column"><p class="title big-text full-column"><%= result.when.weekDay %> <%=
+                            result.when.month %>
+                            <%= result.when.day %>, <%= result.when.hour %>:<%= result.when.minute %><%=
+                            result.when.AMPM %> <%= result.when.timeZone %></p></div>
+                    </div>
+
+                    <% }); %>
+                    </div>
+
+
+                    <div class="columns is-vcentered" style="text-align:center;border-bottom:2.5px solid black;">
+                        <div class="column big-text"><h1 class="title has-text-black-bis big-text">
+                            UFC 241<br><span class="has-text-grey">CORMIER VS MIOCIC 2</span>
+                        </h1></div>
+                        <div class="column is-two-fifths"><p class="title big-text full-column">01M 04D 02H 02MI 47S</p>
+                        </div>
+                        <div class="column"><p class="title big-text full-column">Sat. Aug 17, 10:00PM</p></div>
+                    </div>
+
+                    <div class="columns" style="text-align:center">
+                        <div class="column">5</div>
+                        <div class="column">6</div>
+                        <div class="column">7</div>
+                    </div>
+
+                    <div class="columns" style="text-align:center">
+                        <div class="column">9</div>
+                        <div class="column">10</div>
+                        <div class="column">11</div>
+                    </div>
+
+
+                    <h1 class="title has-text-primary big-text">
+                        A <span class="has-text-primary">Website</span> that provides the exact <span
+                            class="has-text-primary">time</span>,
+                        regardless of <span class="has-text-primary">time zone</span>, of every <span
+                            class="has-text-primary">MMA Event</span>
+                    </h1>
+                    <h2 class="subtitle">
+                        Primary bold subtitle
+                    </h2>
+                </div>
+            </div>
+
+
+</section>
+
+</body>
+</html>
