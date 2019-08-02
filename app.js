@@ -2,9 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 8080;
-const path = __dirname + '/views/';
+//const path = __dirname + '/views/';
 
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(express.static(__dirname + '/views'));
+
 
 app.set('view engine', 'ejs');
 
@@ -48,6 +51,12 @@ var eventSchema = new mongoose.Schema({
     hour: String,
     minute: String,
     AMPM: String
+  },
+  location: {
+    name: String,
+    city: String,
+    provState: String,
+    country: String
   }
 });
 
@@ -61,13 +70,18 @@ var ufc241 = new Event ({
     year: '2019',
     month: 'August',
     day: '17',
-    weekDay: 'Saturday',
+    weekDay: 'Sat',
     hour: '10',
     minute: '00',
     AMPM: 'PM'
+  },
+  location: {
+    name: 'Honda Center',
+    city: 'Anaheim',
+    provState: 'California',
+    country: 'United States'
   }
 });
-
 var ufc242 = new Event ({
   name: 'UFC 242',
   title: 'NURMAGOMEDOV VS POIRIER',
@@ -76,15 +90,105 @@ var ufc242 = new Event ({
     year: '2019',
     month: 'September',
     day: '07',
-    weekDay: 'Saturday',
+    weekDay: 'Sat',
     hour: '08',
     minute: '00',
     AMPM: 'PM'
+  },
+  location: {
+    name: 'du Arena',
+    city: 'Abu Dhabi',
+    provState: 'Abu Dhabi',
+    country: 'United Arab Emirates'
+  }
+});
+var bellator225 = new Event ({
+  name: 'Bellator 225',
+  title: 'MITRIONE VS KHARITONOV II',
+  when: {
+    timeZone: 'EST',
+    year: '2019',
+    month: 'August',
+    day: '24',
+    weekDay: 'Sat',
+    hour: '08',
+    minute: '00',
+    AMPM: 'PM'
+  },
+  location: {
+    name: 'Webster Bank Arena',
+    city: 'Bridgeport',
+    provState: 'Connecticut',
+    country: 'United States'
+  }
+});
+var bellator226 = new Event ({
+  name: 'Bellator 225',
+  title: 'BADER VS KONGO',
+  when: {
+    timeZone: 'EST',
+    year: '2019',
+    month: 'September',
+    day: '07',
+    weekDay: 'Sat',
+    hour: '08',
+    minute: '00',
+    AMPM: 'PM'
+  },
+  location: {
+    name: 'SAP Center',
+    city: 'Bridgeport',
+    provState: 'Connecticut',
+    country: 'United States'
+  }
+});
+var pfl6 = new Event ({
+  name: 'PFL 6',
+  title: 'TILLER VS GOLTSOV',
+  when: {
+    timeZone: 'EST',
+    year: '2019',
+    month: 'August',
+    day: '08',
+    weekDay: 'Thu',
+    hour: '08',
+    minute: '00',
+    AMPM: 'PM'
+  },
+  location: {
+    name: 'Ocean Resort Casino',
+    city: 'Atlantic City',
+    provState: 'New Jersey',
+    country: 'United States'
+  }
+});
+var pfl7 = new Event ({
+  name: 'PFL 7',
+  title: 'TBA VS TBA',
+  when: {
+    timeZone: 'EST',
+    year: '2019',
+    month: 'October',
+    day: '11',
+    weekDay: 'Fri',
+    hour: '08',
+    minute: '00',
+    AMPM: 'PM'
+  },
+  location: {
+    name: 'Mandalay Bay Events Center',
+    city: 'Las Vegas',
+    provState: 'Nevada',
+    country: 'United States'
   }
 });
 // Saving it to the database.
-ufc241.save(function (err) {if (err) console.log ('Error on save!')});
+pfl7.save(function (err) {if (err) console.log ('Error on save!')});
 ufc242.save(function (err) {if (err) console.log ('Error on save!')});
+bellator226.save(function (err) {if (err) console.log ('Error on save!')});
+bellator225.save(function (err) {if (err) console.log ('Error on save!')});
+ufc241.save(function (err) {if (err) console.log ('Error on save!')});
+pfl6.save(function (err) {if (err) console.log ('Error on save!')});
 
 
 
@@ -143,7 +247,8 @@ app.delete('/user', function (req, res) {
 app.get('/ufc', function(req, res){
 //    res.send( 'Hello World!' );
 //    res.sendFile( __dirname + "/public/" + "index1.html" );
-    res.sendFile( path + "ufc.html" );
+    res.render('ufc');
+//    res.sendFile( path + "ufc.html" );
 });
 
 app.post('/ufc', function(req, res) {

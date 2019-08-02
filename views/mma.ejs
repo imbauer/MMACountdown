@@ -81,8 +81,8 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
 .boxes {
   text-align: center;
   position: relative;
-  width: 1260px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0 0;
 }
 .boxes .box {
   display: block;
@@ -164,51 +164,61 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
 
 </head>
 <body id="home">
-<section class="hero is-medium is-bold has-background-dark-shade">
-
-
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-
-
-        <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-start">
-                <a class="navbar-item has-text-white-bis">
-                    MMA
-                </a>
-
-                <a class="navbar-item has-text-white-bis">
-                    UFC
-                </a>
-
-                <a class="navbar-item has-text-white-bis">
-                    Bellator
-                </a>
-
-                <a class="navbar-item has-text-white-bis">
-                    PFL
-                </a>
-
-                <a class="navbar-item has-text-white-bis">
-                    Rizen FF
-                </a>
-
-                <a class="navbar-item has-text-white-bis">
-                    ONE Championship
-                </a>
-
-            </div>
-            <div class="navbar-end">
-                <a class="navbar-item has-text-white-bis">
-                    Time Zone
-                </a>
-
-            </div>
-        </div>
-    </nav>
+<!--<section class="hero is-medium is-bold has-background-dark-shade">-->
+<section class="hero is-medium is-bold has-background-grey-lighter">
 
 
     <div class="hero-body">
         <div class="container">
+
+
+
+            <div class="boxes" style="margin-bottom:30px;">
+                <div class="columns" style="text-align:center;">
+
+                    <div class="box" style="margin:0;padding:0;float:left;">
+                        <div class="column">
+
+                            <h3>Competitive Levels</h3>
+                            'Currently Selected'
+                            <p>This is some content for the box</p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="box" style="padding:0;margin:auto;">
+                        <div class="column">
+
+                            <h3>Organizations</h3>
+                            'Currently Selected'
+                            <p>This is some content for the box</p>
+
+                        </div>
+
+                    </div>
+                    <div class="box" style="margin:0;padding:0;float:right;">
+                        <div class="column">
+
+                            <h3>Time Zone & Locations</h3>
+                            'Currently Selected'
+                            <p>This is some content for the box</p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+
             <h1 class="title has-text-light big-text">
                 A <span class="has-text-primary">Website</span> that provides the exact <span class="has-text-primary">time</span>,
                 regardless of <span class="has-text-primary">time zone</span>, of every <span class="has-text-primary">MMA Event</span>
@@ -216,6 +226,10 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
             <h2 class="subtitle">
                 Primary bold subtitle
             </h2>
+
+
+
+
         </div>
     </div>
 
@@ -236,7 +250,20 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
             <div class="hero-body">
                 <div class="container">
 
-
+                    <div class="columns">
+                        <div class="column" style="background-color:red;">
+                            First column
+                        </div>
+                        <div class="column">
+                            Second column
+                        </div>
+                        <div class="column">
+                            Third column
+                        </div>
+                        <div class="column" style="background-color:orange;">
+                            Fourth column
+                        </div>
+                    </div>
 
 
                     <div class="work__list">
@@ -245,11 +272,11 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
                         <div class="boxes" style="margin-bottom:30px;">
                         <div class="columns" style="text-align:center;">
 
-                            <div class="box">
+                            <div class="box" style="margin:0;padding:0;float:left;">
                             <div class="column">
 
-                                <h3>This is the box</h3>
-                                Hello
+                                <h3>Competitive Levels</h3>
+                                'Currently Selected'
                                 <p>This is some content for the box</p>
 
                             </div>
@@ -257,21 +284,21 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
                             </div>
 
 
-                            <div class="box">
+                            <div class="box" style="padding:0;margin:auto;">
                                 <div class="column">
 
-                                    <h3>This is the box</h3>
-                                    Hello
+                                    <h3>Organizations</h3>
+                                    'Currently Selected'
                                     <p>This is some content for the box</p>
 
                                 </div>
 
                             </div>
-                            <div class="box">
+                            <div class="box" style="margin:0;padding:0;float:right;">
                                 <div class="column">
 
-                                    <h3>This is the box</h3>
-                                    Hello
+                                    <h3>Time Zone & Locations</h3>
+                                    'Currently Selected'
                                     <p>This is some content for the box</p>
 
                                 </div>
@@ -282,48 +309,62 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
                         </div>
 
                         </div>
+                        <ul>
+                            <% results.forEach(function(result, key) { %>
+                            <li id="page_<%= key %>"><%= result %></li>
+                            <p>page_<%= key %></p>
+                            <% }); %>
+                        </ul>
 
-
-                    <% results.forEach(function(result) { %>
+                    <% results.forEach(function(result, key) { %>
 
                     <div class="columns is-vcentered work__list-item" style="text-align:center;">
-                        <div class="column big-text">   <!-- Add here the class to make effects on single column -->
-                            <div class="" style="margin-bottom:40px;">Honda Center, Anaheim, California, United States</div>
-                            <h1 class="title has-text-black-bis big-text work-title" style="margin-bottom:40px;"><%= result.name %></h1>
+                        <div class="column" style="font-size:1.7em;">01M 04D 02H 02MI 47S
+                            <button onclick="someFunction(
+                            '<%=result.when.month %> <%= result.when.day %>, <%= result.when.year %> <%= result.when.hour %>:<%=result.when.minute %>:00',
+                            '<%= key %>'
+                            )">
+                                Click me
+                            </button>
+                            <p id="timer_<%= key %>">
+                                <span id="timer-days_<%= key %>"></span>
+                                <span id="timer-hours_<%= key %>"></span>
+                                <span id="timer-mins_<%= key %>"></span>
+                                <span id="timer-secs_<%= key %>"></span>
+                            </p>
+                            <%=result.when.month %> <%= result.when.day %>,
+                            <%= result.when.year %> <%= result.when.hour %>:<%=result.when.minute %>:00
+                        </div>
+                        <div class="column big-text is-two-fifths">   <!-- Add here the class to make effects on single column -->
+                            <div class="" style="margin-bottom:20px;"><%= result.location.name %>, <%= result.location.city %>, <%= result.location.provState %>, <%= result.location.country %></div>
+                            <h1 class="title has-text-black-bis big-text work-title" style="margin-bottom:20px;"><%= result.name %></h1>
                             <div class=""><%= result.title %> </div>
                         </div>
-                        <div class="column is-two-fifths"><p class="title big-text full-column">01M 04D 02H 02MI 47S</p>
-                        </div>
-                        <div class="column"><p class="title big-text full-column"><%= result.when.weekDay %> <%=
+                        <div class="column" style="font-size:1.7em;"><%= result.when.weekDay %> <%=
                             result.when.month %>
                             <%= result.when.day %>, <%= result.when.hour %>:<%= result.when.minute %><%=
-                            result.when.AMPM %> <%= result.when.timeZone %></p></div>
+                            result.when.AMPM %> <%= result.when.timeZone %></div>
                     </div>
 
                     <% }); %>
                     </div>
 
 
-                    <div class="columns is-vcentered" style="text-align:center;border-bottom:2.5px solid black;">
-                        <div class="column big-text"><h1 class="title has-text-black-bis big-text">
-                            UFC 241<br><span class="has-text-grey">CORMIER VS MIOCIC 2</span>
-                        </h1></div>
-                        <div class="column is-two-fifths"><p class="title big-text full-column">01M 04D 02H 02MI 47S</p>
-                        </div>
-                        <div class="column"><p class="title big-text full-column">Sat. Aug 17, 10:00PM</p></div>
-                    </div>
 
-                    <div class="columns" style="text-align:center">
-                        <div class="column">5</div>
-                        <div class="column">6</div>
-                        <div class="column">7</div>
-                    </div>
 
-                    <div class="columns" style="text-align:center">
-                        <div class="column">9</div>
-                        <div class="column">10</div>
-                        <div class="column">11</div>
-                    </div>
+                    <div style="margin-top:50px;"></div>
+                    <button onclick="myFunction()">Click me</button>
+
+                    <p id="here"></p>
+
+                    <script src="script.js"></script>
+
+                    <p id="timer">
+                        <span id="timer-days"></span>
+                        <span id="timer-hours"></span>
+                        <span id="timer-mins"></span>
+                        <span id="timer-secs"></span>
+                    </p>
 
 
                     <h1 class="title has-text-primary big-text">
