@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600" rel="stylesheet">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="script.js"></script>
 
     <style>
         .has-background-dark-shade {
@@ -319,7 +320,7 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
                     <% results.forEach(function(result, key) { %>
 
                     <div class="columns is-vcentered work__list-item" style="text-align:center;">
-                        <div class="column" style="font-size:1.7em;">01M 04D 02H 02MI 47S
+                        <div class="column" style="font-size:1.7em;">
                             <button onclick="someFunction(
                             '<%=result.when.month %> <%= result.when.day %>, <%= result.when.year %> <%= result.when.hour %>:<%=result.when.minute %>:00',
                             '<%= key %>'
@@ -332,8 +333,6 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
                                 <span id="timer-mins_<%= key %>"></span>
                                 <span id="timer-secs_<%= key %>"></span>
                             </p>
-                            <%=result.when.month %> <%= result.when.day %>,
-                            <%= result.when.year %> <%= result.when.hour %>:<%=result.when.minute %>:00
                         </div>
                         <div class="column big-text is-two-fifths">   <!-- Add here the class to make effects on single column -->
                             <div class="" style="margin-bottom:20px;"><%= result.location.name %>, <%= result.location.city %>, <%= result.location.provState %>, <%= result.location.country %></div>
@@ -353,18 +352,7 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
 
 
                     <div style="margin-top:50px;"></div>
-                    <button onclick="myFunction()">Click me</button>
 
-                    <p id="here"></p>
-
-                    <script src="script.js"></script>
-
-                    <p id="timer">
-                        <span id="timer-days"></span>
-                        <span id="timer-hours"></span>
-                        <span id="timer-mins"></span>
-                        <span id="timer-secs"></span>
-                    </p>
 
 
                     <h1 class="title has-text-primary big-text">

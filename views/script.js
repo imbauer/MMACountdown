@@ -31,7 +31,7 @@ function someFunction(endDateString, idTag) {
             "MIN(S) ";
 
             document.getElementById("timer-secs_"+idTag).innerHTML = ("0"+secs).slice(-2) +
-            "SEC(S)" + endDateString;
+            "SEC(S)";
 
         } else {
 
