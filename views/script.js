@@ -21,17 +21,13 @@ function someFunction(endDateString, idTag) {
             var mins = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
             var secs = Math.floor((t % (1000 * 60)) / 1000);
 
-            document.getElementById("timer-days_"+idTag).innerHTML = days +
-            "DAY(S) ";
+            document.getElementById("timer-days_"+idTag).innerHTML = days;
 
-            document.getElementById("timer-hours_"+idTag).innerHTML = ("0"+hours).slice(-2) +
-            "HR(S) ";
+            document.getElementById("timer-hours_"+idTag).innerHTML = ("0"+hours).slice(-2);
 
-            document.getElementById("timer-mins_"+idTag).innerHTML = ("0"+mins).slice(-2) +
-            "MIN(S) ";
+            document.getElementById("timer-mins_"+idTag).innerHTML = ("0"+mins).slice(-2);
 
-            document.getElementById("timer-secs_"+idTag).innerHTML = ("0"+secs).slice(-2) +
-            "SEC(S)";
+            document.getElementById("timer-secs_"+idTag).innerHTML = ("0"+secs).slice(-2);
 
         } else {
 

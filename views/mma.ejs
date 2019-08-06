@@ -89,16 +89,18 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
   display: block;
   float: left;
   position: relative;
-  width: 400px;
+  width: 29%;
   height: 350px;
   text-align: center;
   border-collapse: collapse;
   text-decoration: none;
   color: black;
   margin: 0 10px;
+  -webkit-transition: all .4s;
+  transition: all .4s;
 }
 .boxes .box h3 {
-  transition: all 0.5s;
+  transition: all 0.4s;
   padding-top: 50px;
   padding-bottom: 60px;
   margin: 0;
@@ -140,6 +142,8 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
   border-width: 1px 0;
 }
 .boxes .box:hover {
+  width:42%;
+  height:500px;
   color: #4099ff;
 }
 .boxes .box:hover h3 {
@@ -160,6 +164,82 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
   border-color: rgba(90, 90, 90, 1);
 }
 
+<!--@media screen and (max-width: 1024px) {-->
+<!--    .countdownMonitorDisplay {-->
+<!--        display: none !important;-->
+<!--    }-->
+<!--}-->
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300);
+.circleDiv {
+  align-items: center;
+  background: #222;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.svg-container {
+  height: 124px;
+  position: relative;
+  width: 124px;
+}
+.svg-container h1 {
+  color: #aaa;
+  font-family: "Source Sans Pro";
+  font-size: 1.2rem;
+  left: 50%;
+  letter-spacing: 4px;
+  position: absolute;
+  text-align: center;
+  top: -60px;
+  transform: translateX(-50%);
+  width: 100%;
+}
+.circle {
+  height: 124px;
+  width: 124px;
+}
+.circle .background {
+  fill: transparent;
+  stroke: #1abc9c;
+  transition: all 200ms ease;
+}
+.circle .foreground {
+  fill: transparent;
+  stroke-dasharray: 377;
+  stroke-dashoffset: 377;
+  stroke: #ee3769;
+  transform-origin: 50% 50%;
+  transform: rotate(-270deg);
+  transition: all 800ms ease;
+}
+.circle .line {
+  stroke-width: 2;
+  stroke: #1abc9c;
+  transform-origin: 50% 50%;
+  transition: all 500ms ease;
+}
+.circle .line2 {
+  transform: rotate(-90deg);
+}
+.circle:hover {
+  cursor: pointer;
+}
+.circle:hover .background {
+  stroke: transparent;
+}
+.circle:hover .foreground {
+  stroke-dashoffset: 0;
+  transform: rotate(-90deg);
+}
+.circle:hover .line {
+  stroke: #ee3769;
+}
+.circle:hover .line {
+  transform: rotate(180deg);
+}
+.circle:hover .line2 {
+  transform: rotate(0);
+}
 
     </style>
 
@@ -168,7 +248,16 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
 <!--<section class="hero is-medium is-bold has-background-dark-shade">-->
 <section class="hero is-medium is-bold has-background-grey-lighter">
 
-
+    <section class="svg-container">
+        <svg class="circle" xmlns="http://www.w3.org/2000/svg">
+            <g>
+                <ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>
+                <ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>
+                <line class="line line1" x1="52" y1="62" x2="74" y2="62" />
+                <line class="line line2" x1="52" y1="62" x2="74" y2="62" />
+            </g>
+        </svg>
+    </section>
     <div class="hero-body">
         <div class="container">
 
@@ -184,12 +273,48 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
                             'Currently Selected'
                             <p>This is some content for the box</p>
 
+                            <div class="columns">
+                                <div class="column">
+                                    <span>UFC</span>
+                                    <a>
+                                    <svg class="circle" xmlns="http://www.w3.org/2000/svg">
+                                        <g>
+                                            <ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>
+                                            <ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>
+                                            <line class="line line1" x1="52" y1="62" x2="74" y2="62" />
+                                            <line class="line line2" x1="52" y1="62" x2="74" y2="62" />
+                                        </g>
+                                    </svg>
+                                    </a>
+                                </div>
+                                <div class="column">
+                                    <svg class="circle" xmlns="http://www.w3.org/2000/svg">
+                                        <g>
+                                            <ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>
+                                            <ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>
+                                            <line class="line line1" x1="52" y1="62" x2="74" y2="62" />
+                                            <line class="line line2" x1="52" y1="62" x2="74" y2="62" />
+                                        </g>
+                                    </svg>
+                                </div>
+                                <div class="column">
+                                    <svg class="circle" xmlns="http://www.w3.org/2000/svg">
+                                        <g>
+                                            <ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>
+                                            <ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>
+                                            <line class="line line1" x1="52" y1="62" x2="74" y2="62" />
+                                            <line class="line line2" x1="52" y1="62" x2="74" y2="62" />
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>
 
 
-                    <div class="box" style="padding:0;margin:auto;">
+                    <div class="box" style="padding:0;margin-left:auto;margin-right:auto;">
                         <div class="column">
 
                             <h3>Organizations</h3>
@@ -241,98 +366,94 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
 
 
 
-            <div class="work__list-item">
-                <h2 class="work-title">SteelSeries</h2><span>Development, Design, UX </span><span class="work-detail work-company">SteelSeries </span><span
-                    class="work-detail work-date">2017</span></div>
-
-
-
 
             <div class="hero-body">
                 <div class="container">
 
-                    <div class="columns">
-                        <div class="column" style="background-color:red;">
-                            First column
-                        </div>
-                        <div class="column">
-                            Second column
-                        </div>
-                        <div class="column">
-                            Third column
-                        </div>
-                        <div class="column" style="background-color:orange;">
-                            Fourth column
-                        </div>
-                    </div>
-
-
                     <div class="work__list">
 
 
-                        <div class="boxes" style="margin-bottom:30px;">
-                        <div class="columns" style="text-align:center;">
+<!--                        <div class="boxes" style="margin-bottom:30px;">-->
+<!--                        <div class="columns" style="text-align:center;">-->
 
-                            <div class="box" style="margin:0;padding:0;float:left;">
-                            <div class="column">
+<!--                            <div class="box" style="margin:0;padding:0;float:left;">-->
+<!--                            <div class="column">-->
 
-                                <h3>Competitive Levels</h3>
-                                'Currently Selected'
-                                <p>This is some content for the box</p>
+<!--                                <h3>Competitive Levels</h3>-->
+<!--                                'Currently Selected'-->
+<!--                                <p>This is some content for the box</p>-->
 
-                            </div>
+<!--                            </div>-->
 
-                            </div>
-
-
-                            <div class="box" style="padding:0;margin:auto;">
-                                <div class="column">
-
-                                    <h3>Organizations</h3>
-                                    'Currently Selected'
-                                    <p>This is some content for the box</p>
-
-                                </div>
-
-                            </div>
-                            <div class="box" style="margin:0;padding:0;float:right;">
-                                <div class="column">
-
-                                    <h3>Time Zone & Locations</h3>
-                                    'Currently Selected'
-                                    <p>This is some content for the box</p>
-
-                                </div>
-
-                            </div>
+<!--                            </div>-->
 
 
-                        </div>
+<!--                            <div class="box" style="padding:0;margin:auto;">-->
+<!--                                <div class="column">-->
 
-                        </div>
-                        <ul>
-                            <% results.forEach(function(result, key) { %>
-                            <li id="page_<%= key %>"><%= result %></li>
-                            <p>page_<%= key %></p>
-                            <% }); %>
-                        </ul>
+<!--                                    <h3>Organizations</h3>-->
+<!--                                    'Currently Selected'-->
+<!--                                    <p>This is some content for the box</p>-->
+
+<!--                                </div>-->
+
+<!--                            </div>-->
+<!--                            <div class="box" style="margin:0;padding:0;float:right;">-->
+<!--                                <div class="column">-->
+
+<!--                                    <h3>Time Zone & Locations</h3>-->
+<!--                                    'Currently Selected'-->
+<!--                                    <p>This is some content for the box</p>-->
+
+<!--                                </div>-->
+
+<!--                            </div>-->
+
+
+<!--                        </div>-->
+
+<!--                        </div>-->
+<!--                        <ul>-->
+<!--                            <% results.forEach(function(result, key) { %>-->
+<!--                            <li id="page_<%= key %>"><%= result %></li>-->
+<!--                            <p>page_<%= key %></p>-->
+<!--                            <% }); %>-->
+<!--                        </ul>-->
 
                     <% results.forEach(function(result, key) { %>
 
                     <div class="columns is-vcentered work__list-item" style="text-align:center;">
                         <div class="column" style="font-size:1.7em;">
-                            <button onclick="someFunction(
+                            <iframe style="display:none" onload="someFunction(
                             '<%=result.when.month %> <%= result.when.day %>, <%= result.when.year %> <%= result.when.hour %>:<%=result.when.minute %>:00',
                             '<%= key %>'
-                            )">
-                                Click me
-                            </button>
-                            <p id="timer_<%= key %>">
-                                <span id="timer-days_<%= key %>"></span>
-                                <span id="timer-hours_<%= key %>"></span>
-                                <span id="timer-mins_<%= key %>"></span>
-                                <span id="timer-secs_<%= key %>"></span>
-                            </p>
+                            )"></iframe>
+
+                            <div class="columns is-gapless is-multiline is-mobile" style="margin:0;" id="timer_<%= key %>">
+                                <div class="column is-one-quarter"><span id="timer-days_<%= key %>"></span>
+                                </div>
+                                <div class="column is-one-quarter has-text-grey"><span id="timer-hours_<%= key %>"></span>
+                                </div>
+                                <div class="column is-one-quarter has-text-grey-light"><span id="timer-mins_<%= key %>"></span>
+                                </div>
+                                <div class="column is-one-quarter has-text-grey-lighter"><span id="timer-secs_<%= key %>"></span>
+                                </div>
+
+                                <div class="column is-one-quarter">DAY(S)
+                                </div>
+                                <div class="column is-one-quarter has-text-grey">HR(S)
+                                </div>
+                                <div class="column is-one-quarter has-text-grey-light">MIN(S)
+                                </div>
+                                <div class="column is-one-quarter has-text-grey-lighter">SEC(S)
+                                </div>
+                            </div>
+<!--                            <p id="timer_<%= key %>" style="font-size:20px;">-->
+<!--                                <span id="timer-days_<%= key %>"></span>-->
+<!--                                <span id="timer-hours_<%= key %>"></span>-->
+<!--                                <span id="timer-mins_<%= key %>"></span>-->
+<!--                                <span id="timer-secs_<%= key %>"></span>-->
+<!--                            </p>-->
                         </div>
                         <div class="column big-text is-two-fifths">   <!-- Add here the class to make effects on single column -->
                             <div class="" style="margin-bottom:20px;"><%= result.location.name %>, <%= result.location.city %>, <%= result.location.provState %>, <%= result.location.country %></div>
