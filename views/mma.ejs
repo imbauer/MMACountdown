@@ -90,11 +90,12 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
   float: left;
   position: relative;
   width: 29%;
-  height: 350px;
+<!--  height: 450px;-->
   text-align: center;
   border-collapse: collapse;
   text-decoration: none;
   color: black;
+  background: #222;
   margin: 0 10px;
   -webkit-transition: all .4s;
   transition: all .4s;
@@ -104,6 +105,7 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
   padding-top: 50px;
   padding-bottom: 60px;
   margin: 0;
+  color:hsl(0, 0%, 96%);
   font-size: 2em;
   text-transform: uppercase;
 }
@@ -112,69 +114,71 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
   font-size: 4em;
 }
 .boxes .box p {
+  color:hsl(0, 0%, 96%);
   transition: all 0.5s;
   margin-top: 70px;
 }
-.boxes .box:before {
-  transition: all 0.4s;
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 50%;
-  left: 50%;
-  margin-left: -50%;
-  top: 25%;
-  border-color: rgba(200, 200, 200, 0);
-  border-style: solid;
-  border-width: 0 1px;
-}
-.boxes .box:after {
-  transition: all 0.4s;
-  position: absolute;
-  content: "";
-  width: 50%;
-  height: 100%;
-  left: 50%;
-  margin-left: -25%;
-  top: 0;
-  border-color: rgba(200, 200, 200, 0);
-  border-style: solid;
-  border-width: 1px 0;
-}
-.boxes .box:hover {
-  width:42%;
-  height:500px;
-  color: #4099ff;
-}
-.boxes .box:hover h3 {
-  padding-top: 80px;
-  padding-bottom: 30px;
-}
-.boxes .box:hover p {
-  margin-top: 30px;
-}
-.boxes .box:hover:after {
-  width: 402px;
-  margin-left: -50%;
-  border-color: rgba(90, 90, 90, 1);
-}
-.boxes .box:hover:before {
-  height: 352px;
-  top: 0%;
-  border-color: rgba(90, 90, 90, 1);
-}
+<!--.boxes .box:before {-->
+<!--  transition: all 0.4s;-->
+<!--  position: absolute;-->
+<!--  content: "";-->
+<!--  width: 100%;-->
+<!--  height: 50%;-->
+<!--  left: 50%;-->
+<!--  margin-left: -50%;-->
+<!--  top: 25%;-->
+<!--  border-color: rgba(200, 200, 200, 0);-->
+<!--  border-style: solid;-->
+<!--  border-width: 0 1px;-->
+<!--}-->
+<!--.boxes .box:after {-->
+<!--  transition: all 0.4s;-->
+<!--  position: absolute;-->
+<!--  content: "";-->
+<!--  width: 50%;-->
+<!--  height: 100%;-->
+<!--  left: 50%;-->
+<!--  margin-left: -25%;-->
+<!--  top: 0;-->
+<!--  border-color: rgba(200, 200, 200, 0);-->
+<!--  border-style: solid;-->
+<!--  border-width: 1px 0;-->
+<!--}-->
+<!--.boxes .box:hover {-->
+<!--  width:42%;-->
+<!--  height:500px;-->
+<!--  color: #4099ff;-->
+<!--}-->
+<!--.boxes .box:hover h3 {-->
+<!--  padding-top: 80px;-->
+<!--  padding-bottom: 30px;-->
+<!--}-->
+<!--.boxes .box:hover p {-->
+<!--  margin-top: 30px;-->
+<!--}-->
+<!--.boxes .box:hover:after {-->
+<!--  width: 402px;-->
+<!--  margin-left: -50%;-->
+<!--  border-color: rgba(90, 90, 90, 1);-->
+<!--}-->
+<!--.boxes .box:hover:before {-->
+<!--  height: 352px;-->
+<!--  top: 0%;-->
+<!--  border-color: rgba(90, 90, 90, 1);-->
+<!--}-->
 
 <!--@media screen and (max-width: 1024px) {-->
 <!--    .countdownMonitorDisplay {-->
 <!--        display: none !important;-->
 <!--    }-->
 <!--}-->
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300);
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,900');
+/* Font from Google fonts */
+/* Basic styles */
 .circleDiv {
   align-items: center;
   background: #222;
   display: flex;
-  flex-direction: column;
   justify-content: center;
 }
 .svg-container {
@@ -197,6 +201,8 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
 .circle {
   height: 124px;
   width: 124px;
+  opacity: 0.6;
+  transition: all 200ms ease;
 }
 .circle .background {
   fill: transparent;
@@ -222,23 +228,67 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
   transform: rotate(-90deg);
 }
 .circle:hover {
+  opacity: 1;
   cursor: pointer;
 }
-.circle:hover .background {
+/* Form Styles */
+label {
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+.form__button {
+  height: 40px;
+  border: none;
+  background-color: green;
+  color: white;
+  text-transform: uppercase;
+  font-family: 'Source Sans Pro', sans-serif;
+  padding: 0 20px;
+  border-radius: 20px;
+  font-weight: 900;
+  cursor: pointer;
+  margin: 20px 0;
+  transition: all 0.25s ease-in-out;
+}
+.form__button:hover, .form__button:focus {
+  background-color: dark-green;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, .25);
+  outline: none;
+}
+/* Input style */
+input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+input[type="checkbox"]:active ~ label {
+  opacity: 1;
+}
+input[type="checkbox"]:checked ~ label {
+  opacity: 1;
+  cursor: pointer;
+}
+input[type="checkbox"]:checked ~ label .background {
   stroke: transparent;
 }
-.circle:hover .foreground {
+input[type="checkbox"]:checked ~ label .foreground {
   stroke-dashoffset: 0;
   transform: rotate(-90deg);
 }
-.circle:hover .line {
+input[type="checkbox"]:checked ~ label .line {
   stroke: #ee3769;
 }
-.circle:hover .line {
+input[type="checkbox"]:checked ~ label .line {
   transform: rotate(180deg);
 }
-.circle:hover .line2 {
+input[type="checkbox"]:checked ~ label .line2 {
   transform: rotate(0);
+}
+.sign {
+    color: #aaa;
+    font-family: "Source Sans Pro";
+    font-size: 1.2rem;
+    text-align: center;
 }
 
     </style>
@@ -246,17 +296,17 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
 </head>
 <body id="home">
 <!--<section class="hero is-medium is-bold has-background-dark-shade">-->
-<section class="hero is-medium is-bold has-background-grey-lighter">
+<section class="hero is-medium is-bold has-background-dark">
 
     <section class="svg-container">
-        <svg class="circle" xmlns="http://www.w3.org/2000/svg">
-            <g>
-                <ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>
-                <ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>
-                <line class="line line1" x1="52" y1="62" x2="74" y2="62" />
-                <line class="line line2" x1="52" y1="62" x2="74" y2="62" />
-            </g>
-        </svg>
+<!--        <svg class="circle" xmlns="http://www.w3.org/2000/svg">-->
+<!--            <g>-->
+<!--                <ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>-->
+<!--                <ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>-->
+<!--                <line class="line line1" x1="52" y1="62" x2="74" y2="62" />-->
+<!--                <line class="line line2" x1="52" y1="62" x2="74" y2="62" />-->
+<!--            </g>-->
+<!--        </svg>-->
     </section>
     <div class="hero-body">
         <div class="container">
@@ -273,40 +323,36 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
                             'Currently Selected'
                             <p>This is some content for the box</p>
 
-                            <div class="columns">
-                                <div class="column">
-                                    <span>UFC</span>
-                                    <a>
-                                    <svg class="circle" xmlns="http://www.w3.org/2000/svg">
-                                        <g>
-                                            <ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>
-                                            <ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>
-                                            <line class="line line1" x1="52" y1="62" x2="74" y2="62" />
-                                            <line class="line line2" x1="52" y1="62" x2="74" y2="62" />
-                                        </g>
-                                    </svg>
-                                    </a>
+                            <div class="columns is-gapless is-multiline">
+
+                                <div class="column is-one-half">
+                                    <form>
+                                        <fieldset>
+                                            <input type="checkbox" name="match" id="match_5" value="bacon">
+                                            <label for="match_5" style="pointer-events: auto;">
+                                                <svg class="circle" xmlns="http://www.w3.org/2000/svg"><g><ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/><ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/><line class="line line1" x1="52" y1="62" x2="74" y2="62" />   <line class="line line2" x1="52" y1="62" x2="74" y2="62" /></g></svg>
+                                                <span class="sign">Amateur</span>
+                                            </label>
+                                        </fieldset>
+<!--                                        <button class="form__button" type="submit">Submit your info</button>-->
+                                    </form>
                                 </div>
-                                <div class="column">
-                                    <svg class="circle" xmlns="http://www.w3.org/2000/svg">
-                                        <g>
-                                            <ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>
-                                            <ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>
-                                            <line class="line line1" x1="52" y1="62" x2="74" y2="62" />
-                                            <line class="line line2" x1="52" y1="62" x2="74" y2="62" />
-                                        </g>
-                                    </svg>
+                                <div class="column is-one-half">
+                                    <form>
+                                        <fieldset>
+                                            <input type="checkbox" name="match" id="match_8" value="bacon">
+                                            <label for="match_8" style="pointer-events: auto;">
+                                                <svg class="circle" xmlns="http://www.w3.org/2000/svg"><g><ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/><ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/><line class="line line1" x1="52" y1="62" x2="74" y2="62" />   <line class="line line2" x1="52" y1="62" x2="74" y2="62" /></g></svg>
+                                                <span class="sign">Professional</span>
+                                            </label>
+                                        </fieldset>
+<!--                                        <button class="form__button" type="submit">Submit your info</button>-->
+                                    </form>
                                 </div>
-                                <div class="column">
-                                    <svg class="circle" xmlns="http://www.w3.org/2000/svg">
-                                        <g>
-                                            <ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>
-                                            <ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>
-                                            <line class="line line1" x1="52" y1="62" x2="74" y2="62" />
-                                            <line class="line line2" x1="52" y1="62" x2="74" y2="62" />
-                                        </g>
-                                    </svg>
-                                </div>
+
+
+
+
                             </div>
 
                         </div>
@@ -314,7 +360,13 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
                     </div>
 
 
+
+
+
                     <div class="box" style="padding:0;margin-left:auto;margin-right:auto;">
+
+
+
                         <div class="column">
 
                             <h3>Organizations</h3>
@@ -349,7 +401,7 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
                 A <span class="has-text-primary">Website</span> that provides the exact <span class="has-text-primary">time</span>,
                 regardless of <span class="has-text-primary">time zone</span>, of every <span class="has-text-primary">MMA Event</span>
             </h1>
-            <h2 class="subtitle">
+            <h2 class="subtitle has-text-light">
                 Primary bold subtitle
             </h2>
 
@@ -364,61 +416,23 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
 
 <section class="hero is-medium is-bold">
 
+<!--    <form>-->
+<!--        <fieldset>-->
+<!--            <input type="checkbox" name="match" id="match_4" value="bacon">-->
+<!--            <label for="match_4">-->
+<!--                <svg class="circle" xmlns="http://www.w3.org/2000/svg"><g><ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/><ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/><line class="line line1" x1="52" y1="62" x2="74" y2="62" />   <line class="line line2" x1="52" y1="62" x2="74" y2="62" /></g></svg>-->
+<!--            </label>-->
+<!--        </fieldset>-->
+<!--        <button class="form__button" type="submit">Submit your info</button>-->
+<!--    </form>-->
 
 
 
-            <div class="hero-body">
+
+    <div class="hero-body">
                 <div class="container">
 
                     <div class="work__list">
-
-
-<!--                        <div class="boxes" style="margin-bottom:30px;">-->
-<!--                        <div class="columns" style="text-align:center;">-->
-
-<!--                            <div class="box" style="margin:0;padding:0;float:left;">-->
-<!--                            <div class="column">-->
-
-<!--                                <h3>Competitive Levels</h3>-->
-<!--                                'Currently Selected'-->
-<!--                                <p>This is some content for the box</p>-->
-
-<!--                            </div>-->
-
-<!--                            </div>-->
-
-
-<!--                            <div class="box" style="padding:0;margin:auto;">-->
-<!--                                <div class="column">-->
-
-<!--                                    <h3>Organizations</h3>-->
-<!--                                    'Currently Selected'-->
-<!--                                    <p>This is some content for the box</p>-->
-
-<!--                                </div>-->
-
-<!--                            </div>-->
-<!--                            <div class="box" style="margin:0;padding:0;float:right;">-->
-<!--                                <div class="column">-->
-
-<!--                                    <h3>Time Zone & Locations</h3>-->
-<!--                                    'Currently Selected'-->
-<!--                                    <p>This is some content for the box</p>-->
-
-<!--                                </div>-->
-
-<!--                            </div>-->
-
-
-<!--                        </div>-->
-
-<!--                        </div>-->
-<!--                        <ul>-->
-<!--                            <% results.forEach(function(result, key) { %>-->
-<!--                            <li id="page_<%= key %>"><%= result %></li>-->
-<!--                            <p>page_<%= key %></p>-->
-<!--                            <% }); %>-->
-<!--                        </ul>-->
 
                     <% results.forEach(function(result, key) { %>
 
