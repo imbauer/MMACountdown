@@ -18,6 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600" rel="stylesheet">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="script.js"></script>
+    <!--    <script type="text/javascript" src="/dist/js/lib/modernizr.min.js"></script>-->
 
     <style>
         .has-background-dark-shade {
@@ -83,25 +84,26 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
   text-align: center;
   position: relative;
   width: 100%;
-  margin: 0 0;
+  margin: -200px 0;
 }
 .boxes .box {
+border:1px solid hsl(0, 0%, 40%);
   display: block;
   float: left;
   position: relative;
   width: 29%;
-<!--  height: 450px;-->
+  height: 450px;
   text-align: center;
   border-collapse: collapse;
   text-decoration: none;
   color: black;
   background: #222;
   margin: 0 10px;
-  -webkit-transition: all .4s;
-  transition: all .4s;
+  -webkit-transition: all 1s;
+  transition: all 1s;
 }
 .boxes .box h3 {
-  transition: all 0.4s;
+  transition: all 1s;
   padding-top: 50px;
   padding-bottom: 60px;
   margin: 0;
@@ -110,62 +112,60 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
   text-transform: uppercase;
 }
 .boxes .box i {
-  transition: all 0.4s;
+  transition: all 1s;
   font-size: 4em;
 }
 .boxes .box p {
   color:hsl(0, 0%, 96%);
-  transition: all 0.5s;
+  transition: all 1s;
   margin-top: 70px;
 }
-<!--.boxes .box:before {-->
-<!--  transition: all 0.4s;-->
+
+
+
+.boxes .box:before {
+  transition: all 1s;
+  content: "";
+  width: 100%;
+  height: 50%;
+  left: 50%;
+  margin-left: -50%;
+  top: 25%;
+  border-color: rgba(200, 200, 200, 0);
+  border-style: solid;
+  border-width: 0 1px;
+}
+.boxes .box:after {
+  transition: all 1s;
 <!--  position: absolute;-->
-<!--  content: "";-->
-<!--  width: 100%;-->
-<!--  height: 50%;-->
-<!--  left: 50%;-->
-<!--  margin-left: -50%;-->
-<!--  top: 25%;-->
-<!--  border-color: rgba(200, 200, 200, 0);-->
-<!--  border-style: solid;-->
-<!--  border-width: 0 1px;-->
-<!--}-->
-<!--.boxes .box:after {-->
-<!--  transition: all 0.4s;-->
-<!--  position: absolute;-->
-<!--  content: "";-->
-<!--  width: 50%;-->
-<!--  height: 100%;-->
-<!--  left: 50%;-->
-<!--  margin-left: -25%;-->
-<!--  top: 0;-->
-<!--  border-color: rgba(200, 200, 200, 0);-->
-<!--  border-style: solid;-->
-<!--  border-width: 1px 0;-->
-<!--}-->
-<!--.boxes .box:hover {-->
-<!--  width:42%;-->
-<!--  height:500px;-->
-<!--  color: #4099ff;-->
-<!--}-->
-<!--.boxes .box:hover h3 {-->
-<!--  padding-top: 80px;-->
-<!--  padding-bottom: 30px;-->
-<!--}-->
-<!--.boxes .box:hover p {-->
-<!--  margin-top: 30px;-->
-<!--}-->
-<!--.boxes .box:hover:after {-->
-<!--  width: 402px;-->
-<!--  margin-left: -50%;-->
-<!--  border-color: rgba(90, 90, 90, 1);-->
-<!--}-->
-<!--.boxes .box:hover:before {-->
-<!--  height: 352px;-->
-<!--  top: 0%;-->
-<!--  border-color: rgba(90, 90, 90, 1);-->
-<!--}-->
+  content: "";
+  width: 50%;
+  height: 100%;
+  left: 50%;
+  margin-left: -25%;
+  top: 0;
+  border-color: white;
+  border-style: solid;
+  border-width: 1px 0;
+}
+.boxes .box:hover {
+border:1px solid hsl(0, 0%, 90%);
+  width:42%;
+  height:500px;
+  color: #4099ff;
+}
+.boxes .box:hover h3 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.boxes .box:hover p {
+  margin-top: 30px;
+}
+.boxes .box:hover:after {
+  width: 402px;
+  margin-left: -50%;
+  border-color: rgba(90, 90, 90, 1);
+}
 
 <!--@media screen and (max-width: 1024px) {-->
 <!--    .countdownMonitorDisplay {-->
@@ -229,7 +229,7 @@ display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-f
 }
 .circle:hover {
   opacity: 1;
-  cursor: pointer;
+  cursor: pointer
 }
 /* Form Styles */
 label {
@@ -291,6 +291,63 @@ input[type="checkbox"]:checked ~ label .line2 {
     text-align: center;
 }
 
+button {
+  background: none;
+  border: 0;
+  box-sizing: border-box;
+  margin: 1em;
+  padding: 1em 2em;
+  box-shadow: inset 0 0 0 2px #f45e61;
+  color: #f45e61;
+  font-size: inherit;
+  font-weight: 700;
+  position: relative;
+  vertical-align: middle;
+}
+button::before, button::after {
+  box-sizing: inherit;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.draw {
+  transition: color 0.25s;
+}
+.draw::before, .draw::after {
+  border: 2px solid transparent;
+  width: 0;
+  height: 0;
+}
+.draw::before {
+  top: 0;
+  left: 0;
+}
+.draw::after {
+  bottom: 0;
+  right: 0;
+}
+.draw:hover {
+  color: #60daaa;
+}
+.draw:hover::before, .draw:hover::after {
+  width: 100%;
+  height: 100%;
+}
+.draw:hover::before {
+  border-top-color: #60daaa;
+  border-right-color: #60daaa;
+  transition: width 0.25s ease-out, height 0.25s ease-out 0.25s;
+}
+.draw:hover::after {
+  border-bottom-color: #60daaa;
+  border-left-color: #60daaa;
+  transition: border-color 0s ease-out 0.5s, width 0.25s ease-out 0.5s, height 0.25s ease-out 0.75s;
+}
+
+
+
+
     </style>
 
 </head>
@@ -299,42 +356,49 @@ input[type="checkbox"]:checked ~ label .line2 {
 <section class="hero is-medium is-bold has-background-dark">
 
     <section class="svg-container">
-<!--        <svg class="circle" xmlns="http://www.w3.org/2000/svg">-->
-<!--            <g>-->
-<!--                <ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>-->
-<!--                <ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>-->
-<!--                <line class="line line1" x1="52" y1="62" x2="74" y2="62" />-->
-<!--                <line class="line line2" x1="52" y1="62" x2="74" y2="62" />-->
-<!--            </g>-->
-<!--        </svg>-->
+        <!--        <svg class="circle" xmlns="http://www.w3.org/2000/svg">-->
+        <!--            <g>-->
+        <!--                <ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>-->
+        <!--                <ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>-->
+        <!--                <line class="line line1" x1="52" y1="62" x2="74" y2="62" />-->
+        <!--                <line class="line line2" x1="52" y1="62" x2="74" y2="62" />-->
+        <!--            </g>-->
+        <!--        </svg>-->
     </section>
     <div class="hero-body">
         <div class="container">
 
 
-
             <div class="boxes" style="margin-bottom:30px;">
                 <div class="columns" style="text-align:center;">
+
 
                     <div class="box" style="margin:0;padding:0;float:left;">
                         <div class="column">
 
                             <h3>Competitive Levels</h3>
-                            'Currently Selected'
-                            <p>This is some content for the box</p>
 
-                            <div class="columns is-gapless is-multiline">
+                            <div class="columns">
 
                                 <div class="column is-one-half">
                                     <form>
                                         <fieldset>
                                             <input type="checkbox" name="match" id="match_5" value="bacon">
                                             <label for="match_5" style="pointer-events: auto;">
-                                                <svg class="circle" xmlns="http://www.w3.org/2000/svg"><g><ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/><ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/><line class="line line1" x1="52" y1="62" x2="74" y2="62" />   <line class="line line2" x1="52" y1="62" x2="74" y2="62" /></g></svg>
-                                                <span class="sign">Amateur</span>
+                                                <svg class="circle" xmlns="http://www.w3.org/2000/svg">
+                                                    <g>
+                                                        <ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5"
+                                                                 stroke-width="2"/>
+                                                        <ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5"
+                                                                 stroke-width="2"/>
+                                                        <line class="line line1" x1="52" y1="62" x2="74" y2="62"/>
+                                                        <line class="line line2" x1="52" y1="62" x2="74" y2="62"/>
+                                                    </g>
+                                                </svg>
+                                                <div class="sign">Amateur</div>
                                             </label>
                                         </fieldset>
-<!--                                        <button class="form__button" type="submit">Submit your info</button>-->
+                                        <!--                                        <button class="form__button" type="submit">Submit your info</button>-->
                                     </form>
                                 </div>
                                 <div class="column is-one-half">
@@ -342,15 +406,22 @@ input[type="checkbox"]:checked ~ label .line2 {
                                         <fieldset>
                                             <input type="checkbox" name="match" id="match_8" value="bacon">
                                             <label for="match_8" style="pointer-events: auto;">
-                                                <svg class="circle" xmlns="http://www.w3.org/2000/svg"><g><ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/><ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/><line class="line line1" x1="52" y1="62" x2="74" y2="62" />   <line class="line line2" x1="52" y1="62" x2="74" y2="62" /></g></svg>
-                                                <span class="sign">Professional</span>
+                                                <svg class="circle" xmlns="http://www.w3.org/2000/svg">
+                                                    <g>
+                                                        <ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5"
+                                                                 stroke-width="2"/>
+                                                        <ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5"
+                                                                 stroke-width="2"/>
+                                                        <line class="line line1" x1="52" y1="62" x2="74" y2="62"/>
+                                                        <line class="line line2" x1="52" y1="62" x2="74" y2="62"/>
+                                                    </g>
+                                                </svg>
+                                                <div class="sign">Professional</div>
                                             </label>
                                         </fieldset>
-<!--                                        <button class="form__button" type="submit">Submit your info</button>-->
+                                        <!--                                        <button class="form__button" type="submit">Submit your info</button>-->
                                     </form>
                                 </div>
-
-
 
 
                             </div>
@@ -360,11 +431,7 @@ input[type="checkbox"]:checked ~ label .line2 {
                     </div>
 
 
-
-
-
                     <div class="box" style="padding:0;margin-left:auto;margin-right:auto;">
-
 
 
                         <div class="column">
@@ -379,7 +446,7 @@ input[type="checkbox"]:checked ~ label .line2 {
                     <div class="box" style="margin:0;padding:0;float:right;">
                         <div class="column">
 
-                            <h3>Time Zone & Locations</h3>
+                            <h3>Time Zone</h3>
                             'Currently Selected'
                             <p>This is some content for the box</p>
 
@@ -392,11 +459,6 @@ input[type="checkbox"]:checked ~ label .line2 {
             </div>
 
 
-
-
-
-
-
             <h1 class="title has-text-light big-text">
                 A <span class="has-text-primary">Website</span> that provides the exact <span class="has-text-primary">time</span>,
                 regardless of <span class="has-text-primary">time zone</span>, of every <span class="has-text-primary">MMA Event</span>
@@ -404,8 +466,6 @@ input[type="checkbox"]:checked ~ label .line2 {
             <h2 class="subtitle has-text-light">
                 Primary bold subtitle
             </h2>
-
-
 
 
         </div>
@@ -416,94 +476,149 @@ input[type="checkbox"]:checked ~ label .line2 {
 
 <section class="hero is-medium is-bold">
 
-<!--    <form>-->
-<!--        <fieldset>-->
-<!--            <input type="checkbox" name="match" id="match_4" value="bacon">-->
-<!--            <label for="match_4">-->
-<!--                <svg class="circle" xmlns="http://www.w3.org/2000/svg"><g><ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/><ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/><line class="line line1" x1="52" y1="62" x2="74" y2="62" />   <line class="line line2" x1="52" y1="62" x2="74" y2="62" /></g></svg>-->
-<!--            </label>-->
-<!--        </fieldset>-->
-<!--        <button class="form__button" type="submit">Submit your info</button>-->
-<!--    </form>-->
-
-
+    <!--    <form>-->
+    <!--        <fieldset>-->
+    <!--            <input type="checkbox" name="match" id="match_4" value="bacon">-->
+    <!--            <label for="match_4">-->
+    <!--                <svg class="circle" xmlns="http://www.w3.org/2000/svg"><g><ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/><ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/><line class="line line1" x1="52" y1="62" x2="74" y2="62" />   <line class="line line2" x1="52" y1="62" x2="74" y2="62" /></g></svg>-->
+    <!--            </label>-->
+    <!--        </fieldset>-->
+    <!--        <button class="form__button" type="submit">Submit your info</button>-->
+    <!--    </form>-->
 
 
     <div class="hero-body">
-                <div class="container">
+        <div class="container">
 
-                    <div class="work__list">
+            <div class="work__list">
 
-                    <% results.forEach(function(result, key) { %>
+                <% results.forEach(function(result, key) { %>
 
-                    <div class="columns is-vcentered work__list-item" style="text-align:center;">
-                        <div class="column" style="font-size:1.7em;">
-                            <iframe style="display:none" onload="someFunction(
+                <div class="columns is-vcentered work__list-item" style="text-align:center;">
+                    <div class="column" style="font-size:1.7em;">
+                        <iframe style="display:none" onload="someFunction(
                             '<%=result.when.month %> <%= result.when.day %>, <%= result.when.year %> <%= result.when.hour %>:<%=result.when.minute %>:00',
                             '<%= key %>'
                             )"></iframe>
 
-                            <div class="columns is-gapless is-multiline is-mobile" style="margin:0;" id="timer_<%= key %>">
-                                <div class="column is-one-quarter"><span id="timer-days_<%= key %>"></span>
-                                </div>
-                                <div class="column is-one-quarter has-text-grey"><span id="timer-hours_<%= key %>"></span>
-                                </div>
-                                <div class="column is-one-quarter has-text-grey-light"><span id="timer-mins_<%= key %>"></span>
-                                </div>
-                                <div class="column is-one-quarter has-text-grey-lighter"><span id="timer-secs_<%= key %>"></span>
-                                </div>
-
-                                <div class="column is-one-quarter">DAY(S)
-                                </div>
-                                <div class="column is-one-quarter has-text-grey">HR(S)
-                                </div>
-                                <div class="column is-one-quarter has-text-grey-light">MIN(S)
-                                </div>
-                                <div class="column is-one-quarter has-text-grey-lighter">SEC(S)
-                                </div>
+                        <div class="columns is-gapless is-multiline is-mobile" style="margin:0;" id="timer_<%= key %>">
+                            <div class="column is-one-quarter"><span id="timer-days_<%= key %>"></span>
                             </div>
-<!--                            <p id="timer_<%= key %>" style="font-size:20px;">-->
-<!--                                <span id="timer-days_<%= key %>"></span>-->
-<!--                                <span id="timer-hours_<%= key %>"></span>-->
-<!--                                <span id="timer-mins_<%= key %>"></span>-->
-<!--                                <span id="timer-secs_<%= key %>"></span>-->
-<!--                            </p>-->
+                            <div class="column is-one-quarter has-text-grey"><span id="timer-hours_<%= key %>"></span>
+                            </div>
+                            <div class="column is-one-quarter has-text-grey-light"><span
+                                    id="timer-mins_<%= key %>"></span>
+                            </div>
+                            <div class="column is-one-quarter has-text-grey-lighter"><span
+                                    id="timer-secs_<%= key %>"></span>
+                            </div>
+
+                            <div class="column is-one-quarter">DAY(S)
+                            </div>
+                            <div class="column is-one-quarter has-text-grey">HR(S)
+                            </div>
+                            <div class="column is-one-quarter has-text-grey-light">MIN(S)
+                            </div>
+                            <div class="column is-one-quarter has-text-grey-lighter">SEC(S)
+                            </div>
                         </div>
-                        <div class="column big-text is-two-fifths">   <!-- Add here the class to make effects on single column -->
-                            <div class="" style="margin-bottom:20px;"><%= result.location.name %>, <%= result.location.city %>, <%= result.location.provState %>, <%= result.location.country %></div>
-                            <h1 class="title has-text-black-bis big-text work-title" style="margin-bottom:20px;"><%= result.name %></h1>
-                            <div class=""><%= result.title %> </div>
+                        <!--                            <p id="timer_<%= key %>" style="font-size:20px;">-->
+                        <!--                                <span id="timer-days_<%= key %>"></span>-->
+                        <!--                                <span id="timer-hours_<%= key %>"></span>-->
+                        <!--                                <span id="timer-mins_<%= key %>"></span>-->
+                        <!--                                <span id="timer-secs_<%= key %>"></span>-->
+                        <!--                            </p>-->
+                    </div>
+                    <div class="column big-text is-two-fifths">
+                        <!-- Add here the class to make effects on single column -->
+                        <div class="" style="margin-bottom:20px;"><%= result.location.name %>, <%= result.location.city
+                            %>, <%= result.location.provState %>, <%= result.location.country %>
                         </div>
-                        <div class="column" style="font-size:1.7em;"><%= result.when.weekDay %> <%=
-                            result.when.month %>
-                            <%= result.when.day %>, <%= result.when.hour %>:<%= result.when.minute %><%=
-                            result.when.AMPM %> <%= result.when.timeZone %></div>
+                        <h1 class="title has-text-black-bis big-text work-title" style="margin-bottom:20px;"><%=
+                            result.name %></h1>
+                        <div class=""><%= result.title %></div>
                     </div>
-
-                    <% }); %>
+                    <div class="column" style="font-size:1.7em;"><%= result.when.weekDay %> <%=
+                        result.when.month %>
+                        <%= result.when.day %>, <%= result.when.hour %>:<%= result.when.minute %><%=
+                        result.when.AMPM %> <%= result.when.timeZone %>
                     </div>
+                </div>
+
+                <% }); %>
+            </div>
+
+
+            <div style="margin-top:50px;"></div>
+
+
+            <h1 class="title has-text-primary big-text">
+                A <span class="has-text-primary">Website</span> that provides the exact <span
+                    class="has-text-primary">time</span>,
+                regardless of <span class="has-text-primary">time zone</span>, of every <span
+                    class="has-text-primary">MMA Event</span>
+            </h1>
+            <h2 class="subtitle">
+                Primary bold subtitle
+            </h2>
 
 
 
 
-                    <div style="margin-top:50px;"></div>
+
+        </div>
+    </div>
+</section>
 
 
 
-                    <h1 class="title has-text-primary big-text">
-                        A <span class="has-text-primary">Website</span> that provides the exact <span
-                            class="has-text-primary">time</span>,
-                        regardless of <span class="has-text-primary">time zone</span>, of every <span
-                            class="has-text-primary">MMA Event</span>
-                    </h1>
-                    <h2 class="subtitle">
-                        Primary bold subtitle
-                    </h2>
+<section class="hero is-medium" style="background:#1B1924;">
+    <div class="hero-body">
+        <div class="container" style="width:60%;">
+
+            <div class="columns is-gapless is-multiline">
+                <div class="column is-one-quarter">
+                    <span class="title has-text-light big-text" style="color:#F4F4F4;">MMA</span>
+                    <br>
+                    <span style="color:#F4F4F4;">Countdown</span>
+                </div>
+                <div class="column is-one-quarter has-text-grey">
+                    <h3 style="color:#48D3D4;">Location</h3>
+                </div>
+                <div class="column is-one-quarter has-text-grey-light">
+                    <h3 style="color:#48D3D4;">Contact</h3>
+                </div>
+                <div class="column is-one-quarter has-text-grey-lighter">
+                    <h3 style="color:#48D3D4;">Legal</h3>
+                </div>
+
+                <div class="column is-one-quarter" style="color:#F4F4F4;">
+                    <span style="font-size:0.7em;">© All Rights Reserved 2019</span>
+                    <br>
+                    <span style="font-size:0.7em;">MMA Countdown Management LLC</span>
+                </div>
+                <div class="column is-one-quarter has-text-grey">
+                    <address>
+                        <a class="double-line" target="_blank" href="put_location_google_maps"><span>A Student House</span></br><span>Hamilton, Canada</span></a>
+                    </address>
+                </div>
+                <div class="column is-one-quarter has-text-grey-light">
+                    <a target="_blank" href="tel:XXX-XXX-XXXX">XXX-XXX-XXXX</a> </br>
+                    <a target="_blank" href="mailto:XXX@XXXXXXXX.XXX?subject=General Inquiry">XXX@XXXXXXXX.XXX</a>
+                </div>
+                <div class="column is-one-quarter has-text-grey-lighter">
+                    <a href="/terms-privacy">Terms &amp; Privacy</a>
                 </div>
             </div>
 
 
+        </div>
+    </div>
 </section>
+
+
+
+
 
 </body>
 </html>
