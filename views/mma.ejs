@@ -33,8 +33,7 @@
             margin: 0;
             position: absolute;
             top: 50%;
-            left:50%;
-            transform: translate(-50%, -50%);
+            transform: translate(0, -50%);
         }
 
         .big-text {
@@ -66,6 +65,7 @@ transform:translateY(-3px);
 border-color:transparent;
 box-shadow:0 1px 6px rgba(93,93,93,.16);
 background:linear-gradient(90deg,#2fe0c5,#3bdcc4,#2fe0c5);
+//background:hsl(0, 0%, 35%);
 color:#fff!important;
 }
 .work__list-item:active .work-detail,.work__list-item:active .work-title,.work__list-item:focus .work-detail,.work__list-item:focus .work-title,.work__list-item:hover .work-detail,.work__list-item:hover .work-title{
@@ -344,7 +344,39 @@ button::before, button::after {
   border-left-color: #60daaa;
   transition: border-color 0s ease-out 0.5s, width 0.25s ease-out 0.5s, height 0.25s ease-out 0.75s;
 }
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+.link{
+  position: relative;
+}
 
+.link:after{
+  content: '';
+  position: absolute;
+  width: 0; height: 1px;
+  display: block;
+  margin-top: 0px;
+  right: 0;
+  background: #fff;
+  transition: width .5s ease;
+  -webkit-transition: width .5s ease;
+}
+
+.link:hover:after{
+  width: 100%;
+  left: 0;
+  background: #fff;
+}
+
+.underline--magical {
+  background-image: linear-gradient(white, white);
+  background-repeat: no-repeat;
+  background-size: 0% 6%;
+  background-position: 0 100%;
+  transition: background-size .2s ease-in;
+}
+.underline--magical:hover {
+  background-size: 100% 6%;
+}
 
 
 
@@ -474,7 +506,7 @@ button::before, button::after {
 
 </section>
 
-<section class="hero is-medium is-bold">
+<section class="hero is-medium is-bold" style="padding-bottom:0;margin-bottom:0;">
 
     <!--    <form>-->
     <!--        <fieldset>-->
@@ -487,8 +519,8 @@ button::before, button::after {
     <!--    </form>-->
 
 
-    <div class="hero-body">
-        <div class="container">
+    <div class="hero-body" style="padding-bottom:12px;margin-bottom:0;padding-top:15px;margin-top:0;">
+        <div class="container" style="padding-left:11px;padding-right:11px;">
 
             <div class="work__list">
 
@@ -534,7 +566,7 @@ button::before, button::after {
                         <div class="" style="margin-bottom:20px;"><%= result.location.name %>, <%= result.location.city
                             %>, <%= result.location.provState %>, <%= result.location.country %>
                         </div>
-                        <h1 class="title has-text-black-bis big-text work-title" style="margin-bottom:20px;"><%=
+                        <h1 style="margin-bottom:20px;font-size:2em;"><%=
                             result.name %></h1>
                         <div class=""><%= result.title %></div>
                     </div>
@@ -549,38 +581,22 @@ button::before, button::after {
             </div>
 
 
-            <div style="margin-top:50px;"></div>
-
-
-            <h1 class="title has-text-primary big-text">
-                A <span class="has-text-primary">Website</span> that provides the exact <span
-                    class="has-text-primary">time</span>,
-                regardless of <span class="has-text-primary">time zone</span>, of every <span
-                    class="has-text-primary">MMA Event</span>
-            </h1>
-            <h2 class="subtitle">
-                Primary bold subtitle
-            </h2>
-
-
-
-
 
         </div>
     </div>
 </section>
 
 
-
 <section class="hero is-medium" style="background:#1B1924;">
     <div class="hero-body">
-        <div class="container" style="width:60%;">
+        <div class="container" style="width:60%;padding-left:7.5%;">
 
-            <div class="columns is-gapless is-multiline">
-                <div class="column is-one-quarter">
-                    <span class="title has-text-light big-text" style="color:#F4F4F4;">MMA</span>
-                    <br>
-                    <span style="color:#F4F4F4;">Countdown</span>
+            <div class="columns is-multiline is-mobile">
+                <div class="column is-one-quarter" style="color:#F4F4F4;line-height:60%;">
+                    <span style="font-size:1.7em;">MMA</span><br>
+                    <span style="font-size:0.7em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Countdown</span>
                 </div>
                 <div class="column is-one-quarter has-text-grey">
                     <h3 style="color:#48D3D4;">Location</h3>
@@ -592,22 +608,24 @@ button::before, button::after {
                     <h3 style="color:#48D3D4;">Legal</h3>
                 </div>
 
-                <div class="column is-one-quarter" style="color:#F4F4F4;">
-                    <span style="font-size:0.7em;">© All Rights Reserved 2019</span>
-                    <br>
-                    <span style="font-size:0.7em;">MMA Countdown Management LLC</span>
+                <div class="column is-one-quarter vertical-align-text-div" style="color:#F4F4F4;line-height:80%;">
+                <div class="vertical-align-text-p">
+                    <span style="font-size:0.7em;">© All Rights Reserved 2019</span><br>
+                    <span style="font-size:0.7em;">MMA Countdown</span>
+                </div>
                 </div>
                 <div class="column is-one-quarter has-text-grey">
-                    <address>
-                        <a class="double-line" target="_blank" href="put_location_google_maps"><span>A Student House</span></br><span>Hamilton, Canada</span></a>
-                    </address>
+                        <a class="underline--magical" target="_blank"
+                           href="put_location_google_maps" style="text-decoration: none;color: #fff;">
+                            A Student House</br>
+                            Hamilton, Canada</a>
                 </div>
                 <div class="column is-one-quarter has-text-grey-light">
-                    <a target="_blank" href="tel:XXX-XXX-XXXX">XXX-XXX-XXXX</a> </br>
-                    <a target="_blank" href="mailto:XXX@XXXXXXXX.XXX?subject=General Inquiry">XXX@XXXXXXXX.XXX</a>
+                    <a class="link" target="_blank" href="tel:XXX-XXX-XXXX" style="color:#F4F4F4;">XXX-XXX-XXXX</a> </br>
+                    <a class="link" target="_blank" href="mailto:XXX@XXXXXXXX.XXX?subject=General Inquiry" style="color:#F4F4F4;">XXX@XXXXXXXX.XXX</a>
                 </div>
                 <div class="column is-one-quarter has-text-grey-lighter">
-                    <a href="/terms-privacy">Terms &amp; Privacy</a>
+                    <a class="link" href="/terms-privacy" style="color:#F4F4F4;">Terms &amp; Privacy</a>
                 </div>
             </div>
 
@@ -615,9 +633,6 @@ button::before, button::after {
         </div>
     </div>
 </section>
-
-
-
 
 
 </body>
