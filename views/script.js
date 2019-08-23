@@ -1,51 +1,14 @@
 
 $(document).ready(function() {
-  $("#firstRadio_0").click(function() {
-    $("#firstHiddenDiv_0").slideToggle("slow");
+
+  $(".work__list-item").click(function() {
+    console.log(this.id);
+    console.log("#first" + this.id);
+    $("#first" + this.id).slideToggle("slow");
   });
-  $("#firstRadio_1").click(function() {
-    $("#firstHiddenDiv_1").slideToggle("slow");
-  });
-  $("#firstRadio_2").click(function() {
-    $("#firstHiddenDiv_2").slideToggle("slow");
-  });
-  $("#firstRadio_3").click(function() {
-    $("#firstHiddenDiv_3").slideToggle("slow");
-  });
-  $("#firstRadio_4").click(function() {
-    $("#firstHiddenDiv_4").slideToggle("slow");
-  });
-  $("#firstRadio_5").click(function() {
-    $("#firstHiddenDiv_5").slideToggle("slow");
-  });
-//  $("#firstRadio_6").click(function() {
-//    $("#firstHiddenDiv_6").slideToggle("slow");
-//  });
-//  $("#firstRadio_7").click(function() {
-//    $("#firstHiddenDiv_7").slideToggle("slow");
-//  });
-//  $("#firstRadio_8").click(function() {
-//    $("#firstHiddenDiv_8").slideToggle("slow");
-//  });
-//  $("#firstRadio_" + num).click(function() {
-//    $("#firstHiddenDiv_" + num).slideToggle("slow");
-//  });
-//  $("#firstRadio_" + num).click(function() {
-//    $("#firstHiddenDiv_" + num).slideToggle("slow");
-//  });
-//  $("#firstRadio_" + num).click(function() {
-//    $("#firstHiddenDiv_" + num).slideToggle("slow");
-//  });
-//  $("#firstRadio_" + num).click(function() {
-//    $("#firstHiddenDiv_" + num).slideToggle("slow");
-//  });
+
 });
 
-//function sliderFunction(idNum) {
-//  $("#firstRadio_" + idNum).click(function() {
-//    $("#firstHiddenDiv_" + idNum).slideToggle("slow");
-//  });
-//}
 
 
 function myFunction() {
@@ -56,6 +19,10 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function someFunction(endDateString, idTag) {
+    if (idTag === undefined) {
+//        console.log('Exiting');
+        return;
+    }
     var endDate = new Date(endDateString).getTime();
 
     var timer = setInterval(function() {
@@ -69,6 +36,9 @@ function someFunction(endDateString, idTag) {
             var hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             var mins = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
             var secs = Math.floor((t % (1000 * 60)) / 1000);
+
+//            console.log(days + ' days ' + hours + ' hours ' + mins + ' mins ' + secs + ' secs');
+//            console.log(idTag);
 
             document.getElementById("timer-days_"+idTag).innerHTML = days;
 

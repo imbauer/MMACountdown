@@ -527,7 +527,7 @@ button::before, button::after {
 
                 <% results.forEach(function(result, key) { %>
 
-                <div class="columns is-vcentered work__list-item" style="text-align:center;" id='firstRadio_<%= key %>'>
+                <div class="columns is-vcentered work__list-item" style="text-align:center;" id='hiddendiv_<%= key %>'>
                     <div class="column" style="font-size:1.7em;">
                         <iframe style="display:none" onload="someFunction(
                             '<%=result.when.month %> <%= result.when.day %>, <%= result.when.year %> <%= result.when.hour %>:<%=result.when.minute %>:00',
@@ -579,7 +579,7 @@ button::before, button::after {
                 </div>
 
 
-                <div id="firstHiddenDiv_<%= key %>" style="height:100px;background-color:red;">
+                <div id="firsthiddendiv_<%= key %>" style="height:100px;background-color:red;display: none;">
                 </div>
 
 
