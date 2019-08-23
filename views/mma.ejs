@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600" rel="stylesheet">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="script.js"></script>
     <!--    <script type="text/javascript" src="/dist/js/lib/modernizr.min.js"></script>-->
 
@@ -492,7 +493,7 @@ button::before, button::after {
 
 
             <h1 class="title has-text-light big-text">
-                A <span class="has-text-primary">Website</span> that provides the exact <span class="has-text-primary">time</span>,
+                A <span class="has-text-primary">Websitee</span> that provides the exact <span class="has-text-primary">time</span>,
                 regardless of <span class="has-text-primary">time zone</span>, of every <span class="has-text-primary">MMA Event</span>
             </h1>
             <h2 class="subtitle has-text-light">
@@ -526,7 +527,7 @@ button::before, button::after {
 
                 <% results.forEach(function(result, key) { %>
 
-                <div class="columns is-vcentered work__list-item" style="text-align:center;">
+                <div class="columns is-vcentered work__list-item" style="text-align:center;" id='firstRadio_<%= key %>'>
                     <div class="column" style="font-size:1.7em;">
                         <iframe style="display:none" onload="someFunction(
                             '<%=result.when.month %> <%= result.when.day %>, <%= result.when.year %> <%= result.when.hour %>:<%=result.when.minute %>:00',
@@ -577,7 +578,13 @@ button::before, button::after {
                     </div>
                 </div>
 
+
+                <div id="firstHiddenDiv_<%= key %>" style="height:100px;background-color:red;">
+                </div>
+
+
                 <% }); %>
+
             </div>
 
 

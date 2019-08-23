@@ -30,22 +30,22 @@ const options = {
 
 const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
 
-//mongoose.connect(url, options).then( function() {
-//  console.log('MongoDB is connected');
-//})
-//  .catch( function(err) {
-//  console.log(err);
-//});
+mongoose.connect(url, options).then( function() {
+  console.log('MongoDB is connected');
+})
+  .catch( function(err) {
+  console.log(err);
+});
 
-var connectWithRetry = function() {
-  return mongoose.connect(url, function(err) {
-    if (err) {
-      console.error('Failed to connect to mongo on startup - retrying in 5 sec', err);
-      setTimeout(connectWithRetry, 5000);
-    }
-  });
-};
-connectWithRetry();
+//var connectWithRetry = function() {
+//  return mongoose.connect(url, function(err) {
+//    if (err) {
+//      console.error('Failed to connect to mongo on startup - retrying in 5 sec', err);
+//      setTimeout(connectWithRetry, 5000);
+//    }
+//  });
+//};
+//connectWithRetry();
 
 
 
