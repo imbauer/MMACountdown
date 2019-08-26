@@ -28,4 +28,4 @@ CMD [ "node", "app.js" ]
 #
 #RUN npm install -g nodemon
 #
-#CMD [ "nodemon", "index.js" ]
+#CMD [ "nodemon", "routes.js" ]

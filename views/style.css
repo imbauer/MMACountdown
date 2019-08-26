@@ -1,0 +1,356 @@
+        .has-background-dark-shade {
+            background-color:#1D1D2B;
+        }
+
+        .vertical-align-text-div {
+            position:relative;
+        }
+
+        .vertical-align-text-p {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -50%);
+        }
+
+        .big-text {
+            font-family:'Work Sans';
+            font-weight:400;
+        }
+
+        .full-column {
+            width:100%;
+        }
+
+
+
+.work__list-item {
+transform:translateY(0);
+color:black!important;
+padding:18px 0% 20px;
+border-bottom:1px solid #dadada;
+box-shadow:0 0 0 rgba(93,93,93,.16);
+background:linear-gradient(#fbfbfb,#fbfbfb);
+transition:all .3s ease!important;
+}
+.work__list-item .work__list-item--first{
+border-top:1px solid #dadada
+}
+.work__list-item:active,.work__list-item:focus,
+.work__list-item:hover{
+transform:translateY(-3px);
+border-color:transparent;
+box-shadow:0 1px 6px rgba(93,93,93,.16);
+background:linear-gradient(90deg,#2fe0c5,#3bdcc4,#2fe0c5);
+//background:hsl(0, 0%, 35%);
+color:#fff!important;
+}
+.work__list-item:active .work-detail,.work__list-item:active .work-title,.work__list-item:focus .work-detail,.work__list-item:focus .work-title,.work__list-item:hover .work-detail,.work__list-item:hover .work-title{
+color:#fff!important;
+}.work__list-item-link{
+display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;max-width:1400px;margin-right:auto;margin-left:auto
+}
+
+
+
+
+
+
+
+.boxes {
+  text-align: center;
+  position: relative;
+  width: 100%;
+  margin: -200px 0;
+}
+.boxes .box {
+border:1px solid hsl(0, 0%, 40%);
+  display: block;
+  float: left;
+  position: relative;
+  width: 29%;
+  height: 450px;
+  text-align: center;
+  border-collapse: collapse;
+  text-decoration: none;
+  color: black;
+  background: #222;
+  margin: 0 10px;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+.boxes .box h3 {
+  transition: all 1s;
+  padding-top: 50px;
+  padding-bottom: 60px;
+  margin: 0;
+  color:hsl(0, 0%, 96%);
+  font-size: 2em;
+  text-transform: uppercase;
+}
+.boxes .box i {
+  transition: all 1s;
+  font-size: 4em;
+}
+.boxes .box p {
+  color:hsl(0, 0%, 96%);
+  transition: all 1s;
+  margin-top: 70px;
+}
+
+
+
+.boxes .box:before {
+  transition: all 1s;
+  content: "";
+  width: 100%;
+  height: 50%;
+  left: 50%;
+  margin-left: -50%;
+  top: 25%;
+  border-color: rgba(200, 200, 200, 0);
+  border-style: solid;
+  border-width: 0 1px;
+}
+.boxes .box:after {
+  transition: all 1s;
+<!--  position: absolute;-->
+  content: "";
+  width: 50%;
+  height: 100%;
+  left: 50%;
+  margin-left: -25%;
+  top: 0;
+  border-color: white;
+  border-style: solid;
+  border-width: 1px 0;
+}
+.boxes .box:hover {
+border:1px solid hsl(0, 0%, 90%);
+  width:42%;
+  height:500px;
+  color: #4099ff;
+}
+.boxes .box:hover h3 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.boxes .box:hover p {
+  margin-top: 30px;
+}
+.boxes .box:hover:after {
+  width: 402px;
+  margin-left: -50%;
+  border-color: rgba(90, 90, 90, 1);
+}
+
+<!--@media screen and (max-width: 1024px) {-->
+<!--    .countdownMonitorDisplay {-->
+<!--        display: none !important;-->
+<!--    }-->
+<!--}-->
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,900');
+/* Font from Google fonts */
+/* Basic styles */
+.circleDiv {
+  align-items: center;
+  background: #222;
+  display: flex;
+  justify-content: center;
+}
+.svg-container {
+  height: 124px;
+  position: relative;
+  width: 124px;
+}
+.svg-container h1 {
+  color: #aaa;
+  font-family: "Source Sans Pro";
+  font-size: 1.2rem;
+  left: 50%;
+  letter-spacing: 4px;
+  position: absolute;
+  text-align: center;
+  top: -60px;
+  transform: translateX(-50%);
+  width: 100%;
+}
+.circle {
+  height: 124px;
+  width: 124px;
+  opacity: 0.6;
+  transition: all 200ms ease;
+}
+.circle .background {
+  fill: transparent;
+  stroke: #1abc9c;
+  transition: all 200ms ease;
+}
+.circle .foreground {
+  fill: transparent;
+  stroke-dasharray: 377;
+  stroke-dashoffset: 377;
+  stroke: #ee3769;
+  transform-origin: 50% 50%;
+  transform: rotate(-270deg);
+  transition: all 800ms ease;
+}
+.circle .line {
+  stroke-width: 2;
+  stroke: #1abc9c;
+  transform-origin: 50% 50%;
+  transition: all 500ms ease;
+}
+.circle .line2 {
+  transform: rotate(-90deg);
+}
+.circle:hover {
+  opacity: 1;
+  cursor: pointer
+}
+/* Form Styles */
+label {
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+.form__button {
+  height: 40px;
+  border: none;
+  background-color: green;
+  color: white;
+  text-transform: uppercase;
+  font-family: 'Source Sans Pro', sans-serif;
+  padding: 0 20px;
+  border-radius: 20px;
+  font-weight: 900;
+  cursor: pointer;
+  margin: 20px 0;
+  transition: all 0.25s ease-in-out;
+}
+.form__button:hover, .form__button:focus {
+  background-color: dark-green;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, .25);
+  outline: none;
+}
+/* Input style */
+input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+input[type="checkbox"]:active ~ label {
+  opacity: 1;
+}
+input[type="checkbox"]:checked ~ label {
+  opacity: 1;
+  cursor: pointer;
+}
+input[type="checkbox"]:checked ~ label .background {
+  stroke: transparent;
+}
+input[type="checkbox"]:checked ~ label .foreground {
+  stroke-dashoffset: 0;
+  transform: rotate(-90deg);
+}
+input[type="checkbox"]:checked ~ label .line {
+  stroke: #ee3769;
+}
+input[type="checkbox"]:checked ~ label .line {
+  transform: rotate(180deg);
+}
+input[type="checkbox"]:checked ~ label .line2 {
+  transform: rotate(0);
+}
+.sign {
+    color: #aaa;
+    font-family: "Source Sans Pro";
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+button {
+  background: none;
+  border: 0;
+  box-sizing: border-box;
+  margin: 1em;
+  padding: 1em 2em;
+  box-shadow: inset 0 0 0 2px #f45e61;
+  color: #f45e61;
+  font-size: inherit;
+  font-weight: 700;
+  position: relative;
+  vertical-align: middle;
+}
+button::before, button::after {
+  box-sizing: inherit;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.draw {
+  transition: color 0.25s;
+}
+.draw::before, .draw::after {
+  border: 2px solid transparent;
+  width: 0;
+  height: 0;
+}
+.draw::before {
+  top: 0;
+  left: 0;
+}
+.draw::after {
+  bottom: 0;
+  right: 0;
+}
+.draw:hover {
+  color: #60daaa;
+}
+.draw:hover::before, .draw:hover::after {
+  width: 100%;
+  height: 100%;
+}
+.draw:hover::before {
+  border-top-color: #60daaa;
+  border-right-color: #60daaa;
+  transition: width 0.25s ease-out, height 0.25s ease-out 0.25s;
+}
+.draw:hover::after {
+  border-bottom-color: #60daaa;
+  border-left-color: #60daaa;
+  transition: border-color 0s ease-out 0.5s, width 0.25s ease-out 0.5s, height 0.25s ease-out 0.75s;
+}
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+.link{
+  position: relative;
+}
+
+.link:after{
+  content: '';
+  position: absolute;
+  width: 0; height: 1px;
+  display: block;
+  margin-top: 0px;
+  right: 0;
+  background: #fff;
+  transition: width .5s ease;
+  -webkit-transition: width .5s ease;
+}
+
+.link:hover:after{
+  width: 100%;
+  left: 0;
+  background: #fff;
+}
+
+.underline--magical {
+  background-image: linear-gradient(white, white);
+  background-repeat: no-repeat;
+  background-size: 0% 6%;
+  background-position: 0 100%;
+  transition: background-size .2s ease-in;
+}
+.underline--magical:hover {
+  background-size: 100% 6%;
+}
