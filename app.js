@@ -1,38 +1,12 @@
 var express = require('express');
 var app = express();
+var processPromotions = require('./scripts/process_promotions');
 
 app.set('port', (process.env.PORT || 8080));
 app.use(express.static(__dirname + '/public'));
 
 var request = require('request');
 
-var dict = {
-    'Flyweight': 'FLW',
-    'Bantamweight': 'BW',
-    'Featherweight': 'FW',
-    'Lightweight': 'LW',
-    'Welterweight': 'WW',
-    'Middleweight': 'MW',
-    'Light Heavyweight': 'LHW',
-    'Heavyweight': 'HW',
-    'Women\'s Strawweight': 'WSW',
-    'Women\'s Flyweight': 'WFLW',
-    'Women\'s Bantamweight': 'WBW',
-    'Women\'s Featherweight': 'WFW',
-};
-var weightClasses = [
-    'Flyweight','Bantamweight','Featherweight','Lightweight','Welterweight',
-    'Middleweight','Light Heavyweight','Heavyweight','Women\'s Strawweight',
-    'Women\'s Flyweight','Women\'s Bantamweight', 'Women\'s Featherweight'
-    ];
-
-var weightClassesVs = ['vs.','weight'];
-
-var tvSlots = ['Early Preliminary Card','Preliminary Card'];
-var regex = /(?=Early Preliminary Card)|(?=(?<!Early )Preliminary Card)|(?=\^)/g;
-var weightRegex = /(?=\^)|(?=Women)|(?=(?<!Women..\s)Fly)|(?=(?<!Women..\s)Bantam)|(?=Featherweight)|(?=Lightweight)|(?=Welterweight)|(?=Middleweight)|(?=(?<!Light )Heavyweight)|(?=Light Heavyweight)/g;
-var weightRegexAndVs = /(?:vs\.)|weight/g;
-var infoRegex = /(?:.*UFC mixed martial arts event in \d{4})|Promotion(?=\w)|Information|Date|(?<!\s)\(|(?<=\d)-(?=\d)|\)Venue|(?<!\s)City|Event\schronology/g;
 
 app.get('/', function(request, response) {
     response.send('Hello World!')
@@ -40,32 +14,31 @@ app.get('/', function(request, response) {
 
 app.listen(app.get('port'), function() {
     console.log("Node app is running at localhost:" + app.get('port'));
-    // If event has a '+' in the title, run currentEvent.replace('+', '%2B');
-    var currentEvent = 'UFC%20242'
-//    currentEvent = 'UFC%20on%20ESPN%2B%2021';
-//    currentEvent = 'UFC%20Fight%20Night:%20Cerrone%20vs.%20Gaethje';
+});
+
+
+app.get('/v1/ufc/event/:eventName', function(req, res, next) {
+
+    var currentEvent = req.params.eventName.replace(/\s/g, '\%20').replace(/\+/g, '\%2B');
     var url = "https://en.wikipedia.org/w/api.php?action=parse&format=json&page=" + currentEvent + "&prop=text";
-//var url="https://en.wikipedia.org/w/api.php?action=parse&format=json&page=UFC%20Fight%20Night:%20Andrade%20vs.%20Zhang&prop=text";
 
     request(url, function (err, response, body) {
         if(err){
             var error = "cannot connect to the server";
             console.log(error);
         } else {
-
-//name,    title,               timezone, year, month,  day, weekDay, hour, minute, AMPM, nextEvent
-//UFC 241, CORMIER VS MIOCIC 2, EST,      2019, August, 17, Saturday, 10,   00,     PM
-
             body = body.replace(/<[^>]*>/g,'').replace(/\\n/g,'');
-            var result = processUFC(body, currentEvent);
-            console.log(result);
-
+            var event = processPromotions.processUFC(body, currentEvent);
+            console.log(event);
+            console.log(event.fightCard);
+            return event;
         }
     });
+
 });
 
 function processUFC(body, currentEvent) {
-    var user = {};
+    var event = {};
     var fightsTotal = [];
 
     currentEvent = currentEvent.replace('%20', ' ');
@@ -76,27 +49,24 @@ function processUFC(body, currentEvent) {
     for (var i = 0; i < mainSection.length; i++) {
         var data = mainSection[i] + "\n";
         if (i === 0) {
-            console.log(data);
-            var info = data.split(infoRegex);
+            var info = data.split(eventDetailsParsing);
             info = info.filter(function(e){return e});
-            if (info[0].includes('+')) {
+            if (info[0].includes('+')) { // Error when calling special characters into an API call, must use escape characters
                 info[0] = info[0].replace('+', '\\+');
             }
-            if (info[0].includes('The poster')) {
+            if (info[0].includes('The poster')) { // Remove unneeded text from title of event
                 info[0] = info[0].split('The poster')[0];
             }
-            info[info.length - 1] = info[info.length - 1].match(new RegExp(info[0] + "(.*)" + info[0]))[1];
-            info[2] = info[2].replace( /\W|[0-9]/g , '');
+            info[info.length - 1] = info[info.length - 1].match(new RegExp(info[0] + "(.*)" + info[0]))[1]; // Extract next event title
+            info[2] = info[2].replace( /\W|[0-9]/g , ''); // Remove extra text after month name
 
             var country_list = ["USA","US","Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia &amp; Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Cape Verde","Cayman Islands","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cruise Ship","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kuwait","Kyrgyz Republic","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania","Mauritius","Mexico","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Namibia","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","Norway","Oman","Pakistan","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre &amp; Miquelon","Samoa","San Marino","Satellite","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","South Africa","South Korea","Spain","Sri Lanka","St Kitts &amp; Nevis","St Lucia","St Vincent","St. Lucia","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad &amp; Tobago","Tunisia","Turkey","Turkmenistan","Turks &amp; Caicos","Uganda","Ukraine","United Arab Emirates","United Kingdom","Uruguay","Uzbekistan","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
 
-            var city;
-            var provState;
-            var country;
+            var city, provState, country;
 
+            // Gets all information about location of event
             var locationCombined = info[7].split(', ');
             if (locationCombined.length < 3) {
-//                console.log(locationCombined[1]);
                 if (country_list.includes(locationCombined[1]) === true) {
                     city = locationCombined[0];
                     country = locationCombined[1];
@@ -114,9 +84,9 @@ function processUFC(body, currentEvent) {
             }
 
 
-            user.name = info[0].replace('\\', '').split(': ')[0];
-            user.title = info[0].split(': ')[1];
-            user.nextEvent = info[info.length - 1];
+            event.name = info[0].replace('\\', '').split(': ')[0];
+            event.title = info[0].split(': ')[1];
+            event.nextEvent = info[info.length - 1];
 
             var location = {
                 name : info[6],
@@ -124,7 +94,7 @@ function processUFC(body, currentEvent) {
                 provState : provState,
                 country : country
             }
-            user.location = location;
+            event.location = location;
 
             var timeZone;
             var year;
@@ -135,60 +105,56 @@ function processUFC(body, currentEvent) {
             var minute;
             var AMPM;
 
+            var weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+            var d = new Date(info[3], info[4] - 1, info[5]);
+
             var when = {
                 timeZone : 'EST',
                 year : info[3],
                 month : info[4],
                 monthString: info[2],
                 day : info[5],
-                weekDay : 'Friday',
-                hour : '08',
+                weekDay : weekday[d.getDay()],
+                hour : '18',
                 minute : '00',
                 AMPM : 'PM'
             }
-            user.when = when;
-
-
+            event.when = when;
 
         }
-        if (i === 1) {
-//            console.log(data);
-            data = data.substring(0, data.indexOf('Announced bout'));
-            var tokens = data.split(regex);
-//            console.log(tokens);
-            for (var i = 0; i < tokens.length; i++) {
-                var fights = [];
-                var tokenSection = tokens[i].split(weightRegex);
+        if (i === 1) { // Section for extracting fight card information from the Wikipedia API
+            if (data.includes('Announced bout')) { // Removes unneeded data from end of data
+                data = data.substring(0, data.indexOf('Announced bout'));
+            }
+            var fightCards = data.split(cardSlots);
+            for (var i = 0; i < fightCards.length; i++) {
+                var fights = []; // Reset fights array for each separate card to be parsed through
+                var fightCard = fightCards[i].split(weightClasses);
                 if (i === 0) {
-                    var card = currentEvent;
-                    tokenSection[0] = currentEvent;
+                    fightCard[0] = currentEvent;
                 }
-                else if (!tokenSection[0].includes('^')){
-                    tokenSection[0] = currentEvent + ' ' + tokenSection[0];
+                else if (!fightCard[0].includes('^')){
+                    fightCard[0] = currentEvent + ' ' + fightCard[0];
                 }
-                else if (tokenSection[0].includes('^')){
-                    fightsTotal.push([[tokenSection.join("")]]);
+                else if (fightCard[0].includes('^')){
+                    fightsTotal.push([[fightCard.join("")]]);
                     continue;
                 }
-                for (var j = 0; j < tokenSection.length; j++) {
-                    var ts = tokenSection[j].split(weightRegexAndVs);
-                    if (j !== 0 && ts.length === 3) {
-                        ts[0] = ts[0] + 'weight';
+                for (var j = 0; j < fightCard.length; j++) {
+                    var fight = fightCard[j].split(fightSlots);
+                    if (j !== 0 && fight.length === 3) {
+                        fight[0] = fight[0] + 'weight';
                     }
-                    fights.push(ts);
+                    fights.push(fight);
                 }
                 fightsTotal.push(fights);
-
             }
-
-            user.fightCard = fights;
-
+            event.fightCard = fights;
         }
     }
-
-    user.fightCard = fightsTotal;
-    console.log(user.fightCard);
-    return user;
+    event.fightCard = fightsTotal;
+    return event;
 }
 function processPFL() {
      var pet = 'dog';
