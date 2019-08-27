@@ -19,22 +19,26 @@ const options = {
 var eventSchema = new mongoose.Schema({
     name: String,
     title: String,
+    nextEvent: String,
+    location: {
+        name: String,
+        city: String,
+        provState: String,
+        country: String
+    },
     when: {
         timeZone: String,
         year: String,
         month: String,
+        monthString: String,
         day: String,
         weekDay: String,
         hour: String,
         minute: String,
         AMPM: String
     },
-    location: {
-        name: String,
-        city: String,
-        provState: String,
-        country: String
-    }
+    fightCard: Array
+
 });
 
 var Events = mongoose.model('events', eventSchema);
@@ -59,6 +63,36 @@ module.exports = {
         //  });
         //};
         //connectWithRetry();
+    },
+
+    addData: function(event) {
+
+//        var thisEvent = new Events ({
+//            name: event.name,
+//            title: event.title,
+//            nextEvent: event.nextEvent,
+//            location: {
+//                name: event.location.name,
+//                city: event.location.city,
+//                provState: event.location.provState,
+//                country: event.location.country
+//            },
+//            when: {
+//                timeZone: event.when.timeZone,
+//                year: event.when.year,
+//                month: event.when.month,
+//                monthString: event.when.monthString,
+//                day: event.when.day,
+//                weekDay: event.when.weekDay,
+//                hour: event.when.hour,
+//                minute: event.when.minute,
+//                AMPM: event.when.AMPM
+//            },
+//            fightCard: event.fightCard
+//        });
+        var thisEvent = new Events (event);
+        thisEvent.save(function (err) {if (err) console.log ('Error on save!')});
+
     },
 
     addSampleData: function() {

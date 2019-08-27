@@ -212,7 +212,7 @@
                         <div class=""><%= result.title %></div>
                     </div>
                     <div class="column" style="font-size:1.7em;"><%= result.when.weekDay %> <%=
-                        result.when.month %>
+                        result.when.monthString %>
                         <%= result.when.day %>, <%= result.when.hour %>:<%= result.when.minute %><%=
                         result.when.AMPM %> <%= result.when.timeZone %>
                     </div>
@@ -220,8 +220,8 @@
 
 
                 <div id="firsthiddendiv_<%= key %>" style="height:100px;background-color:red;display: none;">
+                    <%= result.fightCard %>
                 </div>
-
 
                 <% }); %>
 
