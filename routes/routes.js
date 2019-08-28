@@ -12,21 +12,52 @@ router.get('/hey', function(req, res) {
     res.send('Hey');
 });
 
+//router.get('/ufc/event/:eventName', function(req, res) {
+//    var currentEvent = req.params.eventName.replace(/\s/g, '\%20').replace(/\+/g, '\%2B');
+//    var url = 'http://192.168.99.103:8081/v1/ufc/event/' + currentEvent;
+//    request(url, function (err, response, body) {
+//        if(err){
+////            var error = "cannot connect to the server(1)";
+//            res.send(err);
+//            console.log(err);
+//        } else {
+//            var data = JSON.parse(body);
+//            mongodb.addData(data);
+//            res.send(data);
+//        }
+//    });
+//});
+
+
+
+
 router.get('/ufc/event/:eventName', function(req, res) {
-    var currentEvent = req.params.eventName.replace(/\s/g, '\%20').replace(/\+/g, '\%2B');
-    var url = 'http://192.168.99.103:8081/v1/ufc/event/' + currentEvent;
+    repeatProcess(req.params.eventName);
+});
+
+function repeatProcess(event) {
+    event = event.replace(/\s/g, '\%20').replace(/\+/g, '\%2B');
+    var url = 'http://192.168.99.103:8081/v1/ufc/event/' + encodeURIComponent(event);
     request(url, function (err, response, body) {
         if(err){
-//            var error = "cannot connect to the server(1)";
-            res.send(err);
-            console.log(err);
+            console.log('ERR: Stopped at ---> ' + url);
         } else {
             var data = JSON.parse(body);
             mongodb.addData(data);
-            res.send(body);
+            if (data.nextEvent !== null || data.nextEvent !== '' || data.nextEvent !== undefined) {
+                console.log(data.name + ' WORKED');
+                repeatProcess(data.nextEvent);
+            }
         }
     });
-});
+}
+
+
+
+
+
+
+
 //app.get('/', function(req, res){
 ////    res.send('Hello World!');
 ////    res.sendFile( __dirname + "/public/" + "index1.html" );

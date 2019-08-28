@@ -19,6 +19,7 @@ const options = {
 var eventSchema = new mongoose.Schema({
     name: String,
     title: String,
+    promotion: String,
     nextEvent: String,
     location: {
         name: String,
