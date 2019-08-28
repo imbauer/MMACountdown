@@ -14,10 +14,12 @@ app.get('/', function(request, response) {
 
 app.listen(app.get('port'), function() {
     console.log("Node app is running at localhost:" + app.get('port'));
-    var currentEvent = 'UFC 244';
-//    currentEvent = 'UFC Fight Night: Andrade vs. Zhang';
-    currentEvent = currentEvent.replace(/\s/g, '\%20').replace(/\+/g, '\%2B');
-//    currentEvent = req.params.eventName.replace(/\s/g, '\%20').replace(/\+/g, '\%2B');
+});
+
+
+app.get('/v1/ufc/event/:eventName', function(req, res, next) {
+
+    var currentEvent = req.params.eventName.replace(/\s/g, '\%20').replace(/\+/g, '\%2B');
     var url = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvslots=*&rvprop=content&format=json&utf8=true&titles=" + currentEvent;
 
     request(url, function (err, response, body) {
@@ -25,33 +27,6 @@ app.listen(app.get('port'), function() {
             var error = "cannot connect to the server(2)";
             console.log(error);
         } else {
-//            body = body.replace(/<[^>]*>/g,'').replace(/\\n/g,'');
-            var event = processPromotions.processUFC(body, currentEvent);
-            console.log(event);
-//            console.log(event.fightCard);
-//            res.send(event);
-            return event;
-        }
-    });
-});
-
-
-app.get('/v1/ufc/event/:eventName', function(req, res, next) {
-
-//    res.send('This is the correct API :C')
-
-    var currentEvent = req.params.eventName.replace(/\s/g, '\%20').replace(/\+/g, '\%2B');
-    var url = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=" + currentEvent;
-
-    request(url, function (err, response, body) {
-        if(err){
-            var error = "cannot connect to the server(2)";
-            console.log(error);
-        } else {
-            console.log('============================================================================');
-            console.log(body);
-            console.log('============================================================================');
-//            body = body.replace(/<[^>]*>/g,'').replace(/\\n/g,'');
             var event = processPromotions.processUFC(body, currentEvent);
             console.log(event);
             console.log(event.fightCard);
