@@ -37,10 +37,11 @@ router.get('/ufc/event/:eventName', function(req, res) {
 
 function repeatProcess(event) {
     event = event.replace(/\s/g, '\%20').replace(/\+/g, '\%2B');
-    var url = 'http://192.168.99.103:8081/v1/ufc/event/' + encodeURIComponent(event);
+    var URI = encodeURIComponent(event).replace(/%2520/g, '%20');
+    var url = 'http://192.168.99.103:8081/v1/ufc/event/' + URI;
     request(url, function (err, response, body) {
         if(err){
-            console.log('ERR: Stopped at ---> ' + url);
+            console.log(err + ' ERR: Stopped at ---> ' + url);
         } else {
             var data = JSON.parse(body);
             mongodb.addData(data);
