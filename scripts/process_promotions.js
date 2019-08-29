@@ -40,8 +40,9 @@ module.exports =
         info[5] = info[5].replace(/(.*=\[\[)|(\|.*)/g, '');
         info[6] = info[6].replace(/(.*=\[\[)|(\|.*)/g, '');
 
-        event.name = info[0].split(/:/g)[0];
-        event.title = info[0].split(/:/g)[1];
+        event.name = info[0].split(/:\s/g)[0];
+        event.title = info[0].split(/:\s/g)[1];
+        event.event = info[0];
         event.promotion = info[1];
         event.nextEvent = info[6];
         var location = {};
