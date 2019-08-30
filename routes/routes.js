@@ -44,14 +44,19 @@ function repeatProcess(event) {
             console.log(err + ' ERR: Stopped at ---> ' + url);
         } else {
             var data = JSON.parse(body);
-            mongodb.addData(data);
-            if (data.nextEvent !== null || data.nextEvent !== '' || data.nextEvent !== undefined) {
-                console.log(data.name + ' WORKED');
-                if (data.nextEvent.includes('following')) {
+            console.log(url);
+            console.log(data);
+            console.log(data.length);
+            for (var i = 0; i < data.length; i++) {
+                mongodb.addData(data[i]);
+            }
+            if (data[0].nextEvent !== null || data[0].nextEvent !== '' || data[0].nextEvent !== undefined) {
+                console.log(data[0].name + ' WORKED');
+                if (data[0].nextEvent.includes('following')) {
                     console.log('Exited without issue');
                     return;
                 }
-                repeatProcess(data.nextEvent);
+                repeatProcess(data[0].nextEvent);
             }
         }
     });
