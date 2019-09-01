@@ -23,6 +23,32 @@
         }
 
 
+.one {
+  overflow: hidden;
+  text-align: center;
+}
+
+.one:before,
+.one:after {
+  background-color: #A9A9A9;
+  opacity:0.9;
+  content: "";
+  display: inline-block;
+  height: 100px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+
+.one:before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+
+.one:after {
+  left: 0.5em;
+  margin-right: -50%;
+}
 
 .work__list-item {
 transform:translateY(0);
@@ -30,7 +56,7 @@ color:black!important;
 padding:18px 0% 20px;
 border-bottom:1px solid #dadada;
 box-shadow:0 0 0 rgba(93,93,93,.16);
-background:linear-gradient(#fbfbfb,#fbfbfb);
+//background:linear-gradient(#fbfbfb,#fbfbfb);
 transition:all .3s ease!important;
 }
 .work__list-item .work__list-item--first{
@@ -149,6 +175,7 @@ border:1px solid hsl(0, 0%, 90%);
 <!--        display: none !important;-->
 <!--    }-->
 <!--}-->
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,500,600|Playfair+Display');
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,900');
 /* Font from Google fonts */
 /* Basic styles */

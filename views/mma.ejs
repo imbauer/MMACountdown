@@ -12,6 +12,7 @@
           content="Ignite a world of creativity with mod.io, a cross platform mod API and SDK for game developers.">
 
     <!--    <link rel="stylesheet" type="text/css" href="./style.css"  />-->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400" rel="stylesheet">
     <link rel="shortcut icon" href="https://cdn.iconscout.com/icon/premium/png-256-thumb/clock-220-155041.png"/>
     <link rel="icon" href="https://cdn.iconscout.com/icon/premium/png-256-thumb/clock-220-155041.png"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
@@ -205,20 +206,12 @@
                     <div class="column big-text is-two-fifths">
                         <!-- Add here the class to make effects on single column -->
                         <div class="" style="margin-bottom:20px;">
-
-
-
                             <% if (result.location.name && result.location.city && result.location.provState && result.location.country) { %>
                                 <%= result.location.name %>, <%= result.location.city %>,
                                 <%= result.location.provState %>, <%= result.location.country %>
                             <% } else if (result.location.name && result.location.city && !result.location.provState && result.location.country) { %>
                                 <%= result.location.name %>, <%= result.location.city %>, <%= result.location.country %>
                             <% } %>
-
-
-
-
-
                         </div>
                         <h1 style="margin-bottom:20px;font-size:2em;"><%=
                             result.name %></h1>
@@ -232,8 +225,27 @@
                 </div>
 
 
-                <div id="firsthiddendiv_<%= key %>" style="height:100px;background-color:red;display: none;">
-                    <%= result.fightCard %>
+                <div id="firsthiddendiv_<%= key %>" style="display: none;text-align:center;">
+
+                    <% if (result.fightCard !== undefined || result.fightCard !== null || result.fightCard.length > 0) { %>
+                        <% for (var i = 0; i < result.fightCard.length; i++) { %>
+                            <% if (result.fightCard[i].length === 3) { %>
+                                <div class="columns is-vcentered" style="padding-bottom:15px;">
+                                    <div class="column" style="font-size:1.7em;font-family: Work Sans;font-weight:300;"><%= result.fightCard[i][1] %></div>
+                                    <div class="column is-two-fifths big-text">
+
+                                        <h1 class="one" style="font-size:1em;color:black;font-weight:200;"><span style="display:inline-block;width:50%;"><%= result.fightCard[i][0] %></span></h1>
+
+
+                                    </div>
+                                    <div class="column big-text" style="font-size:1.7em;font-family:Nunito;font-weight:300;"><%= result.fightCard[i][2] %></div>
+                                </div>
+                            <% } %>
+                        <% } %>
+
+                    <% } %>
+                    <!--<%= result.fightCard.length %>-->
+                    <!--<%= result.fightCard %>-->
                 </div>
 
                 <% }); %>
