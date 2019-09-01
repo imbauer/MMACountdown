@@ -133,7 +133,7 @@
 
 
             <h1 class="title has-text-light big-text">
-                A <span class="has-text-primary">Websitee</span> that provides the exact <span class="has-text-primary">time</span>,
+                A <span class="has-text-primary">Website</span> that provides the exact <span class="has-text-primary">time</span>,
                 regardless of <span class="has-text-primary">time zone</span>, of every <span class="has-text-primary">MMA Event</span>
             </h1>
             <h2 class="subtitle has-text-light">
@@ -204,8 +204,21 @@
                     </div>
                     <div class="column big-text is-two-fifths">
                         <!-- Add here the class to make effects on single column -->
-                        <div class="" style="margin-bottom:20px;"><%= result.location.name %>, <%= result.location.city
-                            %>, <%= result.location.provState %>, <%= result.location.country %>
+                        <div class="" style="margin-bottom:20px;">
+
+
+
+                            <% if (result.location.name && result.location.city && result.location.provState && result.location.country) { %>
+                                <%= result.location.name %>, <%= result.location.city %>,
+                                <%= result.location.provState %>, <%= result.location.country %>
+                            <% } else if (result.location.name && result.location.city && !result.location.provState && result.location.country) { %>
+                                <%= result.location.name %>, <%= result.location.city %>, <%= result.location.country %>
+                            <% } %>
+
+
+
+
+
                         </div>
                         <h1 style="margin-bottom:20px;font-size:2em;"><%=
                             result.name %></h1>

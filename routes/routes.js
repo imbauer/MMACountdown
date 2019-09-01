@@ -38,7 +38,7 @@ router.get('/ufc/event/:eventName', function(req, res) {
 function repeatProcess(event) {
     event = event.replace(/\s/g, '\%20').replace(/\+/g, '\%2B');
     var URI = encodeURIComponent(event).replace(/%2520/g, '%20').replace(/%252B/g, '%2B');
-    var url = 'http://192.168.99.103:8081/v1/ufc/event/' + URI;
+    var url = 'http://192.168.99.100:8081/v1/ufc/event/' + URI;
     request(url, function (err, response, body) {
         if(err){
             console.log(err + ' ERR: Stopped at ---> ' + url);
