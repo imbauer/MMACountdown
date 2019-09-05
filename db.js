@@ -17,6 +17,7 @@ const options = {
 };
 
 var eventSchema = new mongoose.Schema({
+    "_id": false,
     name: String,
     title: String,
     event: String,
@@ -42,6 +43,8 @@ var eventSchema = new mongoose.Schema({
     fightCard: Array
 
 });
+
+eventSchema.index({name: 1, title: 1}, {unique: true});
 
 var Events = mongoose.model('events', eventSchema);
 
@@ -92,8 +95,23 @@ module.exports = {
 //            },
 //            fightCard: event.fightCard
 //        });
-        var thisEvent = new Events (event);
-        thisEvent.save(function (err) {if (err) console.log ('Error on save!')});
+        var thisEvent = new Events(event);
+        console.log('=====IN DB =====');
+        console.log(event.name);
+        console.log('----------------');
+        console.log(thisEvent.name);
+        console.log('================');
+
+        Events.findOneAndUpdate(
+            {'name':event.name, 'title':event.title},
+            thisEvent,
+            {upsert:true, new: true},
+            function(err, doc){
+                if (err){console.log(err)}
+            }
+        );
+
+//        thisEvent.save(function (err) {if (err) console.log ('Error on save!')});
 
     },
 
