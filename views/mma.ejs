@@ -231,16 +231,35 @@
                         <% for (var i = 0; i < result.fightCard.length; i++) { %>
                             <% if (result.fightCard[i].length === 3) { %>
                                 <div class="columns is-vcentered" style="padding-bottom:15px;">
-                                    <div class="column" style="font-size:1.7em;font-family: Work Sans;font-weight:300;"><%= result.fightCard[i][1] %></div>
-                                    <div class="column is-two-fifths big-text">
+                                    <div class="column" style="color:black;font-size:1.7em;font-family: Work Sans;font-weight:300;"><%= result.fightCard[i][1] %></div>
+                                    <div class="column is-two-fifths big-text" style="background-color:gray;">
 
-                                        <h1 class="one" style="font-size:1em;color:black;font-weight:200;"><span style="display:inline-block;width:50%;"><%= result.fightCard[i][0] %></span></h1>
+                                        <h1 class="" style="font-size:1em;color:black;font-weight:200;">
+                                            <%= result.fightCard[i][0] %>
+                                        </h1>
 
 
                                     </div>
-                                    <div class="column big-text" style="font-size:1.7em;font-family:Nunito;font-weight:300;"><%= result.fightCard[i][2] %></div>
+                                    <div class="column big-text" style="color:black;font-size:1.7em;font-family:Nunito;font-weight:300;"><%= result.fightCard[i][2] %></div>
                                 </div>
+
+                            <% } else if (result.fightCard[i].length > 3) { %>
+                            <div class="columns is-vcentered" style="padding-bottom:15px;background-color:hsl(0, 0%, 96%);">
+                                <div class="column" style="background-color:rgba(0, 200, 150, 0.6);color:black;font-size:1.7em;font-family: Work Sans;font-weight:300;"><%= result.fightCard[i][1] %></div>
+                                <div class="column is-two-fifths big-text">
+
+                                    <h1 class="" style="font-size:1em;color:black;font-weight:200;">
+                                            <%= result.fightCard[i][4] %><br>
+                                            <%= result.fightCard[i][0] %><br>
+                                            <%= result.fightCard[i][6] %> Round <%= result.fightCard[i][5] %>
+                                    </h1>
+
+                                </div>
+                                <div class="column big-text" style="background-color:rgba(255, 0, 0, 0.6);color:black;font-size:1.7em;font-family:Nunito;font-weight:300;"><%= result.fightCard[i][3] %></div>
+                            </div>
                             <% } %>
+
+
                         <% } %>
 
                     <% } %>
