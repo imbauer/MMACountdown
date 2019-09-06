@@ -1,5 +1,6 @@
 
 const mongoose = require('mongoose');
+mongoose.set('useFindAndModify', false);
 
 const {
     MONGO_USERNAME,
@@ -72,44 +73,105 @@ module.exports = {
 
     addData: function(event) {
 
-//        var thisEvent = new Events ({
-//            name: event.name,
-//            title: event.title,
-//            nextEvent: event.nextEvent,
-//            location: {
-//                name: event.location.name,
-//                city: event.location.city,
-//                provState: event.location.provState,
-//                country: event.location.country
-//            },
-//            when: {
-//                timeZone: event.when.timeZone,
-//                year: event.when.year,
-//                month: event.when.month,
-//                monthString: event.when.monthString,
-//                day: event.when.day,
-//                weekDay: event.when.weekDay,
-//                hour: event.when.hour,
-//                minute: event.when.minute,
-//                AMPM: event.when.AMPM
-//            },
-//            fightCard: event.fightCard
-//        });
-        var thisEvent = new Events(event);
-        console.log('=====IN DB =====');
-        console.log(event.name);
-        console.log('----------------');
-        console.log(thisEvent.name);
-        console.log('================');
 
-        Events.findOneAndUpdate(
-            {'name':event.name, 'title':event.title},
-            thisEvent,
-            {upsert:true, new: true},
-            function(err, doc){
-                if (err){console.log(err)}
-            }
-        );
+        var thisEvent = new Events(event);
+
+
+        function getOldEvent(event) {
+            return Events.findOne({name:event.name, title: event.title}) // Notice the return here
+            .lean()
+            .exec()
+            .then((previousEvent) => {
+                console.log('Phase 0');
+                // FIRST CONSOLE.LOG
+                console.log(typeof previousEvent);
+                console.log(previousEvent.name);
+                console.log(previousEvent.location);
+                console.log(previousEvent.fightCard);
+
+//                previousEvent = JSON.parse(previousEvent);
+
+                if (previousEvent.fightCard !== undefined || previousEvent.fightCard !== null || previousEvent.fightCard !== []) {
+                    console.log('Phase 1');
+                    for (var i = 0; i < previousEvent.fightCard.length; i++) {
+                        console.log('Phase 2');
+                        if (previousEvent.fightCard[i].length === 3) {
+                            console.log('Phase 3');
+                            if (event.fightCard[i].length === 3) {
+                                console.log('Phase 4');
+                                // Do nothing
+                            }
+                            else if (event.fightCard[i].length > 3) {
+                                console.log('Phase 5');
+                                if (event.fightCard[i][1] === previousEvent.fightCard[i][1]) {
+                                    console.log('Phase 6');
+                                    // Do nothing
+                                }
+                                else if (event.fightCard[i][3] === previousEvent.fightCard[i][1]) {
+                                    console.log('Phase 7');
+                                    event.fightCard[i][2] = 2;
+                                    event.fightCard[i][3] = previousEvent.fightCard[i][2];
+                                    event.fightCard[i][1] = previousEvent.fightCard[i][1];
+                                }
+                            }
+                        }
+                        else if (previousEvent.fightCard[i].length > 3) {
+                            console.log('Phase 8');
+                            // Do nothing
+                        }
+                    }
+                }
+
+                Events.findOneAndUpdate(
+                    {'name':event.name, 'title':event.title},
+                    thisEvent,
+                    {upsert:true, new: true},
+                    function(err, doc){
+                        if (err){console.log(err)}
+                    }
+                );
+        //        console.log('||||||||||||||||||||||||||||||||||||||||');
+        //        console.log(previousEvent);
+        //        console.log('||||||||||||||||||||||||||||||||||||||||');
+                return previousEvent;
+            })
+            .catch((err) => {
+                console.log(err);
+                Events.findOneAndUpdate(
+                    {'name':event.name, 'title':event.title},
+                    thisEvent,
+                    {upsert:true, new: true},
+                    function(err, doc){
+                        if (err){console.log(err)}
+                    }
+                );
+            });
+        }
+
+
+
+//        async function getEvent(event) { // Async function statment
+//          return 42;
+//        }
+//        let logNumber = async function() { // Async function expression
+//          getEvent().then(function(value) {
+//              console.log('||||||||||||||||||||||||||||||||||||||||');
+//              console.log(value);
+//              console.log('||||||||||||||||||||||||||||||||||||||||');
+//            });
+//        }
+//        logNumber(); // 42
+
+        getOldEvent(event);
+
+//        Events.findOneAndUpdate(
+//            {'name':event.name, 'title':event.title},
+//            thisEvent,
+//            {upsert:true, new: true},
+//            function(err, doc){
+//                if (err){console.log(err)}
+//            }
+//        );
 
 //        thisEvent.save(function (err) {if (err) console.log ('Error on save!')});
 

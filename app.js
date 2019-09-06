@@ -21,7 +21,7 @@ mongodb.connectDB();
 
 //mongodb.addSampleData();
 
-mongodb.findData();
+//mongodb.findData();
 
 
 

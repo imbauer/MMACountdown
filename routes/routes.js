@@ -44,9 +44,9 @@ function repeatProcess(event) {
             console.log(err + ' ERR: Stopped at ---> ' + url);
         } else {
             var data = JSON.parse(body);
-            console.log(url);
-            console.log(data);
-            console.log(data.length);
+//            console.log(url);
+//            console.log(data);
+//            console.log(data.length);
             for (var i = 0; i < data.length; i++) {
                 mongodb.addData(data[i]);
             }

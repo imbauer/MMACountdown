@@ -245,7 +245,13 @@
 
                             <% } else if (result.fightCard[i].length > 3) { %>
                             <div class="columns is-vcentered" style="padding-bottom:15px;background-color:hsl(0, 0%, 96%);">
-                                <div class="column" style="background-color:rgba(0, 200, 150, 0.6);color:black;font-size:1.7em;font-family: Work Sans;font-weight:300;"><%= result.fightCard[i][1] %></div>
+                                <% if (result.fightCard[i][2] === 2) { %>
+                                    <div class="column" style="background-color:rgba(255, 0, 0, 0.6);color:black;font-size:1.7em;font-family: Work Sans;font-weight:300;"><%= result.fightCard[i][1] %></div>
+                                <% } else { %>
+                                    <div class="column" style="background-color:rgba(0, 200, 150, 0.6);color:black;font-size:1.7em;font-family: Work Sans;font-weight:300;"><%= result.fightCard[i][1] %></div>
+
+                                <% } %>
+
                                 <div class="column is-two-fifths big-text">
 
                                     <h1 class="" style="font-size:1em;color:black;font-weight:200;">
@@ -255,7 +261,14 @@
                                     </h1>
 
                                 </div>
+                                <% if (result.fightCard[i][2] === 2) { %>
+                                <div class="column big-text" style="background-color:rgba(0, 200, 150, 0.6);color:black;font-size:1.7em;font-family:Nunito;font-weight:300;"><%= result.fightCard[i][3] %></div>
+                                <% } else { %>
                                 <div class="column big-text" style="background-color:rgba(255, 0, 0, 0.6);color:black;font-size:1.7em;font-family:Nunito;font-weight:300;"><%= result.fightCard[i][3] %></div>
+
+                                <% } %>
+
+
                             </div>
                             <% } %>
 
