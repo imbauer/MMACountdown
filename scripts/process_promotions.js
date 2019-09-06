@@ -11,7 +11,7 @@ module.exports =
         var weightClasses = /(?=\^)|(?=Women)|(?=(?<!Women..\s)Fly)|(?=(?<!Women..\s)Bantam)|(?=Featherweight)|(?=Lightweight)|(?=Welterweight)|(?=Middleweight)|(?=(?<!Light )Heavyweight)|(?=Light Heavyweight)/g;
         var fightSlots = /(?:vs\.)|weight/g;
         var eventDetailsParsing = /(?:.*UFC mixed martial arts event in \d{4})|Promotion(?=\w)|Information|Date|(?<!\s)\(|(?<=\d)-(?=\d)|\)Venue|(?<!\s)City|Event\schronology/g;
-        var eventParsing = /(?=promotion)|(?:{{MMAevent end.*)|(?===Fight card==)|(city=\s\[\[.*?previousevent)|(city=\s\[\[.*?attendance)|(city=\[\[.*?attendance)|(?=venue)|(?=date\|\d{4}\|\d{2}\|\d{2})|(followingevent.*?\}})|(?=\^)|(?:attendance=\|gate=\|)|(?:{\"batchcomplete.*?name)|(?:\'\'\'\'\'.*?==Fight\scard==)/g;
+        var eventParsing = /(?=promotion=)|(?:{{MMAevent end.*)|(?===Fight card==)|(city=\s\[\[.*?previousevent)|(city=\s\[\[.*?attendance)|(city=\[\[.*?attendance)|(?=venue)|(?=date\|\d{4}\|\d{2}\|\d{2})|(followingevent.*?\}})|(?=\^)|(?:attendance=\|gate=\|)|(?:{\"batchcomplete.*?name)|(?:\'\'\'\'\'.*?==Fight\scard==)/g;
         //  (?=city).*?\|   (?=(city=\[\[.*?\|))
         var splitEvents = /(?:MMAevent\scard\|)/g;
         var splitFights = /(?:MMAevent\sbout\|)/g;
@@ -22,8 +22,14 @@ module.exports =
         var fightsTotal = [];
 
         body = body.replace(/<[^>]*>/g,'').replace(/\\n/g,'').replace(/\s\s+/g, ' ');
+        console.log('============================================================================================================');
+        console.log(body);
+        console.log('============================================================================================================');
         var info = body.split(eventParsing);
         info = info.filter(function(e){return e});
+        console.log('============================================================================================================');
+        console.log(info);
+        console.log('============================================================================================================');
         var fightCard = info[7].split(splitEvents);
         info.pop();
         fightCard.shift();
@@ -121,8 +127,10 @@ module.exports =
             event.location = location;
             event.fightCard = fightCard[m];
             events.push(event);
-         }
-
+        }
+        console.log('============================================================================================================');
+        console.log(events);
+        console.log('============================================================================================================');
         return events;
     },
 
