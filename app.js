@@ -28,8 +28,8 @@ app.get('/v1/ufc/event/:eventName', function(req, res, next) {
             console.log(err + ' ERR: Stopped at ---> ' + url);
         } else {
             var event = processPromotions.processUFC(body, currentEvent);
-            console.log(event);
-            console.log(event.fightCard);
+//            console.log(event);
+//            console.log(event.fightCard);
             res.send(event);
             return event;
         }

@@ -2,9 +2,9 @@ module.exports =
 {
     processUFC: function (body, currentEvent)  {
 
-        console.log('==============BODY===========');
-        console.log(body);
-        console.log('============END BODY =========');
+//        console.log('==============BODY===========');
+//        console.log(body);
+//        console.log('============END BODY =========');
 
         var tvSlots = ['Early Preliminary Card','Preliminary Card'];
         var cardSlots = /(?=Early Preliminary Card)|(?=(?<!Early )Preliminary Card)|(?=\^)/g;
@@ -13,8 +13,8 @@ module.exports =
         var eventDetailsParsing = /(?:.*UFC mixed martial arts event in \d{4})|Promotion(?=\w)|Information|Date|(?<!\s)\(|(?<=\d)-(?=\d)|\)Venue|(?<!\s)City|Event\schronology/g;
         var eventParsing = /(?=promotion=)|(?:{{MMAevent end.*)|(?===Fight card==)|(city=\s\[\[.*?previousevent)|(city=\s\[\[.*?attendance)|(city=\[\[.*?attendance)|(?=venue)|(?=date\|\d{4}\|\d{2}\|\d{2})|(followingevent.*?\}})|(?=\^)|(?:attendance=\|gate=\|)|(?:{\"batchcomplete.*?name)|(?:\'\'\'\'\'.*?==Fight\scard==)/g;
         //  (?=city).*?\|   (?=(city=\[\[.*?\|))
-        var splitEvents = /(?:MMAevent\scard\|)/g;
-        var splitFights = /(?:MMAevent\sbout\|)/g;
+        var splitEvents = /(?:MMAevent\scard\|)|(?:MMAevent\scard\s\|)/g;
+        var splitFights = /(?:MMAevent\sbout\|)|(?:MMAevent\sbout\s\|)/g;
         //  (?=Early Preliminary Card)|(?=(?<!Early )Preliminary Card)
 
         var events = [];
@@ -22,27 +22,40 @@ module.exports =
         var fightsTotal = [];
 
         body = body.replace(/<[^>]*>/g,'').replace(/\\n/g,'').replace(/\s\s+/g, ' ');
-        console.log('============================================================================================================');
-        console.log(body);
-        console.log('============================================================================================================');
         var info = body.split(eventParsing);
         info = info.filter(function(e){return e});
-        console.log('============================================================================================================');
-        console.log(info);
-        console.log('============================================================================================================');
         var fightCard = info[7].split(splitEvents);
         info.pop();
         fightCard.shift();
+        console.log('=======================================      1      ===============================================');
+        console.log(fightCard);
+        console.log('============================================================================================================');
         for (var i = 0; i < fightCard.length; i++) {
+
+//            console.log(fightCard[i]);
             fightCard[i] = fightCard[i].replace(/({|}|)/g, '').split(splitFights);
+
             for (var j = 0; j < fightCard[i].length; j++) {
-                fightCard[i][j] = fightCard[i][j].replace(/(\|\|\|\|.*|\[|\]|\|header.*)/g, '').replace(/(\s\|)/g, '|').replace(/(\|vs\.\|.*\(fighter\))/g, '').replace(/(weight\|.*\(fighter\))/g, 'weight').replace(/(\|vs\.)/g, '').replace(/(\|\|\|.*)/g, '').replace(/(\|\|.*)/g, '').split('|');
+                console.log('=======================================      BEFORE REPLACE      ===============================================');
+                console.log(fightCard[i][j]);
+                fightCard[i][j] = fightCard[i][j].replace(/(\|)\1+/g, '|').replace(/(\[)\1+/g, '[').replace(/(\])\1+/g, ']').replace(/[|]+$/g, '');
+                console.log('=======================================  ====== REPLACE ======     ============================================');
+//                fightCard[i][j] = fightCard[i][j].replace(/(\|\|\|\|.*|\[|\]|\|header.*)/g, '').replace(/(\s\|)/g, '|');
+                console.log(fightCard[i][j]);
+                //.replace(/(weight\|.*\(fighter\))/g, 'weight')
+                fightCard[i][j] = fightCard[i][j].replace(/(\|def\.\|.*\(fighter\)\|)|(\|def\.\|.*\(grappler\)\|)/g, '|def.|').replace(/(\|vs\.\|.*\(fighter\)\|)|(\|vs\.\|.*\(grappler\)\|)/g, '|vs.|').replace(/(weight\|.*?\(fighter\)\|)|(weight\|.*?\(grappler\)\|)/g, 'weight|').replace(/(\[)|(\])/g, '').split('|');
+                console.log('=======================================      AFTER REPLACE      ===============================================');
+                console.log(fightCard[i][j]);
+                console.log('=======================================  ====== REPLACE ======     ============================================');
             }
         }
+        console.log('========================================     2     ========================================================');
+        console.log(fightCard);
+        console.log('============================================================================================================');
         for (var k = 0; k < info.length; k++) {
             info[k] = info[k].replace(/(\]\]\|.*)|(\]\]}})|(}}\|)/g, '');
         }
-        info[0] = info[0].replace(/(\|.*)|(=\s)/g, '');
+        info[0] = info[0].replace(/(\|.*)|(=\s)|(=)/g, '');
         info[1] = info[1].replace(/(.*=\[\[)/g, '');
         info[2] = info[2].replace(/(date\|)/g, '').split('|');
 //        info[3] = info[3].replace(/(venue=)|(\[)|(\])/g, '').replace(/(.*=)|(.*\|)/g, '');
