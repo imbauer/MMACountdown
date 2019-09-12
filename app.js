@@ -14,6 +14,25 @@ app.get('/', function(request, response) {
 
 app.listen(app.get('port'), function() {
     console.log("Node app is running at localhost:" + app.get('port'));
+
+//    var currentEvent = 'UFC Fight Night: dos Santos vs. Volkov';
+//    currentEvent = 'UFC 241';
+////    currentEvent = 'UFC on ESPN: Overeem vs. Harris';
+//
+//    var url = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvslots=*&rvprop=content&format=json&utf8=true&titles=" + encodeURIComponent(currentEvent).replace(/%2520/g, '%20').replace(/%252B/g, '%2B');
+////    console.log(url);
+//    request(url, function (err, response, body) {
+//        if(err){
+//            console.log(err + ' ERR: Stopped at ---> ' + url);
+//        } else {
+//            var event = processPromotions.processUFC(body, currentEvent);
+////            console.log(event[0]);
+////            console.log(event[0].fightCard);
+////            console.log('huh');
+//            return event;
+//        }
+//    });
+
 });
 
 
