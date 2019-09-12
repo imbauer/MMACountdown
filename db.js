@@ -22,6 +22,7 @@ var eventSchema = new mongoose.Schema({
     name: String,
     title: String,
     event: String,
+    otherName: String,
     promotion: String,
     nextEvent: String,
     location: {
@@ -95,13 +96,13 @@ module.exports = {
                     console.log('Phase 1');
                     for (var i = 0; i < previousEvent.fightCard.length; i++) {
                         console.log('Phase 2');
-                        if (previousEvent.fightCard[i].length === 3) {
+                        if (previousEvent.fightCard[i].length === 4 || previousEvent.fightCard[i].length === 5) {
                             console.log('Phase 3');
-                            if (event.fightCard[i].length === 3) {
+                            if (event.fightCard[i].length === 4 || event.fightCard[i].length === 5) {
                                 console.log('Phase 4');
                                 // Do nothing
                             }
-                            else if (event.fightCard[i].length > 3) {
+                            else if (event.fightCard[i].length > 5) {
                                 console.log('Phase 5');
                                 if (event.fightCard[i][1] === previousEvent.fightCard[i][1]) {
                                     console.log('Phase 6');
@@ -110,7 +111,7 @@ module.exports = {
                                 else if (event.fightCard[i][3] === previousEvent.fightCard[i][1]) {
                                     console.log('Phase 7');
                                     event.fightCard[i][2] = 2;
-                                    event.fightCard[i][3] = previousEvent.fightCard[i][2];
+                                    event.fightCard[i][3] = previousEvent.fightCard[i][3];
                                     event.fightCard[i][1] = previousEvent.fightCard[i][1];
                                 }
                             }
