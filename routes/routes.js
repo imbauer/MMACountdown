@@ -62,6 +62,27 @@ function repeatProcess(event) {
     });
 }
 
+router.get('/bellator/event/:eventName', function(req, res) {
+    var event = req.params.eventName.replace(/\s/g, '\%20').replace(/\+/g, '\%2B');
+    var URI = encodeURIComponent(event).replace(/%2520/g, '%20').replace(/%252B/g, '%2B');
+    var url = 'http://192.168.99.100:8081/v1/bellator/event/' + URI;
+    request(url, function (err, response, body) {
+        if(err){
+            console.log(err + ' ERR: Stopped at ---> ' + url);
+        } else {
+            var data = JSON.parse(body);
+            console.log('============================================');
+            console.log('Data length');
+            console.log(data.length);
+            console.log('============================================');
+            for (var i = 0; i < data.length; i++) {
+//                console.log(data[i]);
+                mongodb.addData(data[i]);
+            }
+        }
+    });
+});
+
 
 
 

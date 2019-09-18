@@ -12,16 +12,19 @@
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "^2.6.2",
-    "request": "^2.88.0",
     "express": "^4.17.1",
+    "flag-icon-css": "^3.3.0",
     "http-errors": "~1.6.3",
+    "i18n-iso-countries": "^3.7.3",
     "jade": "~1.11.0",
     "mongodb": "^3.3.0-beta2",
     "mongoose": "^5.4.10",
     "morgan": "~1.9.1",
-    "node-sass": "^4.12.0"
+    "node-sass": "^4.12.0",
+    "request": "^2.88.0"
   },
   "devDependencies": {
+    "grunt": "^1.0.4",
     "nodemon": "^1.18.10"
   }
 }

@@ -11,7 +11,7 @@ app.use(express.static(__dirname + '/views'));
 app.set('view engine', 'ejs');
 
 app.get('/yo', function(request, response) {
-    response.send('YO')
+    response.send('YO');
 });
 
 app.use('/', routes);

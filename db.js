@@ -29,7 +29,8 @@ var eventSchema = new mongoose.Schema({
         name: String,
         city: String,
         provState: String,
-        country: String
+        country: String,
+        co: String
     },
     when: {
         timeZone: String,
@@ -45,6 +46,34 @@ var eventSchema = new mongoose.Schema({
     fightCard: Array
 
 });
+
+var dict = {
+  'Afghanistan': 'af', 'Aland Islands': 'ax', 'Albania': 'al', 'Algeria': 'dz', 'American Samoa': 'as', 'Andorra': 'ad', 'Angola': 'ao', 'Anguilla': 'ai',
+  'Antigua and Barbuda': 'ag', 'Argentina': 'ar', 'Armenia': 'am', 'Aruba': 'aw', 'Australia': 'au', 'Austria': 'at', 'Azerbaijan': 'az', 'Bahamas': 'bs',
+  'Bahrain': 'bh', 'Bangladesh': 'bd', 'Barbados': 'bb', 'Belarus': 'by', 'Belgium': 'be', 'Belize': 'bz', 'Benin': 'bj', 'Bermuda': 'bm',
+  'Bhutan': 'bt', 'Bolivia ': 'bo', 'Bosnia and Herzegovina': 'ba', 'Botswana': 'bw', 'Brazil': 'br', 'Bulgaria': 'bg', 'Burkina Faso': 'bf', 'Burundi': 'bi',
+  'Cabo Verde': 'cv', 'Cambodia': 'kh', 'Cameroon': 'cm', 'Canada': 'ca', 'Cayman Islands': 'ky', 'Central African Republic': 'cf', 'Chad': 'td', 'Chile': 'cl',
+  'China': 'cn', 'Christmas Island': 'cx', 'Colombia': 'co', 'Comoros': 'km', 'Cook Islands': 'ck', 'Costa Rica': 'cr', 'Croatia': 'hr', 'Cuba': 'cu',
+  'Curaçao': 'cw', 'Cyprus': 'cy', 'Czech Republic': 'cz', 'Côte d\'Ivoire': 'ci', 'Democratic Republic of the Congo': 'cd', 'Denmark': 'dk', 'Djibouti': 'dj',
+  'Dominica': 'dm', 'Dominican Republic': 'do', 'Ecuador': 'ec', 'Egypt': 'eg', 'El Salvador': 'sv', 'England': 'gb-eng', 'Equatorial Guinea': 'gq', 'Eritrea': 'er',
+  'Estonia': 'ee', 'Ethiopia': 'et', 'Falkland Islands': 'fk', 'Faroe Islands': 'fo', 'Fiji': 'fj', 'Finland': 'fi', 'France': 'fr', 'French Guiana': 'gf',
+  'French Polynesia':'pf', 'Gabon':'ga', 'Gambia':'gm', 'Georgia':'ge', 'Germany':'de', 'Ghana':'gh', 'Gibraltar':'gi', 'Greece':'gr', 'Greenland':'gl', 'Grenada':'gd',
+  'Guadeloupe':'gp', 'Guam':'gu', 'Guatemala':'gt', 'Guernsey':'gg', 'Guinea':'gn', 'Guinea-Bissau':'gw', 'Guyana':'gy', 'Haiti':'ht', 'Honduras':'hn', 'Hong Kong':'hk',
+  'Hungary':'hu', 'Iceland':'is', 'India':'in', 'Indonesia':'id', 'Iran':'ir', 'Iraq':'iq', 'Ireland':'ie', 'Israel':'il', 'Italy':'it', 'Jamaica':'jm',
+  'Japan':'jp', 'Jordan':'je', 'Kazakhstan':'jo', 'Kenya':'kz', 'Kiribati':'ki', 'Kosovo':'xk', 'Kuwait':'kw', 'Kyrgyzstan':'kg', 'Laos':'la', 'Latvia':'lv',
+  'Lebanon':'lb', 'Lesotho':'ls', 'Liberia':'lr', 'Libya':'ly', 'Liechtenstein':'li', 'Lithuania':'lt', 'Luxembourg':'lu', 'Macau':'mo', 'Madagascar':'mg', 'Malawi':'mw',
+  'Malaysia':'my', 'Maldives':'mv', 'Mali':'ml', 'Malta':'mt', 'Martinique':'mq', 'Mauritania':'mr', 'Mauritius':'mu', 'Mayotte':'yt', 'Mexico':'mx',
+  'Moldova':'md', 'Monaco':'mc', 'Mongolia':'mn', 'Montenegro':'me', 'Montserrat':'ms', 'Morocco':'ma', 'Mozambique':'mz', 'Myanmar':'mm', 'Namibia':'na',
+  'Nauru':'nr', 'Nepal':'np', 'Netherlands':'nl', 'New Caledonia':'nc', 'New Zealand':'nz', 'Nicaragua':'ni', 'Niger':'ne', 'Nigeria':'ng', 'Niue':'nu',
+  'Norfolk Island':'nf', 'North Korea':'kp', 'North Macedonia':'mk', 'Northern Ireland':'gb-nir', 'Norway':'no', 'Oman':'om', 'Pakistan':'pk', 'Palau':'pw', 'Panama':'pa',
+  'Papua New Guinea':'pg', 'Paraguay':'py', 'Peru':'pe', 'Philippines':'ph', 'Poland':'pl', 'Portugal':'pt', 'Puerto Rico':'pr', 'Qatar':'qa', 'Republic of the Congo':'cg',
+  'Romania':'ro', 'Russia':'ru', 'Rwanda':'rw', 'Samoa':'ws', 'San Marino':'sm', 'Saudi Arabia':'sa', 'Scotland':'gb-sct', 'Senegal':'sn', 'Serbia':'rs',
+  'Singapore':'sg', 'Slovakia':'sk', 'Slovenia':'si', 'Solomon Islands':'sb', 'Somalia':'so', 'South Africa':'za', 'South Korea':'kr', 'South Sudan':'ss', 'Spain':'es',
+  'Sri Lanka':'lk', 'Palestine':'ps', 'Sudan':'sd', 'Swaziland':'sz', 'Sweden':'se', 'Switzerland':'ch', 'Syria':'sy', 'Taiwan':'tw', 'Tajikistan':'tj',
+  'Tanzania':'tz', 'Thailand':'th', 'Tonga':'to', 'Trinidad and Tobago':'tt', 'Tunisia':'tn', 'Turkey':'tr', 'Turkmenistan':'tm', 'Uganda':'ug', 'Ukraine':'ua',
+  'United Arab Emirates':'ae', 'United Kingdom':'gb', 'United States of America':'us', 'United States':'us', 'USA':'us', 'Uruguay':'uy', 'Uzbekistan':'uz',
+  'Venezuela':'ve', 'Vietnam':'vn', 'Wales':'gb-wls', 'Western Sahara':'eh', 'Yemen':'ye', 'Zambia':'zm', 'Zimbabwe':'zw'
+};
 
 eventSchema.index({name: 1, title: 1}, {unique: true});
 
@@ -74,6 +103,10 @@ module.exports = {
 
     addData: function(event) {
 
+        console.log(event.location.country + ' ---> ' + dict[event.location.country]);
+        event.location.co = dict[event.location.country];
+
+        console.log(event);
 
         var thisEvent = new Events(event);
 
@@ -83,33 +116,33 @@ module.exports = {
             .lean()
             .exec()
             .then((previousEvent) => {
-                console.log('Phase 0');
-                // FIRST CONSOLE.LOG
-                console.log(typeof previousEvent);
-                console.log(previousEvent.name);
-                console.log(previousEvent.location);
-                console.log(previousEvent.fightCard);
+                // console.log('Phase 0');
+                // // FIRST CONSOLE.LOG
+                // console.log(typeof previousEvent);
+                // console.log(previousEvent.name);
+                // console.log(previousEvent.location);
+                // console.log(previousEvent.fightCard);
 
 //                previousEvent = JSON.parse(previousEvent);
 
                 if (previousEvent.fightCard !== undefined || previousEvent.fightCard !== null || previousEvent.fightCard !== []) {
-                    console.log('Phase 1');
+                    // console.log('Phase 1');
                     for (var i = 0; i < previousEvent.fightCard.length; i++) {
-                        console.log('Phase 2');
+                        // console.log('Phase 2');
                         if (previousEvent.fightCard[i].length === 4 || previousEvent.fightCard[i].length === 5) {
-                            console.log('Phase 3');
+                            // console.log('Phase 3');
                             if (event.fightCard[i].length === 4 || event.fightCard[i].length === 5) {
-                                console.log('Phase 4');
+                                // console.log('Phase 4');
                                 // Do nothing
                             }
                             else if (event.fightCard[i].length > 5) {
-                                console.log('Phase 5');
+                                // console.log('Phase 5');
                                 if (event.fightCard[i][1] === previousEvent.fightCard[i][1]) {
-                                    console.log('Phase 6');
+                                    // console.log('Phase 6');
                                     // Do nothing
                                 }
                                 else if (event.fightCard[i][3] === previousEvent.fightCard[i][1]) {
-                                    console.log('Phase 7');
+                                    // console.log('Phase 7');
                                     event.fightCard[i][2] = 2;
                                     event.fightCard[i][3] = previousEvent.fightCard[i][3];
                                     event.fightCard[i][1] = previousEvent.fightCard[i][1];
@@ -117,7 +150,7 @@ module.exports = {
                             }
                         }
                         else if (previousEvent.fightCard[i].length > 3) {
-                            console.log('Phase 8');
+                            // console.log('Phase 8');
                             // Do nothing
                         }
                     }
@@ -137,7 +170,8 @@ module.exports = {
                 return previousEvent;
             })
             .catch((err) => {
-                console.log(err);
+//                console.log(err);
+                // console.log('Running it fresh baby!');
                 Events.findOneAndUpdate(
                     {'name':event.name, 'title':event.title},
                     thisEvent,
@@ -151,7 +185,7 @@ module.exports = {
 
 
 
-//        async function getEvent(event) { // Async function statment
+//        async function getEvent(event) { // Async function statement
 //          return 42;
 //        }
 //        let logNumber = async function() { // Async function expression
