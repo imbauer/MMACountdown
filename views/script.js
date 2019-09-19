@@ -7,6 +7,15 @@ $(document).ready(function() {
     $("#first" + this.id).slideToggle("slow");
   });
 
+  $("#match_1").click(function() {
+    console.log(this.id);
+    console.log(document.getElementById(this.id).checked);
+  });
+  $("#match_2").click(function() {
+    console.log(this.id);
+    console.log(document.getElementById(this.id).checked);
+  });
+
 });
 
 
