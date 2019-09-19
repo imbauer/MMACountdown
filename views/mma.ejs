@@ -178,31 +178,33 @@
                 <% results.forEach(function(result, key) { %>
 
                 <div class="columns is-vcentered work__list-item" style="text-align:center;overflow: hidden;position: relative;" id='hiddendiv_<%= key %>'>
-                    <div class="column" style="font-size:1.7em;">
-                        <iframe style="display:none" onload="someFunction(
+
+
+                    <div class="column clockDiv" style="font-size:1.7em;text-align:center;">
+                        <iframe style="display:none;" onload="someFunction(
                             '<%=result.when.month %> <%= result.when.day %>, <%= result.when.year %> <%= result.when.hour %>:<%=result.when.minute %>:00',
                             '<%= key %>'
                             )"></iframe>
 
-                        <div class="columns is-gapless is-multiline is-mobile" style="margin:0;" id="timer_<%= key %>">
-                            <div class="column is-one-quarter"><span id="timer-days_<%= key %>"></span>
+                        <div class="columns is-gapless is-multiline is-mobile clock" style="margin:0;" id="timer_<%= key %>">
+                            <div class="column is-one-quarter clockP"><span id="timer-days_<%= key %>"></span>
                             </div>
-                            <div class="column is-one-quarter has-text-grey"><span id="timer-hours_<%= key %>"></span>
+                            <div class="column is-one-quarter has-text-grey-lighter clockP"><span id="timer-hours_<%= key %>"></span>
                             </div>
-                            <div class="column is-one-quarter has-text-grey-light"><span
+                            <div class="column is-one-quarter has-text-grey-light clockP"><span
                                     id="timer-mins_<%= key %>"></span>
                             </div>
-                            <div class="column is-one-quarter has-text-grey-lighter"><span
+                            <div class="column is-one-quarter has-text-grey clockP"><span
                                     id="timer-secs_<%= key %>"></span>
                             </div>
 
-                            <div class="column is-one-quarter">DAY(S)
+                            <div class="column is-one-quarter clockP time">DAY(S)
                             </div>
-                            <div class="column is-one-quarter has-text-grey">HR(S)
+                            <div class="column is-one-quarter has-text-grey-lighter clockP time">HR(S)
                             </div>
-                            <div class="column is-one-quarter has-text-grey-light">MIN(S)
+                            <div class="column is-one-quarter has-text-grey-light clockP time">MIN(S)
                             </div>
-                            <div class="column is-one-quarter has-text-grey-lighter">SEC(S)
+                            <div class="column is-one-quarter has-text-grey clockP time">SEC(S)
                             </div>
                         </div>
                         <!--                            <p id="timer_<%= key %>" style="font-size:20px;">-->
@@ -254,16 +256,20 @@
 
 
 
-                    <div class="column" style="font-size:1.7em;">
+                    <!-- <div class="column clockRight clockP time" style="font-size:1.7em;z-index:2;">
                       <%= result.when.weekDay %> <%= result.when.monthString %>
                           <%= result.when.day %>, <%= result.when.hour %>:<%= result.when.minute %><%=
                           result.when.AMPM %> <%= result.when.timeZone %>
+                    </div> -->
+                    <div class="column clockRight clockP time" style="font-size:1.7em;z-index:2;font-weight:600;">
+                      <%= result.when.year %>-<%= result.when.monthString.substring(0,3).toUpperCase() %>-<%= result.when.day %>
+                      <%= result.when.weekDay.substring(0,3).toUpperCase() %>
+                      <%= result.when.hour %>:<%= result.when.minute %><%= result.when.AMPM %> <%= result.when.timeZone %>
                     </div>
-                    <!-- <div class="column flag-icon-background flag-icon-al" style="font-size:1.7em;z-index:-1;height: 100%;width:30%;position: absolute;right:0;"> -->
 
 
                     <div class="column flag-icon-background flag-icon-<%= result.location.co %>"
-                      style="opacity:0.3;z-index:-1;height: 100%;width:30%;background-position:center;
+                      style="opacity:0.4;z-index:1;height: 100%;width:30%;background-position:center;
                       position: absolute;right:0;top:0;background-repeat: no-repeat;background-size: cover;">
                     </div>
 

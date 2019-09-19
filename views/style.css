@@ -394,3 +394,46 @@ button::before, button::after {
 .underline--magical:hover {
   background-size: 100% 6%;
 }
+
+
+
+
+
+
+.clockDiv {
+  border-radius: 10px;
+  background: #0f3854;
+  opacity:0.8;
+  background: radial-gradient(ellipse at closest-side, #0a2e38 50%, white 70%);
+  background-size: 100%;
+}
+.clockP {
+  margin: 0;
+  padding: 0;
+}
+.clock {
+  font-family: 'Share Tech Mono', monospace;
+  color: #ffffff;
+  color: #daf6ff;
+  text-shadow: 0 0 20px #0aafe6, 0 0 20px rgba(10, 175, 230, 0);
+}
+.clockRight {
+  font-family: 'Share Tech Mono', monospace;
+  color: #ffffff;
+  color: #000000;
+  text-shadow: 0 0 20px #0aafe6, 0 0 20px rgba(10, 175, 230, 0);
+}
+.clock .time {
+  letter-spacing: 0.05em;
+  font-size: 1.3rem;
+  padding: 5px 0;
+}
+.clock .date {
+  letter-spacing: 0.1em;
+  font-size: 24px;
+}
+.clock .text {
+  letter-spacing: 0.1em;
+  font-size: 12px;
+  padding: 20px 0 0;
+}
