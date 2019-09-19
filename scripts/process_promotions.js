@@ -148,13 +148,13 @@ module.exports =
             }
             var when = {
                 timeZone : 'EST',
-                year : info[2][0],
-                month : info[2][1],
+                year : parseInt(info[2][0]),
+                month : parseInt(info[2][1]),
                 monthString: months[parseInt(info[2][1]) - 1],
-                day : info[2][2],
+                day : parseInt(info[2][2]),
                 weekDay : weekdays[d.getDay()],
-                hour : hour,
-                minute : '00',
+                hour : parseInt(hour),
+                minute : parseInt('0'),
                 AMPM : 'PM'
             }
             event.when = when;
@@ -315,13 +315,7 @@ module.exports =
                 var weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
                 var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
                 var month = months.indexOf(info[2][0]) + 1;
-                if (parseInt(month) < 10) {
-                    month = '0' + month;
-                }
                 var day = info[2][1];
-                if (parseInt(day) < 10) {
-                    day = '0' + day;
-                }
                 var d = new Date(info[2][2], months.indexOf(info[2][0]), day);
                 var hour;
                 if (m === 0) {
@@ -338,13 +332,13 @@ module.exports =
                 }
                 var when = {
                     timeZone : 'EST',
-                    year : info[2][2],
-                    month : month,
+                    year : parseInt(info[2][2]),
+                    month : parseInt(month),
                     monthString: info[2][0],
-                    day : day,
+                    day : parseInt(day),
                     weekDay : weekdays[d.getDay()],
-                    hour : hour,
-                    minute : '00',
+                    hour : parseInt(hour),
+                    minute : parseInt('0'),
                     AMPM : 'PM'
                 }
                 event.when = when;
