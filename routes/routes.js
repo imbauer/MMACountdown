@@ -6,6 +6,7 @@ var request = require('request');
 // index page
 router.get('/', function(req, res) {
     mongodb.getResults(res);
+    // mongodb.getOldEvents(res);
 });
 
 router.get('/hey', function(req, res) {
@@ -29,7 +30,9 @@ router.get('/hey', function(req, res) {
 //});
 
 
-
+router.get('/clear/old/events', function(req, res) {
+    mongodb.clearData();
+});
 
 router.get('/ufc/event/:eventName', function(req, res) {
     repeatProcess(req.params.eventName);

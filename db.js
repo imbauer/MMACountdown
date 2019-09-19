@@ -34,13 +34,13 @@ var eventSchema = new mongoose.Schema({
     },
     when: {
         timeZone: String,
-        year: String,
-        month: String,
+        year: Number,
+        month: Number,
         monthString: String,
-        day: String,
+        day: Number,
         weekDay: String,
-        hour: String,
-        minute: String,
+        hour: Number,
+        minute: Number,
         AMPM: String
     },
     fightCard: Array
@@ -99,6 +99,43 @@ module.exports = {
         //  });
         //};
         //connectWithRetry();
+    },
+
+    clearData: function() {
+        var today = new Date();
+        var year = today.getFullYear();
+        var month;
+        if (today.getMonth() + 1 < 10) { month = today.getMonth() + 1;month = '0' + month; }
+        else { month = today.getMonth() + 1; }
+        var day = today.getDate();
+        // var date = year + ' - ' + month + ' - ' + day;
+        // console.log(date);
+        Events.find({}, function(err, events) {
+            // var userMap = {};
+
+            events.forEach(function(event) {
+                if (event.when.year > parseInt(year)) {
+                    Events.deleteOne({ name:event.name, title: event.title }, function (err) {});
+                    console.log('Deleted at year');
+                }
+                else if (event.when.year === parseInt(year)) {
+                    if (event.when.month > parseInt(month)) {
+                        Events.deleteOne({ name:event.name, title: event.title }, function (err) {});
+                        console.log('Deleted at month');
+                    }
+                    else if (event.when.month === parseInt(month)) {
+                        if (event.when.day > parseInt(day)) {
+                            Events.deleteOne({ name:event.name, title: event.title }, function (err) {});
+                            console.log('Deleted at day');
+                        }
+                    }
+                }
+                // console.log(event);
+                // userMap[user._id] = user;
+            });
+
+            // res.send(userMap);
+        });
     },
 
     addData: function(event) {
@@ -347,6 +384,29 @@ module.exports = {
             if (!err) {
                 console.log('=============================================');
                 console.log(result);
+            } else {
+                // error handling
+            };
+        });
+    },
+
+    getOldEvents: function(res) {
+        var today = new Date();
+        var year = today.getFullYear();
+        var month;
+        if (today.getMonth() + 1 < 10) { month = today.getMonth() + 1;month = '0' + month; }
+        else { month = today.getMonth() + 1; }
+        var day = today.getDate();
+
+        // Events.find({ $and: [ { when: { month: { $lte: parseInt(month) }, day: { $lt: day } } } ] })
+        Events.find({ $and: [ { promotion: "Bellator" }, { 'when.year': { $lte: parseInt(year) } }, 
+        { 'when.month': { $lte: parseInt(month) } }, { 'when.day': { $lte: parseInt(day) } } ] })
+        .sort( { 'when.year': -1, 'when.month': -1, 'when.day': -1, 'when.hour': -1 } )
+        .exec(function(err, results) {
+            if (!err) {
+                res.render('mma', {
+                    results: results
+                });
             } else {
                 // error handling
             };
