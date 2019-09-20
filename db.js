@@ -172,6 +172,9 @@ module.exports = {
                     {upsert:true, new: true},
                     function(err, doc){
                         if (err){console.log(err)}
+                        else {
+                            console.log('Event already exists in DB ---> Checking fight order and refreshing');
+                        }
                     }
                 );
                 return previousEvent;
