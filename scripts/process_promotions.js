@@ -76,13 +76,13 @@ module.exports =
         info[4] = info[4].replace(/(city\s=)|(city=)|(\[)|(\])|(\|attendance.*)/g, '').replace(/(,.*\(state\)\|)/g, ', ');
         info[5] = info[5].replace(/(.*=\[\[)|(\|.*)/g, '');
         info[6] = info[6].replace(/(.*=\[\[)|(\|.*)/g, '');
-        console.log('......................................................................');
-        console.log(info[7]);
+        // console.log('......................................................................');
+        // console.log(info[7]);
         if (info[7] !== undefined) {
             info[7] = info[7].replace(/(.*?\()|([^a-zA-Z]or.*)|([^a-zA-Z]and.*)|(also known as )|(also known as)|(\))/g, '').replace(/(\')\1+/g, '').trim();
         }
-        console.log(info[7]);
-        console.log('......................................................................');
+        // console.log(info[7]);
+        // console.log('......................................................................');
 
 
         var cycles = fightCard.length;
@@ -281,9 +281,9 @@ module.exports =
                 for (var n = 0; n < locationCombined.length; n++) {
                     locationCombined[n] = locationCombined[n].trim().replace(/(\|.*)/g, '');
                 }
-                console.log(locationCombined);
+                // console.log(locationCombined);
                 if (locationCombined.length < 3) {
-                    console.log(country_list.includes(locationCombined[1]));
+                    // console.log(country_list.includes(locationCombined[1]));
                     if (country_list.includes(locationCombined[1]) === true) {
                         location.city = locationCombined[0];
                         location.country = locationCombined[1];
@@ -349,9 +349,9 @@ module.exports =
 
         }
 
-        console.log('============================================================================================================');
-        console.log(events);
-        console.log('============================================================================================================');
+        // console.log('============================================================================================================');
+        // console.log(events);
+        // console.log('============================================================================================================');
         return events;
     },
 };
