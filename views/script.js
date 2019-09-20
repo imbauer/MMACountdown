@@ -10,6 +10,16 @@ $(document).ready(function() {
   $("#match_1").click(function() {
     console.log(this.id);
     console.log(document.getElementById(this.id).checked);
+
+    $.ajax({
+        url: "hey",
+        success: function(result)
+        {
+            console.log(result);
+            // $('.work__list').html(result);
+        }
+    });
+
   });
   $("#match_2").click(function() {
     console.log(this.id);

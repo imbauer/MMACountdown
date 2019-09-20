@@ -44,7 +44,6 @@ var eventSchema = new mongoose.Schema({
         AMPM: String
     },
     fightCard: Array
-
 });
 
 var dict = {
@@ -108,78 +107,53 @@ module.exports = {
         if (today.getMonth() + 1 < 10) { month = today.getMonth() + 1;month = '0' + month; }
         else { month = today.getMonth() + 1; }
         var day = today.getDate();
-        // var date = year + ' - ' + month + ' - ' + day;
-        // console.log(date);
+
         Events.find({}, function(err, events) {
-            // var userMap = {};
 
             events.forEach(function(event) {
                 if (event.when.year > parseInt(year)) {
                     Events.deleteOne({ name:event.name, title: event.title }, function (err) {});
-                    console.log('Deleted at year');
+                    // console.log('Deleted at year');
                 }
                 else if (event.when.year === parseInt(year)) {
                     if (event.when.month > parseInt(month)) {
                         Events.deleteOne({ name:event.name, title: event.title }, function (err) {});
-                        console.log('Deleted at month');
+                        // console.log('Deleted at month');
                     }
                     else if (event.when.month === parseInt(month)) {
                         if (event.when.day > parseInt(day)) {
                             Events.deleteOne({ name:event.name, title: event.title }, function (err) {});
-                            console.log('Deleted at day');
+                            // console.log('Deleted at day');
                         }
                     }
                 }
-                // console.log(event);
-                // userMap[user._id] = user;
             });
 
-            // res.send(userMap);
         });
+
     },
 
-    addData: function(event) {
-
-        console.log(event.location.country + ' ---> ' + dict[event.location.country]);
+    addEvent: function(event) {
         event.location.co = dict[event.location.country];
-
-        console.log(event);
-
         var thisEvent = new Events(event);
-
 
         function getOldEvent(event) {
             return Events.findOne({name:event.name, title: event.title}) // Notice the return here
             .lean()
             .exec()
             .then((previousEvent) => {
-                // console.log('Phase 0');
-                // // FIRST CONSOLE.LOG
-                // console.log(typeof previousEvent);
-                // console.log(previousEvent.name);
-                // console.log(previousEvent.location);
-                // console.log(previousEvent.fightCard);
-
-//                previousEvent = JSON.parse(previousEvent);
 
                 if (previousEvent.fightCard !== undefined || previousEvent.fightCard !== null || previousEvent.fightCard !== []) {
-                    // console.log('Phase 1');
                     for (var i = 0; i < previousEvent.fightCard.length; i++) {
-                        // console.log('Phase 2');
                         if (previousEvent.fightCard[i].length === 4 || previousEvent.fightCard[i].length === 5) {
-                            // console.log('Phase 3');
                             if (event.fightCard[i].length === 4 || event.fightCard[i].length === 5) {
-                                // console.log('Phase 4');
                                 // Do nothing
                             }
                             else if (event.fightCard[i].length > 5) {
-                                // console.log('Phase 5');
                                 if (event.fightCard[i][1] === previousEvent.fightCard[i][1]) {
-                                    // console.log('Phase 6');
                                     // Do nothing
                                 }
                                 else if (event.fightCard[i][3] === previousEvent.fightCard[i][1]) {
-                                    // console.log('Phase 7');
                                     event.fightCard[i][2] = 2;
                                     event.fightCard[i][3] = previousEvent.fightCard[i][3];
                                     event.fightCard[i][1] = previousEvent.fightCard[i][1];
@@ -187,7 +161,6 @@ module.exports = {
                             }
                         }
                         else if (previousEvent.fightCard[i].length > 3) {
-                            // console.log('Phase 8');
                             // Do nothing
                         }
                     }
@@ -201,14 +174,10 @@ module.exports = {
                         if (err){console.log(err)}
                     }
                 );
-        //        console.log('||||||||||||||||||||||||||||||||||||||||');
-        //        console.log(previousEvent);
-        //        console.log('||||||||||||||||||||||||||||||||||||||||');
                 return previousEvent;
             })
             .catch((err) => {
-//                console.log(err);
-                // console.log('Running it fresh baby!');
+                console.log('Event did not already exist in DB ---> Being saved fresh');
                 Events.findOneAndUpdate(
                     {'name':event.name, 'title':event.title},
                     thisEvent,
@@ -219,178 +188,11 @@ module.exports = {
                 );
             });
         }
-
-
-
-//        async function getEvent(event) { // Async function statement
-//          return 42;
-//        }
-//        let logNumber = async function() { // Async function expression
-//          getEvent().then(function(value) {
-//              console.log('||||||||||||||||||||||||||||||||||||||||');
-//              console.log(value);
-//              console.log('||||||||||||||||||||||||||||||||||||||||');
-//            });
-//        }
-//        logNumber(); // 42
-
         getOldEvent(event);
 
-//        Events.findOneAndUpdate(
-//            {'name':event.name, 'title':event.title},
-//            thisEvent,
-//            {upsert:true, new: true},
-//            function(err, doc){
-//                if (err){console.log(err)}
-//            }
-//        );
-
-//        thisEvent.save(function (err) {if (err) console.log ('Error on save!')});
-
     },
 
-    addSampleData: function() {
-        var ufc241 = new Events ({
-            name: 'UFC 241',
-            title: 'CORMIER VS MIOCIC II',
-            when: {
-                timeZone: 'EST',
-                year: '2019',
-                month: 'August',
-                day: '17',
-                weekDay: 'Sat',
-                hour: '10',
-                minute: '00',
-                AMPM: 'PM'
-            },
-            location: {
-                name: 'Honda Center',
-                city: 'Anaheim',
-                provState: 'California',
-                country: 'United States'
-            }
-        });
-        var ufc242 = new Events ({
-            name: 'UFC 242',
-            title: 'NURMAGOMEDOV VS POIRIER',
-            when: {
-                timeZone: 'EST',
-                year: '2019',
-                month: 'September',
-                day: '07',
-                weekDay: 'Sat',
-                hour: '08',
-                minute: '00',
-                AMPM: 'PM'
-            },
-            location: {
-                name: 'du Arena',
-                city: 'Abu Dhabi',
-                provState: 'Abu Dhabi',
-                country: 'United Arab Emirates'
-            }
-        });
-        var bellator225 = new Events ({
-            name: 'Bellator 225',
-            title: 'MITRIONE VS KHARITONOV II',
-            when: {
-                timeZone: 'EST',
-                year: '2019',
-                month: 'August',
-                day: '24',
-                weekDay: 'Sat',
-                hour: '08',
-                minute: '00',
-                AMPM: 'PM'
-            },
-            location: {
-                name: 'Webster Bank Arena',
-                city: 'Bridgeport',
-                provState: 'Connecticut',
-                country: 'United States'
-            }
-        });
-        var bellator226 = new Events ({
-            name: 'Bellator 225',
-            title: 'BADER VS KONGO',
-            when: {
-                timeZone: 'EST',
-                year: '2019',
-                month: 'September',
-                day: '07',
-                weekDay: 'Sat',
-                hour: '08',
-                minute: '00',
-                AMPM: 'PM'
-            },
-            location: {
-                name: 'SAP Center',
-                city: 'Bridgeport',
-                provState: 'Connecticut',
-                country: 'United States'
-            }
-        });
-        var pfl6 = new Events ({
-            name: 'PFL 6',
-            title: 'TILLER VS GOLTSOV',
-            when: {
-                timeZone: 'EST',
-                year: '2019',
-                month: 'August',
-                day: '08',
-                weekDay: 'Thu',
-                hour: '08',
-                minute: '00',
-                AMPM: 'PM'
-            },
-            location: {
-                name: 'Ocean Resort Casino',
-                city: 'Atlantic City',
-                provState: 'New Jersey',
-                country: 'United States'
-            }
-        });
-        var pfl7 = new Events ({
-            name: 'PFL 7',
-            title: 'TBA VS TBA',
-            when: {
-                timeZone: 'EST',
-                year: '2019',
-                month: 'October',
-                day: '11',
-                weekDay: 'Fri',
-                hour: '08',
-                minute: '00',
-                AMPM: 'PM'
-            },
-            location: {
-                name: 'Mandalay Bay Events Center',
-                city: 'Las Vegas',
-                provState: 'Nevada',
-                country: 'United States'
-            }
-        });
-        // Saving it to the database.
-        pfl7.save(function (err) {if (err) console.log ('Error on save!')});
-        ufc242.save(function (err) {if (err) console.log ('Error on save!')});
-        bellator226.save(function (err) {if (err) console.log ('Error on save!')});
-        bellator225.save(function (err) {if (err) console.log ('Error on save!')});
-        ufc241.save(function (err) {if (err) console.log ('Error on save!')});
-        pfl6.save(function (err) {if (err) console.log ('Error on save!')});
-    },
-
-    findData: function() {
-        Events.find({}).exec(function(err, result) {
-            if (!err) {
-                console.log('=============================================');
-                console.log(result);
-            } else {
-                // error handling
-            };
-        });
-    },
-
-    getOldEvents: function(res) {
+    renderPastEvents: function(res) {
         var today = new Date();
         var year = today.getFullYear();
         var month;
@@ -398,8 +200,7 @@ module.exports = {
         else { month = today.getMonth() + 1; }
         var day = today.getDate();
 
-        // Events.find({ $and: [ { when: { month: { $lte: parseInt(month) }, day: { $lt: day } } } ] })
-        Events.find({ $and: [ { promotion: "Bellator" }, { 'when.year': { $lte: parseInt(year) } }, 
+        Events.find({ $and: [ { promotion: "Bellator" }, { 'when.year': { $lte: parseInt(year) } },
         { 'when.month': { $lte: parseInt(month) } }, { 'when.day': { $lte: parseInt(day) } } ] })
         .sort( { 'when.year': -1, 'when.month': -1, 'when.day': -1, 'when.hour': -1 } )
         .exec(function(err, results) {
@@ -413,7 +214,7 @@ module.exports = {
         });
     },
 
-    getResults: function(res) {
+    renderEvents: function(res) {
         Events.find({}).sort( { 'when.year': 1, 'when.month': 1, 'when.day': 1, 'when.hour': 1 } ).exec(function(err, results) {
             if (!err) {
                 res.render('mma', {

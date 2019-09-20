@@ -5,29 +5,13 @@ var request = require('request');
 
 // index page
 router.get('/', function(req, res) {
-    mongodb.getResults(res);
-    // mongodb.getOldEvents(res);
+    mongodb.renderEvents(res);
+    // mongodb.renderPastEvents(res);
 });
 
 router.get('/hey', function(req, res) {
-    res.send('Hey');
+    mongodb.renderPastEvents(res);
 });
-
-//router.get('/ufc/event/:eventName', function(req, res) {
-//    var currentEvent = req.params.eventName.replace(/\s/g, '\%20').replace(/\+/g, '\%2B');
-//    var url = 'http://192.168.99.100:8081/v1/ufc/event/' + currentEvent;
-//    request(url, function (err, response, body) {
-//        if(err){
-////            var error = "cannot connect to the server(1)";
-//            res.send(err);
-//            console.log(err);
-//        } else {
-//            var data = JSON.parse(body);
-//            mongodb.addData(data);
-//            res.send(data);
-//        }
-//    });
-//});
 
 
 router.get('/clear/old/events', function(req, res) {
@@ -51,7 +35,7 @@ function repeatProcess(event) {
 //            console.log(data);
 //            console.log(data.length);
             for (var i = 0; i < data.length; i++) {
-                mongodb.addData(data[i]);
+                mongodb.addEvent(data[i]);
             }
             if (data[0].nextEvent !== null || data[0].nextEvent !== '' || data[0].nextEvent !== undefined) {
                 console.log(data[0].name + ' WORKED');
@@ -80,23 +64,12 @@ router.get('/bellator/event/:eventName', function(req, res) {
             console.log('============================================');
             for (var i = 0; i < data.length; i++) {
 //                console.log(data[i]);
-                mongodb.addData(data[i]);
+                mongodb.addEvent(data[i]);
             }
         }
     });
 });
 
-
-
-
-
-
-
-//app.get('/', function(req, res){
-////    res.send('Hello World!');
-////    res.sendFile( __dirname + "/public/" + "index1.html" );
-//    res.sendFile( path + "mma.html" );
-//});
 
 router.post('/', function (req, res) {
     res.send( 'Got a POST request' )
