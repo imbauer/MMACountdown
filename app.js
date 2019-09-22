@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var processPromotions = require('./scripts/process_promotions');
+var processFighters = require('./scripts/process_fighters');
 
 app.set('port', (process.env.PORT || 8081));
 app.use(express.static(__dirname + '/public'));
@@ -18,15 +19,18 @@ app.listen(app.get('port'), function() {
     var currentEvent = 'UFC Fight Night: dos Santos vs. Volkov';
     currentEvent = 'UFC 241';
     currentEvent = 'Bellator MMA in 2019';
+    currentEvent = 'Israel Adesanya';
+    currentEvent = 'Zubaira Tukhugov';
 //    currentEvent = 'UFC on ESPN: Overeem vs. Harris';
 
-    var url = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvslots=*&rvprop=content&format=json&utf8=true&titles=" + encodeURIComponent(currentEvent).replace(/%2520/g, '%20').replace(/%252B/g, '%2B');
+    var url = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvslots=*&rvprop=content&format=json&utf8=true&titles="
+    + encodeURIComponent(currentEvent).replace(/%2520/g, '%20').replace(/%252B/g, '%2B');
 //    console.log(url);
     request(url, function (err, response, body) {
         if(err){
             console.log(err + ' ERR: Stopped at ---> ' + url);
         } else {
-            var event = processPromotions.processBellator(body, currentEvent);
+            var event = processFighters.processFighter(body);
 //            console.log(event[0]);
 //            console.log(event[0].fightCard);
 //            console.log('huh');
