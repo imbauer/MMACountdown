@@ -22,6 +22,22 @@ router.get('/ufc/event/:eventName', function(req, res) {
     repeatProcess(req.params.eventName);
 });
 
+
+//SETUP GET FIGHTER DATA DONT REPEAT
+router.get('/fighter/data/:fighterName', function(req, res) {
+    var fighter = req.params.fighterName.replace(/\s/g, '\%20').replace(/\+/g, '\%2B');
+    var URI = encodeURIComponent(fighter).replace(/%2520/g, '%20').replace(/%252B/g, '%2B');
+    var url = 'http://192.168.99.100:8081/v1/fighter/data/' + URI;
+    request(url, function (err, response, body) {
+        if(err){
+            console.log(err + ' ERR: Stopped at ---> ' + url);
+        } else {
+            var data = JSON.parse(body);
+            mongodb.addFighter(data);
+        }
+    });
+});
+
 function repeatProcess(event) {
     event = event.replace(/\s/g, '\%20').replace(/\+/g, '\%2B');
     var URI = encodeURIComponent(event).replace(/%2520/g, '%20').replace(/%252B/g, '%2B');
@@ -69,7 +85,6 @@ router.get('/bellator/event/:eventName', function(req, res) {
         }
     });
 });
-
 
 router.post('/', function (req, res) {
     res.send( 'Got a POST request' )

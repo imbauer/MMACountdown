@@ -17,6 +17,35 @@ const options = {
     connectTimeoutMS: 10000,
 };
 
+var fighterSchema = new mongoose.Schema({
+    "_id": false,
+    name: String,
+    birth_place: String,
+    other_names: String,
+    nationality: String,
+    weight: String,
+    weight_class: String,
+    residence: String,
+    reach_in: String,
+    stance: String,
+    wrestling: String,
+    style: String,
+    fighting_out_of: String,
+    team: String,
+    fighting_out_of: String,
+    years_active: String,
+    mma_kowin: String,
+    mma_subwin: String,
+    mma_decwin: String,
+    mma_koloss: String,
+    mma_subloss: String,
+    mma_decloss: String,
+    age: Number,
+    country: String,
+    co: String,
+    fightRecord: Array
+});
+
 var eventSchema = new mongoose.Schema({
     "_id": false,
     name: String,
@@ -66,17 +95,19 @@ var dict = {
   'Nauru':'nr', 'Nepal':'np', 'Netherlands':'nl', 'New Caledonia':'nc', 'New Zealand':'nz', 'Nicaragua':'ni', 'Niger':'ne', 'Nigeria':'ng', 'Niue':'nu',
   'Norfolk Island':'nf', 'North Korea':'kp', 'North Macedonia':'mk', 'Northern Ireland':'gb-nir', 'Norway':'no', 'Oman':'om', 'Pakistan':'pk', 'Palau':'pw', 'Panama':'pa',
   'Papua New Guinea':'pg', 'Paraguay':'py', 'Peru':'pe', 'Philippines':'ph', 'Poland':'pl', 'Portugal':'pt', 'Puerto Rico':'pr', 'Qatar':'qa', 'Republic of the Congo':'cg',
-  'Romania':'ro', 'Russia':'ru', 'Rwanda':'rw', 'Samoa':'ws', 'San Marino':'sm', 'Saudi Arabia':'sa', 'Scotland':'gb-sct', 'Senegal':'sn', 'Serbia':'rs',
+  'Romania':'ro', 'Russia':'ru', 'Dagestan':'ru', 'Rwanda':'rw', 'Samoa':'ws', 'San Marino':'sm', 'Saudi Arabia':'sa', 'Scotland':'gb-sct', 'Senegal':'sn', 'Serbia':'rs',
   'Singapore':'sg', 'Slovakia':'sk', 'Slovenia':'si', 'Solomon Islands':'sb', 'Somalia':'so', 'South Africa':'za', 'South Korea':'kr', 'South Sudan':'ss', 'Spain':'es',
   'Sri Lanka':'lk', 'Palestine':'ps', 'Sudan':'sd', 'Swaziland':'sz', 'Sweden':'se', 'Switzerland':'ch', 'Syria':'sy', 'Taiwan':'tw', 'Tajikistan':'tj',
   'Tanzania':'tz', 'Thailand':'th', 'Tonga':'to', 'Trinidad and Tobago':'tt', 'Tunisia':'tn', 'Turkey':'tr', 'Turkmenistan':'tm', 'Uganda':'ug', 'Ukraine':'ua',
-  'United Arab Emirates':'ae', 'United Kingdom':'gb', 'United States of America':'us', 'United States':'us', 'USA':'us', 'Uruguay':'uy', 'Uzbekistan':'uz',
+  'United Arab Emirates':'ae', 'United Kingdom':'gb', 'United States of America':'us', 'United States':'us', 'USA':'us', 'U.S.A.':'us', 'U.S.':'us', 'Uruguay':'uy', 'Uzbekistan':'uz',
   'Venezuela':'ve', 'Vietnam':'vn', 'Wales':'gb-wls', 'Western Sahara':'eh', 'Yemen':'ye', 'Zambia':'zm', 'Zimbabwe':'zw'
 };
 
 eventSchema.index({name: 1, title: 1}, {unique: true});
 
 var Events = mongoose.model('events', eventSchema);
+
+var Fighters = mongoose.model('fighters', fighterSchema);
 
 const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
 
@@ -130,6 +161,19 @@ module.exports = {
             });
 
         });
+
+    },
+
+    addFighter: function(fighter) {
+        var countryOptions = fighter.birth_place.replace(/,/g, '').split(' ');
+        for (var i = 0; i < countryOptions.length; i++) {
+            if (dict[countryOptions[i]] !== undefined) {
+                fighter.co = dict[countryOptions[i]];
+                fighter.country = countryOptions[i];
+                break;
+            }
+        }
+        console.log(fighter);
 
     },
 

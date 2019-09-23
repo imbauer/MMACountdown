@@ -74,12 +74,12 @@ function reAddUpcomingBellatorEvents() {
     });
 }
 
-cron.schedule('0 * * * * *', () => {
-    removeUpcomingEvents().then(() => reAddUpcomingUFCEvents()).then(() => reAddUpcomingBellatorEvents());
-    console.log('==============================================================');
-    console.log('Runs at the start of each minute');
-    console.log('==============================================================');
-});
+// cron.schedule('0 * * * * *', () => {
+//     removeUpcomingEvents().then(() => reAddUpcomingUFCEvents()).then(() => reAddUpcomingBellatorEvents());
+//     console.log('==============================================================');
+//     console.log('Runs at the start of each minute');
+//     console.log('==============================================================');
+// });
 
 app.listen(port, function(){
     console.log( `Example app listening on port ${port}!` );
