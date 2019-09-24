@@ -103,7 +103,7 @@ var dict = {
   'Venezuela':'ve', 'Vietnam':'vn', 'Wales':'gb-wls', 'Western Sahara':'eh', 'Yemen':'ye', 'Zambia':'zm', 'Zimbabwe':'zw'
 };
 
-eventSchema.index({name: 1, title: 1}, {unique: true});
+eventSchema.index({name: 1, title: 1, event: 1}, {unique: true});
 
 var Events = mongoose.model('events', eventSchema);
 
@@ -143,17 +143,17 @@ module.exports = {
 
             events.forEach(function(event) {
                 if (event.when.year > parseInt(year)) {
-                    Events.deleteOne({ name:event.name, title: event.title }, function (err) {});
+                    Events.deleteOne({ name:event.name, title: event.title, event: event.event }, function (err) {});
                     // console.log('Deleted at year');
                 }
                 else if (event.when.year === parseInt(year)) {
                     if (event.when.month > parseInt(month)) {
-                        Events.deleteOne({ name:event.name, title: event.title }, function (err) {});
+                        Events.deleteOne({ name:event.name, title: event.title, event: event.event }, function (err) {});
                         // console.log('Deleted at month');
                     }
                     else if (event.when.month === parseInt(month)) {
                         if (event.when.day > parseInt(day)) {
-                            Events.deleteOne({ name:event.name, title: event.title }, function (err) {});
+                            Events.deleteOne({ name:event.name, title: event.title, event: event.event }, function (err) {});
                             // console.log('Deleted at day');
                         }
                     }
@@ -182,7 +182,7 @@ module.exports = {
         var thisEvent = new Events(event);
 
         function getOldEvent(event) {
-            return Events.findOne({name:event.name, title: event.title}) // Notice the return here
+            return Events.findOne({name:event.name, title: event.title, event: event.event}) // Notice the return here
             .lean()
             .exec()
             .then((previousEvent) => {
@@ -211,7 +211,7 @@ module.exports = {
                 }
 
                 Events.findOneAndUpdate(
-                    {'name':event.name, 'title':event.title},
+                    {'name':event.name, 'title':event.title, 'title': event.event},
                     thisEvent,
                     {upsert:true, new: true},
                     function(err, doc){
@@ -226,7 +226,7 @@ module.exports = {
             .catch((err) => {
                 console.log('Event did not already exist in DB ---> Being saved fresh');
                 Events.findOneAndUpdate(
-                    {'name':event.name, 'title':event.title},
+                    {'name':event.name, 'title':event.title, 'title': event.event},
                     thisEvent,
                     {upsert:true, new: true},
                     function(err, doc){

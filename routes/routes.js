@@ -122,6 +122,9 @@ function repeatProcess(event) {
             console.log(err + ' ERR: Stopped at ---> ' + url);
         } else {
             var data = JSON.parse(body);
+            console.log('=================================ALL EVENTS FOR SPECIFIC EVENT=============================');
+            console.log(data);
+            console.log('-------------------------------------------------------------------------------------------');
 //            console.log(url);
 //            console.log(data);
 //            console.log(data.length);
