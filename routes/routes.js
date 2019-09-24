@@ -32,8 +32,83 @@ router.get('/fighter/data/:fighterName', function(req, res) {
         if(err){
             console.log(err + ' ERR: Stopped at ---> ' + url);
         } else {
-            var data = JSON.parse(body);
-            mongodb.addFighter(data);
+            if (body === 'Error') {
+                console.log('Yup, now youre gonna have to call the other possibilities');
+                url = url + ' (fighter)';
+                request(url, function (err, response, body) {
+                    if(err){
+                        console.log(err + ' ERR: Stopped at ---> ' + url);
+                    } else {
+                        if (body === 'Error') {
+                            url = url.replace(/(\s\(.*)|(%20\(.*)/g, '') + ' (MMA)';
+                            console.log('Yup, now youre gonna have to call the other possibilities (fighter layer)');
+                            request(url, function (err, response, body) {
+                                if(err){
+                                    console.log(err + ' ERR: Stopped at ---> ' + url);
+                                } else {
+                                    if (body === 'Error') {
+                                        url = url.replace(/(\s\(.*)|(%20\(.*)/g, '') + ' (grappler)';
+                                        console.log('Yup, now youre gonna have to call the other possibilities (MMA layer)');
+                                        request(url, function (err, response, body) {
+                                            if(err){
+                                                console.log(err + ' ERR: Stopped at ---> ' + url);
+                                            } else {
+                                                if (body === 'Error') {
+                                                    url = url.replace(/(\s\(.*)|(%20\(.*)/g, '') + ' (wrestler)';
+                                                    console.log('Yup, now youre gonna have to call the other possibilities (wrestler layer)');
+                                                    request(url, function (err, response, body) {
+                                                        if(err){
+                                                            console.log(err + ' ERR: Stopped at ---> ' + url);
+                                                        } else {
+                                                            if (body === 'Error') {
+                                                                url = url.replace(/(\s\(.*)|(%20\(.*)/g, '') + ' (kickboxer)';
+                                                                console.log('Yup, now youre gonna have to call the other possibilities (kickboxer layer)');
+                                                                request(url, function (err, response, body) {
+                                                                    if(err){
+                                                                        console.log(err + ' ERR: Stopped at ---> ' + url);
+                                                                    } else {
+                                                                        if (body === 'Error') {
+                                                                            console.log('This guy is a can and doesnt have a WIKIPEDIA page');
+                                                                        }
+                                                                        else {
+                                                                            var data = JSON.parse(body);
+                                                                            mongodb.addFighter(data);
+                                                                        }
+                                                                    }
+                                                                });
+                                                            }
+                                                            else {
+                                                                var data = JSON.parse(body);
+                                                                mongodb.addFighter(data);
+                                                            }
+                                                        }
+                                                    });
+                                                }
+                                                else {
+                                                    var data = JSON.parse(body);
+                                                    mongodb.addFighter(data);
+                                                }
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        var data = JSON.parse(body);
+                                        mongodb.addFighter(data);
+                                    }
+                                }
+                            });
+                        }
+                        else {
+                            var data = JSON.parse(body);
+                            mongodb.addFighter(data);
+                        }
+                    }
+                });
+            }
+            else {
+                var data = JSON.parse(body);
+                mongodb.addFighter(data);
+            }
         }
     });
 });
