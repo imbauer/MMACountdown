@@ -99,11 +99,13 @@ var dict = {
   'Singapore':'sg', 'Slovakia':'sk', 'Slovenia':'si', 'Solomon Islands':'sb', 'Somalia':'so', 'South Africa':'za', 'South Korea':'kr', 'South Sudan':'ss', 'Spain':'es',
   'Sri Lanka':'lk', 'Palestine':'ps', 'Sudan':'sd', 'Swaziland':'sz', 'Sweden':'se', 'Switzerland':'ch', 'Syria':'sy', 'Taiwan':'tw', 'Tajikistan':'tj',
   'Tanzania':'tz', 'Thailand':'th', 'Tonga':'to', 'Trinidad and Tobago':'tt', 'Tunisia':'tn', 'Turkey':'tr', 'Turkmenistan':'tm', 'Uganda':'ug', 'Ukraine':'ua',
-  'United Arab Emirates':'ae', 'United Kingdom':'gb', 'United States of America':'us', 'United States':'us', 'USA':'us', 'U.S.A.':'us', 'U.S.':'us', 'Uruguay':'uy', 'Uzbekistan':'uz',
+  'United Arab Emirates':'ae', 'United Kingdom':'gb', 'United States of America':'us', 'United States':'us', 'U.S':'us', 'USA':'us', 'U.S.A.':'us', 'U.S.':'us', 'Uruguay':'uy', 'Uzbekistan':'uz',
   'Venezuela':'ve', 'Vietnam':'vn', 'Wales':'gb-wls', 'Western Sahara':'eh', 'Yemen':'ye', 'Zambia':'zm', 'Zimbabwe':'zw'
 };
 
 eventSchema.index({name: 1, title: 1, event: 1}, {unique: true});
+
+fighterSchema.index({name: 1}, {unique: true});
 
 var Events = mongoose.model('events', eventSchema);
 
@@ -164,16 +166,90 @@ module.exports = {
 
     },
 
+
+    getAllFightersFromEvents: function() {
+
+        return new Promise((resolve, reject) => {
+
+            var fighters = [];
+            var fighter1;
+            var fighter2;
+
+            Events.find({}, function(err, events) {
+
+                if (err) {
+                  return err;
+                }
+
+                events.forEach(function(event) {
+
+                    for (var i = 0; i < event.fightCard.length; i++) {
+                        if (event.fightCard[i].length > 2) {
+
+                            // console.log(event.fightCard[i][1] + ' <-----> ' + event.fightCard[i][3]);
+                            fighter1 = event.fightCard[i][1].replace(/\s\(.*/g, '');
+                            fighter2 = event.fightCard[i][3].replace(/\s\(.*/g, '');
+                            fighters.push(fighter1);
+                            fighters.push(fighter2);
+
+                        }
+                    }
+
+                });
+
+                var unique = [...new Set(fighters)];
+
+                // console.log('------------------------- All Fighters List -------------------------');
+                // console.log(unique);
+                // console.log('---------------------------------------------------------------------');
+                return resolve(unique);
+
+            });
+
+        })
+
+    },
+
+
+
     addFighter: function(fighter) {
-        var countryOptions = fighter.birth_place.replace(/,/g, '').split(' ');
-        for (var i = 0; i < countryOptions.length; i++) {
-            if (dict[countryOptions[i]] !== undefined) {
-                fighter.co = dict[countryOptions[i]];
-                fighter.country = countryOptions[i];
-                break;
+        if (fighter !== undefined) {
+
+            if (fighter.birth_place !== undefined && fighter.fightRecord !== undefined) {
+                var countryOptions = fighter.birth_place.replace(/\(|\)|today\s/g, '').split(', ');
+                console.log(countryOptions);
+                for (var i = countryOptions.length - 1; i >= 0; i--) {
+                    if (dict[countryOptions[i]] !== undefined) {
+                        fighter.co = dict[countryOptions[i]];
+                        fighter.country = countryOptions[i];
+                        break;
+                    }
+                }
+                console.log(fighter);
+
+                Fighters.findOneAndUpdate(
+                    {'name':fighter.name},
+                    fighter,
+                    {upsert:true, new: true},
+                    function(err, doc){
+                        if (err){console.log(err)}
+                    }
+                );
+
             }
         }
-        console.log(fighter);
+
+        // Fighters.findOneAndUpdate(
+        //     {'name':fighter.name},
+        //     thisEvent,
+        //     {upsert:true, new: true},
+        //     function(err, doc){
+        //         if (err){console.log(err)}
+        //         else {
+        //             console.log('Event already exists in DB ---> Checking fight order and refreshing');
+        //         }
+        //     }
+        // );
 
     },
 
