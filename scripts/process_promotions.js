@@ -24,18 +24,23 @@ module.exports =
         body = body.replace(/<[^>]*>/g,'').replace(/\\n/g,'').replace(/\s\s+/g, ' ');
         var info = body.split(eventParsing);
         info = info.filter(function(e){return e});
-//        console.log(info);
+        // console.log(info);
+        if (info[3].includes('date|')) {
+            info.splice(3,1);
+        }
+       // console.log(info);
         if (info[8] !== undefined) {
             var fightCard = info[8].split(splitEvents);
+            // console.log(fightCard);
         }
         else if (info[8] === undefined) {
             fightCard = [];
         }
         info.pop();
         fightCard.shift();
-//        console.log('=======================================      1      ===============================================');
-//        console.log(fightCard);
-//        console.log('============================================================================================================');
+       console.log('=======================================      1      ===============================================');
+       console.log(fightCard);
+       console.log('============================================================================================================');
         for (var i = 0; i < fightCard.length; i++) {
 
 //            console.log(fightCard[i]);
@@ -70,7 +75,7 @@ module.exports =
 //        console.log();
         info[0] = info[0].replace(/(\|.*)|(=\s)|(=)/g, '');
         info[1] = info[1].replace(/(.*=\[\[)/g, '');
-        info[2] = info[2].replace(/(date\|)/g, '').split('|');
+        info[2] = info[2].replace(/(date\|)|(\}.*)/g, '').split('|');
 //        info[3] = info[3].replace(/(venue=)|(\[)|(\])/g, '').replace(/(.*=)|(.*\|)/g, '');
         info[3] = info[3].replace(/(\[)|(\])|(.*=)|(\|)/g, '').trim();
         info[4] = info[4].replace(/(city\s=)|(city=)|(\[)|(\])|(\|attendance.*)/g, '').replace(/(,.*\(state\)\|)/g, ', ');

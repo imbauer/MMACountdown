@@ -15,19 +15,20 @@ app.get('/', function(request, response) {
 
 app.listen(app.get('port'), function() {
     console.log("Node app is running at localhost:" + app.get('port'));
-    // var fighterName = 'Jim Miller (fighter)';
-    // var url = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvslots=*&rvprop=content&format=json&utf8=true&titles="
-    // + encodeURIComponent(fighterName).replace(/%2520/g, '%20').replace(/%252B/g, '%2B');
-    //
+
+    // var currentEvent = 'UFC 243'
+    // var url = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvslots=*&rvprop=content&format=json&utf8=true&titles=" + encodeURIComponent(currentEvent).replace(/%2520/g, '%20').replace(/%252B/g, '%2B');
+    // console.log(url);
     // request(url, function (err, response, body) {
     //     if(err){
     //         console.log(err + ' ERR: Stopped at ---> ' + url);
     //     } else {
-    //         var fighter = processFighters.processFighter(body, fighterName);
-    //         res.send(fighter);
-    //         return fighter;
+    //         var event = processPromotions.processUFC(body, currentEvent);
+    //         console.log(event);
+    //         return event;
     //     }
     // });
+
 });
 
 app.get('/v1/fighter/data/:fighterName', function(req, res, next) {
