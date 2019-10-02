@@ -53,7 +53,7 @@ ul.ks-cboxtags li label::before {
     -webkit-font-smoothing: antialiased;
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
-    font-size: 12px;
+    /* font-size: 12px; */
     padding: 2px 6px 2px 2px;
     content: "\002B";
     transition: transform .3s ease-in-out;
@@ -67,7 +67,7 @@ ul.ks-cboxtags li input[type="checkbox"]:checked + label::before {
 
 ul.ks-cboxtags li input[type="checkbox"]:checked + label {
     border: 2px solid #1bdbf8;
-    background-color: #12bbd4;
+    background-color: #00D1B2;
     color: #fff;
     transition: all .2s;
 }
@@ -83,6 +83,9 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
   border: 2px solid #e9a1ff;
 }
 
+.imageSize {
+    height:50%;
+}
 
 .big-text {
     font-family:'Work Sans';
@@ -99,6 +102,30 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
 .column.height {
     height:200px;
     position:relative;
+}
+.column.mobile {
+    height:400px;
+    margin-top:0;
+    padding-top:0;
+    margin-bottom:0;
+    padding-bottom:0;
+    margin-left:0;
+    padding-left:0;
+    margin-right:0;
+    padding-right:0;
+}
+.columns.mobile {
+    height:400px;
+}
+.seperator {
+    height:200px;
+    margin-top:0;
+    padding-top:0;
+    margin-bottom:0;
+    padding-bottom:0;
+}
+.map {
+    height:200px;
 }
 @media (max-width: 320px) {
   body { background-color: red; }
@@ -125,6 +152,24 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
   }
   .columns.height {
       height:150px;
+  }
+  .imageSize {
+      height:60%;
+  }
+  .map {
+      height:150px;
+  }
+  .column.mobile {
+      height:200px;
+  }
+  .columns.mobile {
+      height:600px;
+  }
+  .seperator {
+      height:100px;
+  }
+  .map {
+      height:100px;
   }
   .eventTitle {
       font-size:2em;
@@ -392,7 +437,7 @@ label + input[type=radio] + label {
 
 .styled select {
   background: transparent;
-  background-image:url('worldmapbrown.png');
+  background-image:url('worldmapteal50.png');
   background-size:80%;
   background-repeat:no-repeat;
   background-position:center;
@@ -406,7 +451,7 @@ label + input[type=radio] + label {
 }
 
 .styled:hover select {
-  background-image:url('worldmapred.png');
+  background-image:url('worldmapteal80.png');
   transition: background 0.4s;
 }
 

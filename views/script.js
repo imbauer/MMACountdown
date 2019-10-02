@@ -33,6 +33,18 @@ $(document).ready(function() {
     console.log(document.getElementById(this.id).checked);
   });
 
+  $('#ufcCheckBox').change(function() {
+    console.log($(this).val());
+    console.log(document.getElementById(this.id).checked);
+    // $('#checkboxOne').val(this.checked);
+  });
+
+  $('#bellatorCheckBox').change(function() {
+    console.log($(this).val());
+    console.log(document.getElementById(this.id).checked);
+    // $('#checkboxOne').val(this.checked);
+  });
+
 });
 
 
