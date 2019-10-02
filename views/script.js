@@ -1,6 +1,13 @@
 
 $(document).ready(function() {
 
+    $("#timeZones").change(function(){
+        alert('Selected value: ' + $(this).val());
+        console.log($(this).val());
+    });
+
+
+
   $(".work__list-item").click(function() {
     console.log(this.id);
     console.log("#first" + this.id);

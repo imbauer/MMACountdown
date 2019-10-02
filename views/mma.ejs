@@ -34,14 +34,41 @@
                 A <span class="has-text-primary">Website</span> that provides the exact <span class="has-text-primary">time</span>,
                 regardless of <span class="has-text-primary">time zone</span>, of every <span class="has-text-primary">MMA Event</span>
             </h1>
-            <h2 class="subtitle has-text-light">
+            <!-- <h2 class="subtitle has-text-light">
                 Primary bold subtitle
-            </h2>
+            </h2> -->
 
 
-            <div class="columns height is-vcentered" style="text-align:center;position: relative;">
+            <div class="columns is-mobile height is-vcentered" style="text-align:center;position: relative;">
                 <div class="column height is-one-third">
-                    <form>
+                    <img src="globeresize.png" style="height:50%;" alt="" />
+                    <h2 class="subtitle has-text-light big-text" style="color:white;">Filter below based on preferred organizations</h2>
+                </div>
+                <div class="column height is-one-third">
+                    <img src="clockwhiteoutline.png" style="height:50%;" alt="" />
+                    <h2 class="subtitle has-text-light big-text" style="color:white;">Choose your timezone to display events according to local time</h2>
+                </div>
+                <div class="column height is-one-third">
+                    <img src="arrows2.png" style="height:50%;" alt="" />
+                    <h2 class="subtitle has-text-light big-text" style="color:white;">Select whether you wish to view upcoming events or events that have already passed</h2>
+                </div>
+            </div>
+
+            <div class="columns is-mobile height is-vcentered" style="text-align:center;position: relative;">
+                <div class="column height is-one-third">
+                    <div class="verticalAlign">
+
+                        <div class="containerCheckBoxes">
+                            <ul class="ks-cboxtags">
+                                <li><input type="checkbox" id="checkboxOne" value="UFC"><label for="checkboxOne">&nbsp;&nbsp;&nbsp;UFC&nbsp;&nbsp;&nbsp;</label></li>
+                                <li><input type="checkbox" id="checkboxTwo" value="Bellator" checked><label for="checkboxTwo">Bellator</label></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+                    <!-- <form>
                         <fieldset>
                             <input type="checkbox" name="match" id="match_1" value="bacon">
                             <label for="match_1" style="pointer-events: auto;">
@@ -56,31 +83,13 @@
                                 <div class="sign">UFC</div>
                             </label>
                         </fieldset>
-                    </form>
-
-                    <form>
-                        <fieldset>
-                            <input type="checkbox" name="match" id="match_2" value="bacon">
-                            <label for="match_2" style="pointer-events: auto;">
-                                <svg class="circle" xmlns="http://www.w3.org/2000/svg">
-                                    <g>
-                                        <ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>
-                                        <ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>
-                                        <line class="line line1" x1="52" y1="62" x2="74" y2="62"/>
-                                        <line class="line line2" x1="52" y1="62" x2="74" y2="62"/>
-                                    </g>
-                                </svg>
-                                <div class="sign">Bellator</div>
-                            </label>
-                        </fieldset>
-                    </form>
-                </div>
+                    </form>-->
 
 
 
                 <div class="column height is-one-third big-text styled" style="font-size:1.7em;z-index:2;">
 
-                        <select>
+                        <select id="timeZones">
                           <option timeZoneId="1" gmtAdjustment="GMT-12:00" useDaylightTime="0" value="-12">(GMT-12:00) International Date Line West</option>
                       	  <option timeZoneId="2" gmtAdjustment="GMT-11:00" useDaylightTime="0" value="-11">(GMT-11:00) Midway Island, Samoa</option>
                       	  <option timeZoneId="3" gmtAdjustment="GMT-10:00" useDaylightTime="0" value="-10">(GMT-10:00) Hawaii</option>
@@ -171,7 +180,7 @@
                     <div class="verticalAlign">
                     <form>
                         <div class="radio-group">
-                            <input type="radio" id="when-one" name="selector"><label class="timeLabel" for="when-one">UPCOMING</label><input type="radio" id="when-two" name="selector"><label class="timeLabel" for="when-two">PAST</label>
+                            <input type="radio" id="when-one" checked  name="selector"><label class="timeLabel" for="when-one">UPCOMING</label><input type="radio" id="when-two" name="selector"><label class="timeLabel" for="when-two">PAST</label>
                         </div>
                     </form>
                 </div>
@@ -191,10 +200,10 @@
             <div class="work__list">
 
                 <% results.forEach(function(result, key) { %>
-                <div class="columns height is-vcentered work__list-item" style="text-align:center;position: relative;" id='hiddendiv_<%= key %>'>
+                <div class="columns height is-vcentered work__list-item is-mobile" style="text-align:center;position: relative;" id='hiddendiv_<%= key %>'>
 
                     <!-- ========================= 1st of 3 Columns ========================= -->
-                    <div class="column clockDiv" style="font-size:1.7em;text-align:center;">
+                    <div class="column height clockDiv" style="font-size:1.7em;text-align:center;">
                         <iframe style="display:none;" onload="someFunction(
                             '<%=result.when.month %> <%= result.when.day %>, <%= result.when.year %> <%= result.when.hour %>:<%=result.when.minute %>:00',
                             '<%= key %>'
@@ -246,7 +255,7 @@
                                     <%= result.location.name %>, <%= result.location.city %>, <%= result.location.country %>
                                 <% } %>
                             </div>
-                            <h1 style="margin-bottom:5%;margin-top:5%;font-size:2em;">
+                            <h1 class="eventTitle" style="margin-bottom:5%;margin-top:5%;">
                                 <% if (result.event === result.otherName || result.otherName === undefined) { %>
                                     <%= result.name %>
                                 <% } else { %>
@@ -267,7 +276,7 @@
                                     <%= result.location.name %>, <%= result.location.city %>, <%= result.location.country %>
                                 <% } %>
                             </div>
-                            <h1 style="margin-bottom:5%;margin-top:5%;font-size:2em;">
+                            <h1 class="eventTitle" style="margin-bottom:5%;margin-top:5%;">
                                 <% if (result.event === result.otherName || result.otherName === undefined) { %>
                                     <%= result.name %>
                                 <% } else { %>
@@ -284,8 +293,8 @@
                     <!-- ========================= End of 2nd Column ========================= -->
 
                     <!-- ========================= 3rd of 3 Columns ========================= -->
-                    <div class="column height clockRight clockP time flag-icon-background flag-icon-<%= result.location.co %>" style="background-size:cover;font-size:1.7em;z-index:2;font-weight:600;">
-                        <div class="verticalAlign">
+                    <div class="column height clockRight flagRotate clockP time flag-icon-background flag-icon-<%= result.location.co %>" style="background-size:100%;font-size:1.7em;z-index:2;font-weight:600;">
+                        <div class="verticalAlign textRotate">
                           <%= result.when.year %>-<%= result.when.monthString.substring(0,3).toUpperCase() %>-<%= result.when.day %>
                           <%= result.when.weekDay.substring(0,3).toUpperCase() %>
                           <%= result.when.hour %>:<%= result.when.minute %><%= result.when.AMPM %> <%= result.when.timeZone %>
