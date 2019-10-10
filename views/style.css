@@ -226,7 +226,8 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
     transform:translateY(-3px);
     border-color:transparent;
     box-shadow:0 1px 6px rgba(93,93,93,.16);
-    background:linear-gradient(90deg,#2fe0c5,#3bdcc4,#2fe0c5);
+    /* background:linear-gradient(90deg,#2fe0c5,#3bdcc4,#2fe0c5); */
+    background:#434343;
     color:#fff!important;
 }
 .work__list-item:active .work-detail,.work__list-item:active .work-title,.work__list-item:focus .work-detail,.work__list-item:focus .work-title,.work__list-item:hover .work-detail,.work__list-item:hover .work-title {

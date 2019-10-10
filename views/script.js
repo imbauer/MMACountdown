@@ -2,8 +2,12 @@
 $(document).ready(function() {
 
     $("#timeZones").change(function(){
-        alert('Selected value: ' + $(this).val());
+        // alert('Selected value: ' + $(this).val());
         console.log($(this).val());
+        $('.work__list-item').each(function(i, obj) {
+            console.log(i);
+            console.log(obj);
+        });
     });
 
 
