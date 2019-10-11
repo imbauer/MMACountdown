@@ -297,9 +297,7 @@
                     <!-- ========================= 3rd of 3 Columns ========================= -->
                     <div class="column height clockRight flagRotate clockP time flag-icon-background flag-icon-<%= result.location.co %>" style="background-size:100%;font-size:1.7em;z-index:2;font-weight:600;">
                         <div class="verticalAlign textRotate">
-                          <%= result.when.year %>-<%= result.when.monthString.substring(0,3).toUpperCase() %>-<%= result.when.day %>
-                          <%= result.when.weekDay.substring(0,3).toUpperCase() %>
-                          <%= result.when.hour %>:<%= result.when.minute %><%= result.when.AMPM %> <%= result.when.timeZone %>
+                          <%= result.when.year %>-<%= result.when.monthString.substring(0,3).toUpperCase() %>-<%= result.when.day %> <%= result.when.weekDay.substring(0,3).toUpperCase() %> <%= result.when.hour %> : <%= result.when.minute %> <%= result.when.AMPM %> <%= result.when.timeZone %>
                         </div>
                     </div>
                     <!-- <div class="column height flag-icon-background flag-icon-<%= result.location.co %>"

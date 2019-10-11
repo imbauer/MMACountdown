@@ -3,10 +3,20 @@ $(document).ready(function() {
 
     $("#timeZones").change(function(){
         // alert('Selected value: ' + $(this).val());
+        // console.log($('.s4-ql .menu-item-text').html());
         console.log($(this).val());
         $('.work__list-item').each(function(i, obj) {
             console.log(i);
             console.log(obj);
+            var x = $(obj).find('.clockRight .textRotate').text().trim().split(' ');
+            var ymd = x[0].split('-')
+            var dd = x[0]+'T'+x[2]+':00:00';
+            var d = new Date(x[0]);
+            d.setHours(d.getHours() + parseInt(x[2]));
+            d.setMinutes(d.getMinutes() + parseInt(x[4]));
+            console.log(d);
+            console.log(x);
+            console.log($(obj).find('.clockRight .textRotate').text());
         });
     });
 
