@@ -75,6 +75,15 @@ var eventSchema = new mongoose.Schema({
     fightCard: Array
 });
 
+var eventTimeSchema = new mongoose.Schema({
+    "_id": false,
+    name: String,
+    title: String,
+    event: String,
+    hour: String,
+    minute: String
+});
+
 var dict = {
   'Afghanistan': 'af', 'Aland Islands': 'ax', 'Albania': 'al', 'Algeria': 'dz', 'American Samoa': 'as', 'Andorra': 'ad', 'Angola': 'ao', 'Anguilla': 'ai',
   'Antigua and Barbuda': 'ag', 'Argentina': 'ar', 'Armenia': 'am', 'Aruba': 'aw', 'Australia': 'au', 'Austria': 'at', 'Azerbaijan': 'az', 'Bahamas': 'bs',
@@ -107,7 +116,11 @@ eventSchema.index({name: 1, title: 1, event: 1}, {unique: true});
 
 fighterSchema.index({name: 1}, {unique: true});
 
+eventTimeSchema.index({name: 1, title: 1}, {unique: true});
+
 var Events = mongoose.model('events', eventSchema);
+
+var EventTimes = mongoose.model('eventTimes', eventTimeSchema);
 
 var Fighters = mongoose.model('fighters', fighterSchema);
 
@@ -131,6 +144,27 @@ module.exports = {
         //  });
         //};
         //connectWithRetry();
+    },
+
+    addEventTime: function(res, eventName, eventTitle, eventEvent, eventHour, eventMinute) {
+        var eventTimeObj = {};
+        eventTimeObj.name = eventName;
+        eventTimeObj.title = eventTitle;
+        eventTimeObj.event = eventEvent;
+        eventTimeObj.hour = eventHour;
+        eventTimeObj.minute = eventMinute;
+        EventTimes.findOneAndUpdate(
+            {'name':eventName, 'title':eventTitle, 'event': eventEvent},
+            eventTimeObj,
+            {upsert:true, new: true},
+            function(err, doc){
+                if (err){console.log(err)}
+                else {
+                    console.log('Event already exists in DB ---> Checking fight order and refreshing');
+                    res.send(eventTimeObj);
+                }
+            }
+        );
     },
 
     clearData: function() {
@@ -239,23 +273,37 @@ module.exports = {
             }
         }
 
-        // Fighters.findOneAndUpdate(
-        //     {'name':fighter.name},
-        //     thisEvent,
-        //     {upsert:true, new: true},
-        //     function(err, doc){
-        //         if (err){console.log(err)}
-        //         else {
-        //             console.log('Event already exists in DB ---> Checking fight order and refreshing');
-        //         }
-        //     }
-        // );
+
 
     },
 
     addEvent: function(event) {
         event.location.co = dict[event.location.country];
-        var thisEvent = new Events(event);
+
+
+        function getEventTime(event) {
+            return EventTimes.findOne({name:event.name, title: event.title, event: event.event})
+            .then((eventTime) => {
+                console.log('====== FOUND EVENT TIME ==========');
+                if (eventTime !== null) {
+                    console.log(eventTime.hour);
+                    console.log(eventTime.minute);
+                    console.log(eventTime);
+                    event.when.hour = eventTime.hour;
+                    event.when.minute = eventTime.minute;
+                    console.log(event.when);
+                }
+                getOldEvent(event);
+            })
+            .catch((err) => {
+                console.log('========= DIDNT FIND EVENT TIME >:C ============');
+                getOldEvent(event);
+                console.log(err);
+            });
+        }
+
+
+
 
         function getOldEvent(event) {
             return Events.findOne({name:event.name, title: event.title, event: event.event}) // Notice the return here
@@ -286,8 +334,10 @@ module.exports = {
                     }
                 }
 
+                var thisEvent = new Events(event);
+
                 Events.findOneAndUpdate(
-                    {'name':event.name, 'title':event.title, 'title': event.event},
+                    {'name':event.name, 'title':event.title, 'event': event.event},
                     thisEvent,
                     {upsert:true, new: true},
                     function(err, doc){
@@ -301,8 +351,9 @@ module.exports = {
             })
             .catch((err) => {
                 console.log('Event did not already exist in DB ---> Being saved fresh');
+                var thisEvent = new Events(event);
                 Events.findOneAndUpdate(
-                    {'name':event.name, 'title':event.title, 'title': event.event},
+                    {'name':event.name, 'title':event.title, 'event': event.event},
                     thisEvent,
                     {upsert:true, new: true},
                     function(err, doc){
@@ -311,7 +362,7 @@ module.exports = {
                 );
             });
         }
-        getOldEvent(event);
+        getEventTime(event);
 
     },
 

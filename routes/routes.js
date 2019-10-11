@@ -73,6 +73,10 @@ router.get('/ufc/event/:eventName', function(req, res) {
     repeatProcess(req.params.eventName);
 });
 
+router.get('/exact/time/:eventName/:eventTitle/:eventEvent/:eventHour/:eventMinute', function(req, res) {
+    mongodb.addEventTime(res, req.params.eventName, req.params.eventTitle, req.params.eventEvent, req.params.eventHour, req.params.eventMinute);
+});
+
 
 //SETUP GET FIGHTER DATA DONT REPEAT
 router.get('/fighter/data/:fighterName', function(req, res) {
