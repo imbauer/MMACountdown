@@ -2,21 +2,36 @@
 $(document).ready(function() {
 
     $("#timeZones").change(function(){
+      // var newYork    = moment.tz("2014-06-01 12:00", "America/New_York");
+      // var losAngeles = newYork.clone().tz("America/Los_Angeles");
+      // console.log(newYork.format());    // 2014-06-01T12:00:00-04:00
+      // console.log(losAngeles.format()); // 2014-06-01T09:00:00-07:00
+
         // alert('Selected value: ' + $(this).val());
         // console.log($('.s4-ql .menu-item-text').html());
         console.log($(this).val());
+        var f = $(this).val();
+        console.log($(this).find('option:selected').attr("gmtAdjustment"));
         $('.work__list-item').each(function(i, obj) {
             console.log(i);
             console.log(obj);
-            var x = $(obj).find('.clockRight .textRotate').text().trim().split(' ');
-            var ymd = x[0].split('-')
-            var dd = x[0]+'T'+x[2]+':00:00';
-            var d = new Date(x[0]);
-            d.setHours(d.getHours() + parseInt(x[2]));
-            d.setMinutes(d.getMinutes() + parseInt(x[4]));
-            console.log(d);
-            console.log(x);
+
+            var timeOnWebpage = $(obj).find('.clockRight .textRotate').text();
+            var ny = moment.tz('2014-08-01 16:00', "America/New_York");
+            console.log(ny);
+
+            console.log('vvvvvvv');
             console.log($(obj).find('.clockRight .textRotate').text());
+            $(obj).find('.clockRight .textRotate').text(ny);
+            console.log('---------> ' + f);
+            if (parseInt(f) === parseInt(-7)) {
+              console.log('IF STATEMENT RUN');
+
+              var la = ny.clone().tz("America/Los_Angeles");
+              console.log(la);
+
+              $(obj).find('.clockRight .textRotate').text(la);
+            }
         });
     });
 

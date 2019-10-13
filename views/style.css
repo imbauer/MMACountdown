@@ -437,7 +437,8 @@ label + input[type=radio] + label {
 }
 
 .styled select {
-  background: transparent;
+  background: hsl(0, 0%, 21%);
+  /* background:none; */
   background-image:url('worldmapteal50.png');
   background-size:80%;
   background-repeat:no-repeat;
@@ -447,7 +448,7 @@ label + input[type=radio] + label {
   font-size: 16px;
   border:1px solid black;
   border-radius: 25px;
-  color:white;
+  /* color:white; */
   transition: background 0.4s;
 }
 
