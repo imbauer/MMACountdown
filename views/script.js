@@ -17,7 +17,8 @@ $(document).ready(function() {
             console.log(obj);
 
             var timeOnWebpage = $(obj).find('.clockRight .textRotate').text();
-            var ny = moment.tz('2014-08-01 16:00', "America/New_York");
+
+            var ny = moment.tz('2014-08-01 16:00', "America/Los_Angeles");
             console.log(ny);
 
             console.log('vvvvvvv');
@@ -28,9 +29,17 @@ $(document).ready(function() {
               console.log('IF STATEMENT RUN');
 
               var la = ny.clone().tz("America/Los_Angeles");
+              var extract = $(obj).find('.clockRight .textRotate').text().split(' GMT')[0];
+              var dateOhneTime = moment(new Date(extract)).format('YYYY-MM-DD HH:mm').toString();
+              var dateMitTime = moment.tz(dateOhneTime, "America/Los_Angeles");
+              var realDateMitTime = dateMitTime.clone().tz("America/New_York");
+              console.log('Extract: --- ' + extract);
+              console.log('DateOhneTime: --- ' + dateOhneTime);
+              console.log(realDateMitTime);
+              console.log('DateMitTime: --- ' + realDateMitTime);
               console.log(la);
 
-              $(obj).find('.clockRight .textRotate').text(la);
+              $(obj).find('.clockRight .textRotate').text(realDateMitTime);
             }
         });
     });
