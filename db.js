@@ -62,15 +62,14 @@ var eventSchema = new mongoose.Schema({
         co: String
     },
     when: {
-        timeZone: String,
-        year: Number,
-        month: Number,
+        offset: String,
+        year: String,
+        month: String,
         monthString: String,
-        day: Number,
+        day: String,
         weekDay: String,
-        hour: Number,
-        minute: Number,
-        AMPM: String
+        hour: String,
+        minute: String
     },
     fightCard: Array
 });
@@ -289,8 +288,8 @@ module.exports = {
                     console.log(eventTime.hour);
                     console.log(eventTime.minute);
                     console.log(eventTime);
-                    event.when.hour = eventTime.hour;
-                    event.when.minute = eventTime.minute;
+                    event.when.hour = ("0" + eventTime.hour).slice(-2);
+                    event.when.minute = ("0" + eventTime.minute).slice(-2);
                     console.log(event.when);
                 }
                 getOldEvent(event);

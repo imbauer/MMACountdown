@@ -2,45 +2,41 @@
 $(document).ready(function() {
 
     $("#timeZones").change(function(){
-      // var newYork    = moment.tz("2014-06-01 12:00", "America/New_York");
-      // var losAngeles = newYork.clone().tz("America/Los_Angeles");
-      // console.log(newYork.format());    // 2014-06-01T12:00:00-04:00
-      // console.log(losAngeles.format()); // 2014-06-01T09:00:00-07:00
 
-        // alert('Selected value: ' + $(this).val());
-        // console.log($('.s4-ql .menu-item-text').html());
+
         console.log($(this).val());
         var f = $(this).val();
-        console.log($(this).find('option:selected').attr("gmtAdjustment"));
+        var newGMT = $(this).find('option:selected').attr("value");
         $('.work__list-item').each(function(i, obj) {
-            console.log(i);
-            console.log(obj);
+            // console.log(i);
+            // console.log(obj);
 
-            var timeOnWebpage = $(obj).find('.clockRight .textRotate').text();
+            var newYork    = moment.tz("2014-06-01 12:00", "Europe/London");
+            var losAngeles = newYork.clone().tz("US/Arizona");
+            var london     = newYork.clone().tz("America/New_York");
+            console.log();
+            console.log(newGMT);
+            console.log('oooooooo');
+            console.log(newYork);
+            console.log(losAngeles);
+            console.log(london);
 
-            var ny = moment.tz('2014-08-01 16:00', "America/Los_Angeles");
-            console.log(ny);
 
-            console.log('vvvvvvv');
+            var timeToBeChanged = $(obj).find('.clockRight .textRotate').text();
+            var time = moment(new Date(timeToBeChanged.split(':00 ')[0])).format('YYYY-MM-DD HH:mm');
+            var offset = timeToBeChanged.split(':00 ')[1].trim();
+            // console.log('Old Region: ' + offset);
+            console.log(time);
+            console.log(offset);
+            var currentTime = moment.tz(time.toString(), offset);
+            var differentTime = currentTime.clone().tz(newGMT);
+            console.log(currentTime);
+            console.log(differentTime);
             console.log($(obj).find('.clockRight .textRotate').text());
-            $(obj).find('.clockRight .textRotate').text(ny);
-            console.log('---------> ' + f);
-            if (parseInt(f) === parseInt(-7)) {
-              console.log('IF STATEMENT RUN');
+            console.log('New Region: ' + newGMT);
+            console.log(differentTime.toString().replace(/GMT.*/g, newGMT));
+            $(obj).find('.clockRight .textRotate').text(differentTime.toString().replace(/GMT.*/g, newGMT)); //._d.toString().replace(/GMT.*/g, newGMT)
 
-              var la = ny.clone().tz("America/Los_Angeles");
-              var extract = $(obj).find('.clockRight .textRotate').text().split(' GMT')[0];
-              var dateOhneTime = moment(new Date(extract)).format('YYYY-MM-DD HH:mm').toString();
-              var dateMitTime = moment.tz(dateOhneTime, "America/Los_Angeles");
-              var realDateMitTime = dateMitTime.clone().tz("America/New_York");
-              console.log('Extract: --- ' + extract);
-              console.log('DateOhneTime: --- ' + dateOhneTime);
-              console.log(realDateMitTime);
-              console.log('DateMitTime: --- ' + realDateMitTime);
-              console.log(la);
-
-              $(obj).find('.clockRight .textRotate').text(realDateMitTime);
-            }
         });
     });
 
