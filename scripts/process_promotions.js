@@ -152,24 +152,23 @@ module.exports =
                 hour = '16';
             }
             var when = {
-                timeZone : 'EST',
-                year : parseInt(info[2][0]),
-                month : parseInt(info[2][1]),
+                offset : 'America/New_York',
+                year : (info[2][0]),
+                month : ("0" + (info[2][1])).slice(-2),
                 monthString: months[parseInt(info[2][1]) - 1],
-                day : parseInt(info[2][2]),
+                day : ("0" + (info[2][2])).slice(-2),
                 weekDay : weekdays[d.getDay()],
-                hour : parseInt(hour),
-                minute : parseInt('0'),
-                AMPM : 'PM'
+                hour : ("0" + (hour)).slice(-2),
+                minute : ("0" + ("0").slice(-2))
             }
             event.when = when;
             event.location = location;
             event.fightCard = fightCard[m];
             events.push(event);
         }
-//        console.log('============================================================================================================');
-//        console.log(events);
-//        console.log('============================================================================================================');
+       console.log('============================================================================================================');
+       console.log(events);
+       console.log('============================================================================================================');
         return events;
     },
 
@@ -336,15 +335,14 @@ module.exports =
                     hour = '14';
                 }
                 var when = {
-                    timeZone : 'EST',
-                    year : parseInt(info[2][2]),
-                    month : parseInt(month),
+                    offset : 'America/New_York',
+                    year : (info[2][2]),
+                    month : ("0" + (month)).slice(-2),
                     monthString: info[2][0],
-                    day : parseInt(day),
+                    day : ("0" + (day)).slice(-2),
                     weekDay : weekdays[d.getDay()],
-                    hour : parseInt(hour),
-                    minute : parseInt('0'),
-                    AMPM : 'PM'
+                    hour : ("0" + (hour)).slice(-2),
+                    minute : ("0" + ("0")).slice(-2)
                 }
                 event.when = when;
                 event.location = location;
