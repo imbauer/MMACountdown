@@ -1,0 +1,64 @@
+version: "3.5"
+services:
+    client:
+        build: ./client
+        image: client
+        container_name: client
+        restart: unless-stopped
+        env_file: .env
+        environment:
+          - MONGO_USERNAME=admin
+          - MONGO_PASSWORD=your_password
+          - MONGO_HOSTNAME=db
+          - MONGO_PORT=27017
+          - MONGO_DB=mmaInfo
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./client:/client
+            - node_modules:/client/node_modules
+        # entrypoint: ["npm", "start"]
+        # command: /client/node_modules/.bin/nodemon app.js
+        links:
+            - api
+        networks:
+            - webappnetwork
+    api:
+        build:
+            context: ./api
+            dockerfile: Dockerfile
+        image: api
+        container_name: api
+        restart: always
+        ports:
+            - "9000:9000"
+        volumes:
+            - ./api:/api
+            - node_modules_b:/api/node_modules
+        depends_on:
+            - db
+        networks:
+            - webappnetwork
+    db:
+        image: mongo:4.1.8-xenial
+        container_name: db
+        restart: unless-stopped
+        env_file: .env
+        ports:
+          - "27017:27017"
+        environment:
+          - MONGO_INITDB_ROOT_USERNAME=admin
+          - MONGO_INITDB_ROOT_PASSWORD=your_password
+        volumes:
+          - dbdata:/data/db
+        networks:
+            - webappnetwork
+networks:
+    webappnetwork:
+        driver: bridge
+        name: webappnetwork
+
+volumes:
+    node_modules:
+    node_modules_b:
+    dbdata:

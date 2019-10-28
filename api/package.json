@@ -1,0 +1,29 @@
+{
+  "name": "api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "bulma": "^0.7.5",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "flag-icon-css": "^3.3.0",
+    "http-errors": "~1.6.3",
+    "i18n-iso-countries": "^3.7.3",
+    "jade": "~1.11.0",
+    "mongodb": "^3.3.0-beta2",
+    "mongoose": "^5.4.10",
+    "morgan": "~1.9.1",
+    "node-cron": "^2.0.3",
+    "node-sass": "^4.12.0",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
