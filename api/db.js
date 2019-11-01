@@ -123,8 +123,8 @@ var EventTimes = mongoose.model('eventTimes', eventTimeSchema);
 
 var Fighters = mongoose.model('fighters', fighterSchema);
 
-// const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
-const url = "mongodb://admin:your_password@db:27017/mmaInfo?authSource=admin";
+const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
+// const url = "mongodb://admin:your_password@db:27017/mmaInfo?authSource=admin";
 
 
 
