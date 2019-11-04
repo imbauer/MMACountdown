@@ -50,7 +50,7 @@ function removeUpcomingEvents() {
 
 function reAddUpcomingUFCEvents() {
     return new Promise(resolve => {
-        var url = 'http://192.168.99.100:9000/promotions/ufc/event/UFC%20240';
+        var url = 'http://' + process.env.INTERNAL_URL + '/graphql/promotions/ufc/event/UFC%20240';
         request(url, function (err, response, body) {
             if(err){
                 console.log(err + ' ERR: Stopped at ---> ' + url);
@@ -67,7 +67,7 @@ function reAddUpcomingUFCEvents() {
 
 function reAddUpcomingBellatorEvents() {
     return new Promise(resolve => {
-        var url = 'http://192.168.99.100:9000/promotions/bellator/event/Bellator_MMA_in_2019';
+        var url = 'http://' + process.env.INTERNAL_URL + '/graphql/promotions/bellator/event/Bellator_MMA_in_2019';
         request(url, function (err, response, body) {
             if(err){
                 console.log(err + ' ERR: Stopped at ---> ' + url);
@@ -82,7 +82,7 @@ function reAddUpcomingBellatorEvents() {
     });
 }
 
-cron.schedule('59 * * * *', () => {
+cron.schedule('4 * * * *', () => {
     removeUpcomingEvents().then(() => reAddUpcomingUFCEvents()).then(() => reAddUpcomingBellatorEvents());
     console.log('==============================================================');
     console.log('Runs at the number in the hour');

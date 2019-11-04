@@ -15,7 +15,7 @@ class Fight extends Component {
 }
 
     callFighter() {
-        fetch("http://192.168.99.100:9000/fighters/fighter/" + this.state.firstFighter)
+        fetch("http://192.168.99.100/graphql/fighters/fighter/" + this.state.firstFighter)
             .then(res => res.json())
             .then(res => this.setState({ firstFighterRecord: res.results },
                 function () {
@@ -23,7 +23,7 @@ class Fight extends Component {
                 })
             )
             .catch(err => err);
-        fetch("http://192.168.99.100:9000/fighters/fighter/" + this.state.secondFighter)
+        fetch("http://192.168.99.100/graphql/fighters/fighter/" + this.state.secondFighter)
             .then(res => res.json())
             .then(res => this.setState({ secondFighterRecord: res.results },
                 function () {

@@ -14,7 +14,7 @@ router.get('/ufc/event/:eventName', function(req, res) {
 function repeatProcess(event) {
     event = event.replace(/\s/g, '\%20').replace(/\+/g, '\%2B');
     var URI = encodeURIComponent(event).replace(/%2520/g, '%20').replace(/%252B/g, '%2B');
-    var url = 'http://192.168.99.100:9000/promotionsWiki/ufc/event/' + URI;
+    var url = 'http://' + process.env.INTERNAL_URL + '/graphql/promotionsWiki/ufc/event/' + URI;
     request(url, function (err, response, body) {
         if(err){
             console.log(err + ' ERR: Stopped at ---> ' + url);
@@ -48,7 +48,7 @@ function repeatProcess(event) {
 router.get('/bellator/event/:eventName', function(req, res) {
     var event = req.params.eventName.replace(/\s/g, '\%20').replace(/\+/g, '\%2B');
     var URI = encodeURIComponent(event).replace(/%2520/g, '%20').replace(/%252B/g, '%2B');
-    var url = 'http://192.168.99.100:9000/promotionsWiki/bellator/event/' + URI;
+    var url = 'http://' + process.env.INTERNAL_URL + '/graphql/promotionsWiki/bellator/event/' + URI;
     request(url, function (err, response, body) {
         if(err){
             console.log(err + ' ERR: Stopped at ---> ' + url);

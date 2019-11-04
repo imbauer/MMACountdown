@@ -242,25 +242,23 @@ module.exports = {
     clearData: function() {
         var today = new Date();
         var year = today.getFullYear();
-        var month;
-        if (today.getMonth() + 1 < 10) { month = today.getMonth() + 1;month = '0' + month; }
-        else { month = today.getMonth() + 1; }
-        var day = today.getDate();
+        var month = ("0" + (today.getMonth() + 1)).slice(-2);
+        var day = ("0" + (today.getDate())).slice(-2);
 
         Events.find({}, function(err, events) {
 
             events.forEach(function(event) {
-                if (event.when.year > parseInt(year)) {
+                if (event.when.year > year) {
                     Events.deleteOne({ name:event.name, title: event.title, event: event.event }, function (err) {});
                     // console.log('Deleted at year');
                 }
-                else if (event.when.year === parseInt(year)) {
-                    if (event.when.month > parseInt(month)) {
+                else if (event.when.year === year) {
+                    if (event.when.month > month) {
                         Events.deleteOne({ name:event.name, title: event.title, event: event.event }, function (err) {});
                         // console.log('Deleted at month');
                     }
-                    else if (event.when.month === parseInt(month)) {
-                        if (event.when.day > parseInt(day)) {
+                    else if (event.when.month === month) {
+                        if (event.when.day > day) {
                             Events.deleteOne({ name:event.name, title: event.title, event: event.event }, function (err) {});
                             // console.log('Deleted at day');
                         }
@@ -479,16 +477,14 @@ module.exports = {
     renderPastUFCEvents: function(res) {
         var today = new Date();
         var year = today.getFullYear();
-        var month;
-        if (today.getMonth() + 1 < 10) { month = today.getMonth() + 1;month = '0' + month; }
-        else { month = today.getMonth() + 1; }
-        var day = today.getDate();
+        var month = ("0" + (today.getMonth() + 1)).slice(-2);
+        var day = ("0" + (today.getDate())).slice(-2);
 
         Events.find({
             $or : [
                 { $and : [ { 'when.year': { $lt: parseInt(year) } }, { promotion: "Ultimate Fighting Championship" } ] },
-                { $and : [ { 'when.year': { $lte: parseInt(year) } }, { 'when.month': { $lt: parseInt(month) } }, { promotion: "Ultimate Fighting Championship" } ] },
-                { $and : [ { 'when.year': { $lte: parseInt(year) } }, { 'when.month': { $lte: parseInt(month) } }, { 'when.day': { $lt: parseInt(day) } }, { promotion: "Ultimate Fighting Championship" } ] }
+                { $and : [ { 'when.year': { $lte: parseInt(year) } }, { 'when.month': { $lt: month } }, { promotion: "Ultimate Fighting Championship" } ] },
+                { $and : [ { 'when.year': { $lte: parseInt(year) } }, { 'when.month': { $lte: month } }, { 'when.day': { $lt: day } }, { promotion: "Ultimate Fighting Championship" } ] }
             ]
         })
         .sort( { 'when.year': -1, 'when.month': -1, 'when.day': -1, 'when.hour': -1 } )
@@ -504,16 +500,14 @@ module.exports = {
     renderPastBellatorEvents: function(res) {
         var today = new Date();
         var year = today.getFullYear();
-        var month;
-        if (today.getMonth() + 1 < 10) { month = today.getMonth() + 1;month = '0' + month; }
-        else { month = today.getMonth() + 1; }
-        var day = today.getDate();
+        var month = ("0" + (today.getMonth() + 1)).slice(-2);
+        var day = ("0" + (today.getDate())).slice(-2);
 
         Events.find({
             $or : [
                 { $and : [ { 'when.year': { $lt: parseInt(year) } }, { promotion: "Bellator" } ] },
-                { $and : [ { 'when.year': { $lte: parseInt(year) } }, { 'when.month': { $lt: parseInt(month) } }, { promotion: "Bellator" } ] },
-                { $and : [ { 'when.year': { $lte: parseInt(year) } }, { 'when.month': { $lte: parseInt(month) } }, { 'when.day': { $lt: parseInt(day) } }, { promotion: "Bellator" } ] }
+                { $and : [ { 'when.year': { $lte: parseInt(year) } }, { 'when.month': { $lt: month } }, { promotion: "Bellator" } ] },
+                { $and : [ { 'when.year': { $lte: parseInt(year) } }, { 'when.month': { $lte: month } }, { 'when.day': { $lt: day } }, { promotion: "Bellator" } ] }
             ]
         })
         .sort( { 'when.year': -1, 'when.month': -1, 'when.day': -1, 'when.hour': -1 } )
@@ -529,16 +523,14 @@ module.exports = {
     renderPastEvents: function(res) {
         var today = new Date();
         var year = today.getFullYear();
-        var month;
-        if (today.getMonth() + 1 < 10) { month = today.getMonth() + 1;month = '0' + month; }
-        else { month = today.getMonth() + 1; }
-        var day = today.getDate();
+        var month = ("0" + (today.getMonth() + 1)).slice(-2);
+        var day = ("0" + (today.getDate())).slice(-2);
 
         Events.find({
             $or : [
                 { $and : [ { 'when.year': { $lt: parseInt(year) } } ] },
-                { $and : [ { 'when.year': { $lte: parseInt(year) } }, { 'when.month': { $lt: parseInt(month) } } ] },
-                { $and : [ { 'when.year': { $lte: parseInt(year) } }, { 'when.month': { $lte: parseInt(month) } }, { 'when.day': { $lt: parseInt(day) } } ] }
+                { $and : [ { 'when.year': { $lte: parseInt(year) } }, { 'when.month': { $lt: month } } ] },
+                { $and : [ { 'when.year': { $lte: parseInt(year) } }, { 'when.month': { $lte: month } }, { 'when.day': { $lt: day } } ] }
             ]
         })
         .sort( { 'when.year': -1, 'when.month': -1, 'when.day': -1, 'when.hour': -1 } )
@@ -554,14 +546,14 @@ module.exports = {
     renderUpcomingUFCEvents: function(res) {
         var today = new Date();
         var year = today.getFullYear();
-        var month = today.getMonth() + 1;
-        var day = today.getDate();
+        var month = ("0" + (today.getMonth() + 1)).slice(-2);
+        var day = ("0" + (today.getDate())).slice(-2);
 
         Events.find({
             $or : [
                 { $and : [ { 'when.year': { $gt: parseInt(year) } }, { promotion: "Ultimate Fighting Championship" } ] },
-                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gt: parseInt(month) } }, { promotion: "Ultimate Fighting Championship" } ] },
-                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gte: parseInt(month) } }, { 'when.day': { $gte: parseInt(day) } }, { promotion: "Ultimate Fighting Championship" } ] }
+                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gt: month } }, { promotion: "Ultimate Fighting Championship" } ] },
+                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gte: month } }, { 'when.day': { $gte: day } }, { promotion: "Ultimate Fighting Championship" } ] }
             ]
         })
         .sort( { 'when.year': 1, 'when.month': 1, 'when.day': 1, 'when.hour': 1 } )
@@ -577,14 +569,14 @@ module.exports = {
     renderUpcomingBellatorEvents: function(res) {
         var today = new Date();
         var year = today.getFullYear();
-        var month = today.getMonth() + 1;
-        var day = today.getDate();
+        var month = ("0" + (today.getMonth() + 1)).slice(-2);
+        var day = ("0" + (today.getDate())).slice(-2);
 
         Events.find({
             $or : [
                 { $and : [ { 'when.year': { $gt: parseInt(year) } }, { promotion: "Bellator" } ] },
-                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gt: parseInt(month) } }, { promotion: "Bellator" } ] },
-                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gte: parseInt(month) } }, { 'when.day': { $gte: parseInt(day) } }, { promotion: "Bellator" } ] }
+                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gt: month } }, { promotion: "Bellator" } ] },
+                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gte: month } }, { 'when.day': { $gte: day } }, { promotion: "Bellator" } ] }
             ]
         })
         .sort( { 'when.year': 1, 'when.month': 1, 'when.day': 1, 'when.hour': 1 } )
@@ -600,14 +592,14 @@ module.exports = {
     renderUpcomingEvents: function(res) {
         var today = new Date();
         var year = today.getFullYear();
-        var month = today.getMonth() + 1;
-        var day = today.getDate();
+        var month = ("0" + (today.getMonth() + 1)).slice(-2);
+        var day = ("0" + (today.getDate())).slice(-2);
 
         Events.find({
             $or : [
                 { $and : [ { 'when.year': { $gt: parseInt(year) } } ] },
-                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gt: parseInt(month) } } ] },
-                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gte: parseInt(month) } }, { 'when.day': { $gte: parseInt(day) } } ] }
+                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gt: month } } ] },
+                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gte: month } }, { 'when.day': { $gte: day } } ] }
             ]
         })
         .sort( { 'when.year': 1, 'when.month': 1, 'when.day': 1, 'when.hour': 1 } )

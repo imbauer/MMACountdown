@@ -42,38 +42,38 @@ class App extends Component {
     }
 
     callUpcoming() {
-        fetch("http://192.168.99.100:9000/promotions/upcoming")
+        fetch("http://192.168.99.100/graphql/promotions/upcoming")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
     callUpcomingUFC() {
-        fetch("http://192.168.99.100:9000/promotions/upcoming/ufc")
+        fetch("http://192.168.99.100/graphql/promotions/upcoming/ufc")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
     callUpcomingBellator() {
-        fetch("http://192.168.99.100:9000/promotions/upcoming/bellator")
+        fetch("http://192.168.99.100/graphql/promotions/upcoming/bellator")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
 
     callPast() {
-        fetch("http://192.168.99.100:9000/promotions/past")
+        fetch("http://192.168.99.100/graphql/promotions/past")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
     callPastUFC() {
-        fetch("http://192.168.99.100:9000/promotions/past/ufc")
+        fetch("http://192.168.99.100/graphql/promotions/past/ufc")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
     callPastBellator() {
-        fetch("http://192.168.99.100:9000/promotions/past/bellator")
+        fetch("http://192.168.99.100/graphql/promotions/past/bellator")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
