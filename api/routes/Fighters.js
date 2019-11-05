@@ -63,12 +63,12 @@ function getNextFighter(fighters, fighter) {
     getFighterWikiData(fighter)
         .then(fighterData => {
             console.log('------------------------- fighterData [' + fighters.indexOf(fighter) + '] -------------------------');
-            // console.log(fighterData);
+            console.log(fighterData);
             mongodb.addFighter(fighterData);
-            console.log('-------------------------------------------------------------------------------');
+            // console.log('-------------------------------------------------------------------------------');
             // console.log(fighters.indexOf(fighter));
             // console.log(fighters[fighters.indexOf(fighter) + 1]);
-            if ((fighters.indexOf(fighter) + 1 !== -1 || fighters.indexOf(fighter) + 1 !== 0) && fighters.indexOf(fighter) < 400) {
+            if (fighters[fighters.indexOf(fighter) + 1] !== fighters[0]) {
                 getNextFighter(fighters, fighters[fighters.indexOf(fighter) + 1]);
             }
         })
@@ -78,13 +78,28 @@ function getNextFighter(fighters, fighter) {
 
 }
 
+router.get('/addFighter/:name', function(req, res) {
+    var fighter = req.params.name;
+    getFighterWikiData(fighter)
+        .then(fighterData => {
+            // console.log('--------------------------------- fighterData ---------------------------------');
+            // console.log(fighterData);
+            console.log(fighterData);
+            mongodb.addFighter(fighterData);
+            // console.log('-------------------------------------------------------------------------------');
+
+        })
+        .catch(err => {
+            console.log(err);
+        })
+});
 
 
 function getFighterWikiData(fighter) {
 
     return new Promise((resolve, reject) => {
 
-        console.log('Got to here');
+        // console.log('Got to here');
 
         var URI = encodeURIComponent(fighter).replace(/%2520/g, '%20').replace(/%252B/g, '%2B');
         var url = 'http://' + process.env.INTERNAL_URL + '/graphql/fightersWiki/fighter/data/' + URI;

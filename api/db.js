@@ -336,9 +336,17 @@ module.exports = {
     },
 
     addFighter: function(fighter) {
+        console.log('**************************************************************************************************');
+        console.log('**************************************************************************************************');
+        console.log('**************************************************************************************************');
+        console.log(fighter.name);
+        console.log('**************************************************************************************************');
+        console.log('**************************************************************************************************');
+        console.log('**************************************************************************************************');
         if (fighter !== undefined) {
 
-            if (fighter.birth_place !== undefined && fighter.fightRecord !== undefined) {
+            if (fighter.birth_place !== undefined) {
+                console.log('HAS BIRTHPLACE');
                 var countryOptions = fighter.birth_place.replace(/\(|\)|today\s/g, '').replace(/,\s/g, ' ').replace(/,/g, ' ').split(' ');
                 console.log(countryOptions);
                 for (var i = countryOptions.length - 1; i >= 0; i--) {
@@ -356,7 +364,7 @@ module.exports = {
                         }
                     }
                 }
-                console.log(fighter);
+                // console.log(fighter);
 
                 Fighters.findOneAndUpdate(
                     {'name':fighter.name},
@@ -367,6 +375,17 @@ module.exports = {
                     }
                 );
 
+            }
+            else {
+                console.log('NO BIRTHPLACE');
+                Fighters.findOneAndUpdate(
+                    {'name':fighter.name},
+                    fighter,
+                    {upsert:true, new: true},
+                    function(err, doc){
+                        if (err){console.log(err)}
+                    }
+                );
             }
         }
 

@@ -8,6 +8,8 @@ module.exports =
                 throw new Error("Something bad happened")
             }
 
+            // console.log(body);
+
             body = body.replace(/<[^>]*>/g,'').replace(/\\n/g,'').replace(/\s\s+/g, ' ').replace(/\'\'\'.*?(?=MMA record start)|(?=\{\{end\}\}).*/g, '');
             // console.log(body);
             var eventParsing = /(?=MMA record start)|(?:{\"batchcomplete.*?name =)|(?:{\"batchcomplete.*?name=)/g;
@@ -43,35 +45,37 @@ module.exports =
                         else if (dictPart.length === 2) {
                             dictPart[0] = dictPart[0].trim();
                             dictPart[1] = dictPart[1].trim();
-                            console.log(dictPart);
+                            // console.log(dictPart);
                             details[dictPart[0]] = dictPart[1];
                         }
                     }
-                    details.name = fighterName;
+                    details.name = fighterName.trim();
                     // console.log('---------------------- Details ----------------------');
-                    birthDetails = details['birth_date'].split('|');
-                    var today = new Date();
-                    var birthDate = new Date(birthDetails[0] + '-' + birthDetails[1] + '-' + birthDetails[2]);
-                    var age = today.getFullYear() - birthDate.getFullYear();
-                    var m = today.getMonth() - birthDate.getMonth();
-                    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-                        age = age - 1;
+                    if (details['birth_date'] !== undefined) {
+                        birthDetails = details['birth_date'].split('|');
+                        var today = new Date();
+                        var birthDate = new Date(birthDetails[0] + '-' + birthDetails[1] + '-' + birthDetails[2]);
+                        var age = today.getFullYear() - birthDate.getFullYear();
+                        var m = today.getMonth() - birthDate.getMonth();
+                        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                            age = age - 1;
+                        }
+                        details.age = age;
                     }
-                    details.age = age;
                     // console.log(details);
                     // console.log('-----------------------------------------------------');
                 }
 
 
                 if (i === 1) {
-                    console.log(info[i]);
+                    // console.log(info[i]);
                     info[i] = info[i].replace(/(\|align.*?\|)/g, '');
                     info[i] = info[i].split(mmaRecordFightsParsing);
                     // console.log(info[i]);
                     for (var k = 0; k < info[i].length; k++) {
 
                         info[i][k] = info[i][k].replace(/( format.*?\|)|(format.*?\|)|(dts.*?\|)|(\| align.*?\|)|(\|align.*?\|)/g, '').replace(/((?<=[a-zA-Z])\).*?(?=[0-9]{4}\|))|(N\\A.*?(?=[0-9]{4}\|))|(\|.*?MMA\)\|)|(\|.*?fighter\)\|)|(\|.*?grappler\)\|)|(?=[0-9]{4})-/g, '|').replace(/(\{)|(\})|(\[)|(\])|(?:\(fighter\).*?\|.*?(?=\|))|(?:\(grappler\).*?\|.*?(?=\|))|(\|\-\|)|(\()|(\))/g, '');
-                        console.log(info[i][k]);
+                        // console.log(info[i][k]);
                         info[i][k] = info[i][k].split('|');
 
                         info[i][k].length = 7;
@@ -80,7 +84,7 @@ module.exports =
                             info[i][k] = [info[i][k][0].replace(/(start.*)/g, '')];
                             continue;
                         }
-                        console.log(info[i][k]);
+                        // console.log(info[i][k]);
                         for (var q = 0; q < info[i][k].length; q++) {
                             info[i][k][q] = info[i][k][q].trim();
                         }
@@ -93,9 +97,9 @@ module.exports =
                     // console.log('----------------------------------------------------');
                 }
             }
-            console.log('---------------------- Details ----------------------');
-            console.log(details);
-            console.log('----------------------------------------------------');
+            // console.log('---------------------- Details ----------------------');
+            // console.log(details);
+            // console.log('----------------------------------------------------');
             return details;
 
         } catch(e) {

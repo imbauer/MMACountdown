@@ -82,7 +82,7 @@ function reAddUpcomingBellatorEvents() {
     });
 }
 
-cron.schedule('4 * * * *', () => {
+cron.schedule('48 * * * *', () => {
     removeUpcomingEvents().then(() => reAddUpcomingUFCEvents()).then(() => reAddUpcomingBellatorEvents());
     console.log('==============================================================');
     console.log('Runs at the number in the hour');
