@@ -50,14 +50,14 @@ class Ufc extends Component {
                 <div className="verticalAlign" style={{}}>
                     <h1 className="eventTitle">
                         {(this.props.eventDetails.event === this.props.eventDetails.otherName || this.props.eventDetails.otherName === undefined) &&
-                            <div>{this.props.eventDetails.name}</div>
+                            <div className="lineSize">{this.props.eventDetails.name}</div>
                         }
                         {(this.props.eventDetails.event !== this.props.eventDetails.otherName && this.props.eventDetails.otherName !== undefined) &&
-                            <div>{this.props.eventDetails.otherName}</div>
+                            <div className="lineSize">{this.props.eventDetails.otherName}</div>
                         }
                     </h1>
                 </div>
-                <div className="eventElementBottom">{this.props.eventDetails.title}</div>
+                <div className="eventElementBottom lineSize">{this.props.eventDetails.title}</div>
             </div>
         );
     }

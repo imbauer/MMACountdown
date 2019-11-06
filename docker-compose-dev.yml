@@ -7,13 +7,8 @@ services:
         restart: unless-stopped
         env_file: .env
         environment:
-          - MONGO_USERNAME=${MONGO_USERNAME}
-          - MONGO_PASSWORD=${MONGO_PASSWORD}
-          - MONGO_HOSTNAME=db
-          - MONGO_PORT=${MONGO_PORT}
-          - MONGO_DB=${MONGO_DB}
-          - INTERNAL_URL=192.168.99.100
-          - EXTERNAL_URL=192.168.99.100
+          - REACT_APP_INTERNAL_URL=${REACT_APP_INTERNAL_URL}
+          - REACT_APP_EXTERNAL_URL=${REACT_APP_EXTERNAL_URL}
         ports:
             - "3000:3000"
         volumes:
@@ -39,8 +34,8 @@ services:
           - MONGO_HOSTNAME=db
           - MONGO_PORT=${MONGO_PORT}
           - MONGO_DB=${MONGO_DB}
-          - INTERNAL_URL=192.168.99.100
-          - EXTERNAL_URL=192.168.99.100
+          - INTERNAL_URL=${INTERNAL_URL}
+          - EXTERNAL_URL=${EXTERNAL_URL}
         ports:
             - "9000:9000"
         volumes:
@@ -68,9 +63,6 @@ services:
     nginx:
         image: nginx
         container_name: nginx
-        environment:
-          - INTERNAL_URL=192.168.99.100
-          - EXTERNAL_URL=192.168.99.100
         ports:
             - "80:80"
         volumes:

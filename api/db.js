@@ -84,30 +84,30 @@ var eventTimeSchema = new mongoose.Schema({
 });
 
 var dict = {
-  'Afghanistan': 'af', 'Aland Islands': 'ax', 'Albania': 'al', 'Algeria': 'dz', 'American Samoa': 'as', 'Andorra': 'ad', 'Angola': 'ao', 'Anguilla': 'ai',
-  'Antigua and Barbuda': 'ag', 'Argentina': 'ar', 'Armenia': 'am', 'Aruba': 'aw', 'Australia': 'au', 'Austria': 'at', 'Azerbaijan': 'az', 'Bahamas': 'bs',
-  'Bahrain': 'bh', 'Bangladesh': 'bd', 'Barbados': 'bb', 'Belarus': 'by', 'Belgium': 'be', 'Belize': 'bz', 'Benin': 'bj', 'Bermuda': 'bm',
-  'Bhutan': 'bt', 'Bolivia ': 'bo', 'Bosnia and Herzegovina': 'ba', 'Botswana': 'bw', 'Brazil': 'br', 'Bulgaria': 'bg', 'Burkina Faso': 'bf', 'Burundi': 'bi',
-  'Cabo Verde': 'cv', 'Cambodia': 'kh', 'Cameroon': 'cm', 'Canada': 'ca', 'Cayman Islands': 'ky', 'Central African Republic': 'cf', 'Chad': 'td', 'Chile': 'cl',
+  'Afghanistan': 'af', 'Aland Islands': 'ax', 'Albania': 'al','Albanian': 'al', 'Algeria': 'dz','Algerian': 'dz', 'American Samoa': 'as', 'Andorra': 'ad', 'Angola': 'ao', 'Anguilla': 'ai',
+  'Antigua and Barbuda': 'ag', 'Argentina': 'ar','Argentinian': 'ar', 'Armenia': 'am','Armenian': 'am', 'Aruba': 'aw', 'Australia': 'au', 'Australian': 'au','Austria': 'at','Austrian': 'at', 'Azerbaijan': 'az', 'Bahamas': 'bs',
+  'Bahrain': 'bh', 'Bangladesh': 'bd', 'Barbados': 'bb', 'Belarus': 'by','Belarusian people':'by', 'Belgium': 'be', 'Belize': 'bz', 'Benin': 'bj', 'Bermuda': 'bm',
+  'Bhutan': 'bt', 'Bolivia': 'bo','Bolivian': 'bo', 'Bosnia and Herzegovina': 'ba', 'Botswana': 'bw', 'Brazil': 'br','Brazilian': 'br','Brazilian people':'br', 'Bulgaria': 'bg', 'Burkina Faso': 'bf', 'Burundi': 'bi',
+  'Cabo Verde': 'cv', 'Cambodia': 'kh', 'Cameroon': 'cm', 'Canada': 'ca', 'Canadian': 'ca','Canadians': 'ca','Cayman Islands': 'ky', 'Central African Republic': 'cf', 'Chad': 'td', 'Chile': 'cl',
   'China': 'cn', 'Christmas Island': 'cx', 'Colombia': 'co', 'Comoros': 'km', 'Cook Islands': 'ck', 'Costa Rica': 'cr', 'Croatia': 'hr', 'Cuba': 'cu',
   'Curaçao': 'cw', 'Cyprus': 'cy', 'Czech Republic': 'cz', 'Côte d\'Ivoire': 'ci', 'Democratic Republic of the Congo': 'cd', 'Denmark': 'dk', 'Djibouti': 'dj',
   'Dominica': 'dm', 'Dominican Republic': 'do', 'Ecuador': 'ec', 'Egypt': 'eg', 'El Salvador': 'sv', 'England': 'gb-eng', 'Equatorial Guinea': 'gq', 'Eritrea': 'er',
-  'Estonia': 'ee', 'Ethiopia': 'et', 'Falkland Islands': 'fk', 'Faroe Islands': 'fo', 'Fiji': 'fj', 'Finland': 'fi', 'France': 'fr', 'French Guiana': 'gf',
-  'French Polynesia':'pf', 'Gabon':'ga', 'Gambia':'gm', 'Georgia':'ge', 'Germany':'de', 'Ghana':'gh', 'Gibraltar':'gi', 'Greece':'gr', 'Greenland':'gl', 'Grenada':'gd',
+  'Estonia': 'ee','Estonian': 'ee', 'Ethiopia': 'et', 'Falkland Islands': 'fk', 'Faroe Islands': 'fo', 'Fiji': 'fj', 'Finland': 'fi','Finnish': 'fi', 'France': 'fr','French': 'fr', 'French Guiana': 'gf',
+  'French Polynesia':'pf', 'Gabon':'ga', 'Gambia':'gm', 'Georgia':'ge', 'Germany':'de','German':'de', 'Ghana':'gh', 'Gibraltar':'gi', 'Greece':'gr', 'Greenland':'gl', 'Grenada':'gd',
   'Guadeloupe':'gp', 'Guam':'gu', 'Guatemala':'gt', 'Guernsey':'gg', 'Guinea':'gn', 'Guinea-Bissau':'gw', 'Guyana':'gy', 'Haiti':'ht', 'Honduras':'hn', 'Hong Kong':'hk',
-  'Hungary':'hu', 'Iceland':'is', 'India':'in', 'Indonesia':'id', 'Iran':'ir', 'Iraq':'iq', 'Ireland':'ie', 'Israel':'il', 'Italy':'it', 'Jamaica':'jm',
-  'Japan':'jp', 'Jordan':'je', 'Kazakhstan':'jo', 'Kenya':'kz', 'Kiribati':'ki', 'Kosovo':'xk', 'Kuwait':'kw', 'Kyrgyzstan':'kg', 'Laos':'la', 'Latvia':'lv',
+  'Hungary':'hu','Hungarian':'hu', 'Iceland':'is', 'India':'in', 'Indonesia':'id', 'Iran':'ir', 'Iraq':'iq', 'Ireland':'ie', 'Israel':'il', 'Italy':'it', 'Jamaica':'jm',
+  'Japan':'jp', 'Jordan':'je', 'Kazakhstan':'jo', 'Kenya':'kz', 'Kiribati':'ki', 'Kosovo':'xk', 'Kuwait':'kw', 'Kyrgyzstan':'kg', 'Laos':'la', 'Latvia':'lv','Latvian':'lv',
   'Lebanon':'lb', 'Lesotho':'ls', 'Liberia':'lr', 'Libya':'ly', 'Liechtenstein':'li', 'Lithuania':'lt', 'Luxembourg':'lu', 'Macau':'mo', 'Madagascar':'mg', 'Malawi':'mw',
-  'Malaysia':'my', 'Maldives':'mv', 'Mali':'ml', 'Malta':'mt', 'Martinique':'mq', 'Mauritania':'mr', 'Mauritius':'mu', 'Mayotte':'yt', 'Mexico':'mx',
+  'Malaysia':'my', 'Maldives':'mv', 'Mali':'ml', 'Malta':'mt', 'Martinique':'mq', 'Mauritania':'mr', 'Mauritius':'mu', 'Mayotte':'yt', 'Mexico':'mx','Mexican':'mx',
   'Moldova':'md', 'Monaco':'mc', 'Mongolia':'mn', 'Montenegro':'me', 'Montserrat':'ms', 'Morocco':'ma', 'Mozambique':'mz', 'Myanmar':'mm', 'Namibia':'na',
-  'Nauru':'nr', 'Nepal':'np', 'Netherlands':'nl', 'New Caledonia':'nc', 'New Zealand':'nz', 'Nicaragua':'ni', 'Niger':'ne', 'Nigeria':'ng', 'Niue':'nu',
+  'Nauru':'nr', 'Nepal':'np', 'Netherlands':'nl', 'New Caledonia':'nc', 'New Zealand':'nz','New Zealander':'nz', 'Nicaragua':'ni', 'Niger':'ne', 'Nigeria':'ng','Nigerian':'ng', 'Niue':'nu',
   'Norfolk Island':'nf', 'North Korea':'kp', 'North Macedonia':'mk', 'Northern Ireland':'gb-nir', 'Norway':'no', 'Oman':'om', 'Pakistan':'pk', 'Palau':'pw', 'Panama':'pa',
   'Papua New Guinea':'pg', 'Paraguay':'py', 'Peru':'pe', 'Philippines':'ph', 'Poland':'pl', 'Portugal':'pt', 'Puerto Rico':'pr', 'Qatar':'qa', 'Republic of the Congo':'cg',
-  'Romania':'ro', 'Russia':'ru', 'Dagestan':'ru', 'Rwanda':'rw', 'Samoa':'ws', 'San Marino':'sm', 'Saudi Arabia':'sa', 'Scotland':'gb-sct', 'Senegal':'sn', 'Serbia':'rs',
-  'Singapore':'sg', 'Slovakia':'sk', 'Slovenia':'si', 'Solomon Islands':'sb', 'Somalia':'so', 'South Africa':'za', 'South Korea':'kr', 'South Sudan':'ss', 'Spain':'es',
-  'Sri Lanka':'lk', 'Palestine':'ps', 'Sudan':'sd', 'Swaziland':'sz', 'Sweden':'se', 'Switzerland':'ch', 'Syria':'sy', 'Taiwan':'tw', 'Tajikistan':'tj',
-  'Tanzania':'tz', 'Thailand':'th', 'Tonga':'to', 'Trinidad and Tobago':'tt', 'Tunisia':'tn', 'Turkey':'tr', 'Turkmenistan':'tm', 'Uganda':'ug', 'Ukraine':'ua',
-  'United Arab Emirates':'ae', 'United Kingdom':'gb', 'United States of America':'us', 'United States':'us', 'U.S':'us', 'USA':'us', 'U.S.A.':'us', 'U.S.':'us', 'Uruguay':'uy', 'Uzbekistan':'uz',
+  'Romania':'ro','Romanian':'ro', 'Russia':'ru','Russian':'ru', 'Dagestan':'ru', 'Rwanda':'rw', 'Samoa':'ws', 'San Marino':'sm', 'Saudi Arabia':'sa', 'Scotland':'gb-sct','People of Scotland':'gb-sct', 'Senegal':'sn', 'Serbia':'rs',
+  'Singapore':'sg', 'Slovakia':'sk','Slovakian':'sk', 'Slovenia':'si', 'Solomon Islands':'sb', 'Somalia':'so', 'South Africa':'za', 'South Korea':'kr','Korean':'kr', 'South Sudan':'ss', 'Spain':'es',
+  'Sri Lanka':'lk', 'Suriname':'sr','Surinamese':'sr','Palestine':'ps', 'Sudan':'sd', 'Swaziland':'sz', 'Sweden':'se', 'Switzerland':'ch', 'Syria':'sy', 'Taiwan':'tw', 'Tajikistan':'tj',
+  'Tanzania':'tz', 'Thailand':'th', 'Tonga':'to', 'Trinidad and Tobago':'tt', 'Tunisia':'tn', 'Turkey':'tr', 'Turkmenistan':'tm', 'Uganda':'ug', 'Ukraine':'ua','Ukrainian':'ua',
+  'United Arab Emirates':'ae', 'United Kingdom':'gb', 'United States of America':'us', 'American':'us','Americans':'us','United States':'us', 'U.S':'us', 'USA':'us', 'U.S.A.':'us', 'U.S.':'us', 'Uruguay':'uy', 'Uzbekistan':'uz',
   'Venezuela':'ve', 'Vietnam':'vn', 'Wales':'gb-wls', 'Western Sahara':'eh', 'Yemen':'ye', 'Zambia':'zm', 'Zimbabwe':'zw'
 };
 
@@ -241,26 +241,46 @@ module.exports = {
 
     clearData: function() {
         var today = new Date();
-        var year = today.getFullYear();
+        var year = today.getFullYear().toString();
         var month = ("0" + (today.getMonth() + 1)).slice(-2);
         var day = ("0" + (today.getDate())).slice(-2);
+        console.log(year);
+        console.log(month);
+        console.log(day);
 
         Events.find({}, function(err, events) {
 
+            console.log(events);
+
             events.forEach(function(event) {
+                console.log('[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]');
+                console.log("EventYear " + event.when.year);
+                console.log("Year " + year);
+                console.log(typeof event.when.year);
+                console.log(typeof year);
+                console.log("EventMonth " + event.when.month);
+                console.log("Month " + month);
+                console.log(typeof event.when.month);
+                console.log(typeof month);
+                console.log("EventDay " + event.when.day);
+                console.log("Day " + day);
+                console.log(typeof event.when.day);
+                console.log(typeof day);
+                console.log(event.when.year > year || (event.when.year === year && event.when.month > month) || (event.when.year === year && event.when.month === month && event.when.day > day));
+                console.log('[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]');
                 if (event.when.year > year) {
                     Events.deleteOne({ name:event.name, title: event.title, event: event.event }, function (err) {});
-                    // console.log('Deleted at year');
+                    console.log('Deleted at year');
                 }
                 else if (event.when.year === year) {
                     if (event.when.month > month) {
                         Events.deleteOne({ name:event.name, title: event.title, event: event.event }, function (err) {});
-                        // console.log('Deleted at month');
+                        console.log('Deleted at month');
                     }
                     else if (event.when.month === month) {
                         if (event.when.day > day) {
                             Events.deleteOne({ name:event.name, title: event.title, event: event.event }, function (err) {});
-                            // console.log('Deleted at day');
+                            console.log('Deleted at day');
                         }
                     }
                 }
@@ -364,6 +384,10 @@ module.exports = {
                         }
                     }
                 }
+                if ((fighter.co === undefined || fighter.co === null) && fighter.nationality !== undefined) {
+                    fighter.co = dict[fighter.nationality];
+                    fighter.country = fighter.nationality;
+                }
                 // console.log(fighter);
 
                 Fighters.findOneAndUpdate(
@@ -377,6 +401,10 @@ module.exports = {
 
             }
             else {
+                if ((fighter.co === undefined || fighter.co === null) && fighter.nationality !== undefined) {
+                    fighter.co = dict[fighter.nationality];
+                    fighter.country = fighter.nationality;
+                }
                 console.log('NO BIRTHPLACE');
                 Fighters.findOneAndUpdate(
                     {'name':fighter.name},

@@ -21,6 +21,81 @@
   color: #09d3ac;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Dax:400,900');
+ .middle {
+	 width: 100%;
+	 text-align: center;
+     overflow:hidden;
+}
+ .middle h1 {
+	 font-family: 'Dax', sans-serif;
+	 color: #fff;
+}
+ .middle input[type="radio"] {
+	 display: none;
+}
+ .middle input[type="radio"]:checked + .box {
+	 background-color: #d63c3f;
+}
+ .middle input[type="radio"]:checked + .box span {
+	 color: white;
+	 transform: translateY(-120px);
+}
+ .middle input[type="radio"]:checked + .box span:before {
+	 transform: translateY(55px);
+	 opacity: 1;
+}
+
+
+
+
+
+ .middle .box {
+     border-radius:0px;
+   border:3px solid #d63c3f;
+	 width: 150px;
+	 height: 150px;
+	 background-color: #282c34;
+	 transition: all 250ms ease;
+	 will-change: transition;
+	 display: inline-block;
+	 text-align: center;
+	 cursor: pointer;
+	 position: relative;
+	 font-family: 'Dax', sans-serif;
+	 font-weight: 900;
+}
+ .middle .box:active {
+	 transform: translateY(0px);
+}
+ .middle .box span {
+	 position: absolute;
+	 transform: translate(0, -150px);
+	 left: 0;
+	 right: 0;
+	 transition: all 300ms ease;
+	 font-size: 1.5em;
+	 user-select: none;
+	 color: #fff;
+}
+ .middle .box span:before {
+	 font-size: 5em;
+	 font-family: FontAwesome;
+	 display: block;
+	 opacity: 0;
+	 transition: all 300ms ease-in-out;
+	 font-weight: normal;
+	 color: white;
+}
+ .middle .front-end span:before {
+     content: '\21E8';
+}
+ .middle .back-end span:before {
+     content: '\21E6';
+}
+
+
+
 /* .vertCent {
     position: absolute;
     top: 50%;
@@ -158,6 +233,7 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
 }
 .map {
     height:200px;
+    width:60%;
 }
 
 
@@ -264,6 +340,10 @@ input[type="checkbox"]:checked ~ label .line2 {
   transform: rotate(0);
 }
 
+.lineSize {
+    line-height:0.9;
+}
+
 .sign {
     color: #aaa;
     font-family:Work Sans;
@@ -360,34 +440,7 @@ button::before, button::after {
 }
 
 
-input[type=radio] {
-  position: absolute;
-  visibility: hidden;
-  display: none;
-}
-label.timeLabel  {
-  color: #9a929e;
-  display: inline-block;
-  cursor: pointer;
-  font-weight: bold;
-  font-size:2em;
-  padding: 5px 20px;
-  width:100%;
-}
-input[type=radio]:checked + label {
-  color: #ccc8ce;
-  background: #D63C3F;
-}
-label + input[type=radio] + label {
-  /* border-top: solid 3px #D63C3F; */
-}
-.radio-group {
-  border: solid 3px #D63C3F;
-  display: inline-block;
-  margin: 20px;
-  border-radius: 10px;
-  width:50%;
-}
+
 
 .verticalAlign {
     position: relative;top: 50%;transform: perspective(1px) translateY(-50%);
@@ -397,7 +450,7 @@ label + input[type=radio] + label {
   background: #282c34;
   /* background:none; */
   background-image:url('./images/worldmapteal50.png');
-  background-size:55%;
+  background-size:95%;
   background-repeat:no-repeat;
   background-position:center;
   height: 100%;
@@ -564,28 +617,129 @@ label + input[type=radio] + label {
 
 @media (max-width: 320px) {
   body { background-color: red; }
+
+  .containerCheckBoxes {
+      /* max-width: 200px; */
+      font-size: 1em;
+  }
+  ul.ks-cboxtags {
+      padding: 5px;
+  }
+
   .mobileLocation {
       display:none;
   }
+
+  .middle input[type="radio"]:checked + .box span {
+ 	 transform: translateY(-60px);
+ }
+  .middle input[type="radio"]:checked + .box span:before {
+ 	 transform: translateY(20px);
+ }
+  .middle .box {
+ 	 width: 75px;
+ 	 height: 75px;
+ }
+  .middle .box:active {
+ 	 transform: translateY(0px);
+ }
+  .middle .box span {
+ 	 transform: translate(0, -72px);
+ 	 font-size: 1em;
+ }
+  .middle .box span:before {
+ 	 font-size: 3em;
+ }
+ .textRotate {
+     padding: 20px 10px;
+     color: #111;
+     font-size: 20px;
+     line-height: 30px;
+     font-family: 'Lato', sans-serif;
+ }
+ .big-text {
+     font-size:0.8em;
+ }
+
+
+ .fightFont {
+     font-size:1.2em;
+     font-weight:300;
+ }
+ .mobileLocation {
+     display:none;
+ }
+
+ .ufcBackground {
+     background-size:80%;
+ }
+ .bellatorBackground {
+     background-size:60%;
+ }
+ .eventElementBottom {
+     font-size:1.2em;
+     font-weight:400;
+ }
+
+ .countdown-item {
+     margin: 0 auto;
+  font-size: 30px;
+   line-height: 25px;
+   padding-top: 10px;
+  width: 70px;
+  height: 70px;
+ }
+
+ .countdown-item span {
+     color: #333;
+     font-size: 10px;
+     font-weight: 600;
+     text-transform: uppercase;
+ }
+
+ .countdown-svg {
+  display:none;
+ }
+ .countdown-svgSmall {
+   display:inline;
+ }
+
 }
 
 @media (min-width: 321px ) and (max-width: 375px) {
   body { background-color: blue; }
+
+  .middle input[type="radio"]:checked + .box span {
+ 	 transform: translateY(-60px);
+ }
+  .middle input[type="radio"]:checked + .box span:before {
+ 	 transform: translateY(20px);
+ }
+  .middle .box {
+ 	 width: 75px;
+ 	 height: 75px;
+ }
+  .middle .box:active {
+ 	 transform: translateY(0px);
+ }
+  .middle .box span {
+ 	 transform: translate(0, -72px);
+ 	 font-size: 1em;
+ }
+  .middle .box span:before {
+ 	 font-size: 3em;
+ }
+
+  .containerCheckBoxes {
+      /* max-width: 200px; */
+      font-size: 1em;
+  }
+  ul.ks-cboxtags {
+      padding: 5px;
+  }
   .mobileLocation {
       display:none;
   }
-}
-
-@media (min-width: 376px ) and (max-width: 425px) {
-  body { background-color: orange; }
-  .mobileLocation {
-      display:none;
-  }
-}
-
-
-
-@media (min-width: 426px ) and (max-width: 768px) {
   .column.height {
       height:150px;
   }
@@ -606,6 +760,264 @@ label + input[type=radio] + label {
   }
   .seperator {
       height:150px;
+  }
+  .eventTitle {
+      font-size:1.5em;
+      font-weight:500;
+  }
+  .flagRotate {
+    content:"";
+    position:absolute;
+    margin:-30px 0px 0px -20px;
+    display:inline-block;
+    -webkit-transform:rotate(-90deg);
+    -moz-transform:rotate(-90deg);
+    -ms-transform:rotate(-90deg);
+    -o-transform:rotate(-90deg);
+    transform:rotate(-90deg);
+  }
+  .textRotate {
+      padding: 20px 10px;
+      color: #111;
+      font-size: 20px;
+      line-height: 30px;
+      font-family: 'Lato', sans-serif;
+  }
+  .big-text {
+      font-size:0.8em;
+  }
+
+
+  .fightFont {
+      font-size:1.2em;
+      font-weight:300;
+  }
+  .mobileLocation {
+      display:none;
+  }
+
+  .ufcBackground {
+      background-size:80%;
+  }
+  .bellatorBackground {
+      background-size:60%;
+  }
+  .eventElementBottom {
+      font-size:1.2em;
+      font-weight:400;
+  }
+
+  .countdown-item {
+      margin: 0 auto;
+      font-size: 30px;
+    line-height: 25px;
+    padding-top: 10px;
+      width: 70px;
+      height: 70px;
+  }
+
+  .countdown-item span {
+      color: #333;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+  }
+
+  .countdown-svg {
+      display:none;
+  }
+  .countdown-svgSmall {
+    display:inline;
+  }
+
+
+  .styled select {
+    background-size:90%;
+  }
+}
+
+@media (min-width: 376px ) and (max-width: 425px) {
+  body { background-color: orange; }
+
+  .middle input[type="radio"]:checked + .box span {
+ 	 transform: translateY(-60px);
+ }
+  .middle input[type="radio"]:checked + .box span:before {
+ 	 transform: translateY(20px);
+ }
+  .middle .box {
+ 	 width: 75px;
+ 	 height: 75px;
+ }
+  .middle .box:active {
+ 	 transform: translateY(0px);
+ }
+  .middle .box span {
+ 	 transform: translate(0, -72px);
+ 	 font-size: 1em;
+ }
+  .middle .box span:before {
+ 	 font-size: 3em;
+ }
+
+  .containerCheckBoxes {
+      /* max-width: 200px; */
+      font-size: 0.8em;
+  }
+  ul.ks-cboxtags {
+      padding: 5px;
+  }
+  .mobileLocation {
+      display:none;
+  }
+  .column.height {
+      height:150px;
+  }
+  .columns.height {
+      height:150px;
+  }
+  .imageSize {
+      height:60%;
+  }
+  .map {
+      height:150px;
+  }
+  .column.mobile {
+      height:200px;
+  }
+  .columns.mobile {
+      height:600px;
+  }
+  .seperator {
+      height:150px;
+  }
+  .eventTitle {
+      font-size:1.5em;
+      font-weight:500;
+  }
+  .flagRotate {
+    content:"";
+    position:absolute;
+    margin:-30px 0px 0px -20px;
+    display:inline-block;
+    -webkit-transform:rotate(-90deg);
+    -moz-transform:rotate(-90deg);
+    -ms-transform:rotate(-90deg);
+    -o-transform:rotate(-90deg);
+    transform:rotate(-90deg);
+  }
+  .textRotate {
+      padding: 20px 10px;
+      color: #111;
+      font-size: 20px;
+      line-height: 30px;
+      font-family: 'Lato', sans-serif;
+  }
+  .big-text {
+      font-size:0.8em;
+  }
+
+  .fightFont {
+      font-size:1.2em;
+      font-weight:300;
+  }
+  .mobileLocation {
+      display:none;
+  }
+
+  .ufcBackground {
+      background-size:80%;
+  }
+  .bellatorBackground {
+      background-size:60%;
+  }
+  .eventElementBottom {
+      font-size:1.2em;
+      font-weight:400;
+  }
+
+  .countdown-item {
+      margin: 0 auto;
+      font-size: 30px;
+    line-height: 25px;
+    padding-top: 10px;
+      width: 70px;
+      height: 70px;
+  }
+
+  .countdown-item span {
+      color: #333;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+  }
+
+  .countdown-svg {
+      display:none;
+  }
+  .countdown-svgSmall {
+    display:inline;
+  }
+
+
+  .styled select {
+    background-size:90%;
+  }
+}
+
+
+
+@media (min-width: 426px ) and (max-width: 768px) {
+
+    .containerCheckBoxes {
+        /* max-width: 200px; */
+        font-size: 1em;
+    }
+    ul.ks-cboxtags {
+        padding: 5px;
+    }
+
+    .middle input[type="radio"]:checked + .box span {
+   	 transform: translateY(-60px);
+   }
+    .middle input[type="radio"]:checked + .box span:before {
+   	 transform: translateY(20px);
+   }
+    .middle .box {
+   	 width: 75px;
+   	 height: 75px;
+   }
+    .middle .box:active {
+   	 transform: translateY(0px);
+   }
+    .middle .box span {
+   	 transform: translate(0, -72px);
+   	 font-size: 1em;
+   }
+    .middle .box span:before {
+   	 font-size: 3em;
+   }
+
+  .column.height {
+      height:150px;
+  }
+  .columns.height {
+      height:150px;
+  }
+  .imageSize {
+      height:60%;
+  }
+  .map {
+      height:90px;
+  }
+  .seperator {
+      height:90px;
+  }
+  .column.mobile {
+      height:200px;
+  }
+  .columns.mobile {
+      height:600px;
   }
   .eventTitle {
       font-size:1.5em;
@@ -672,15 +1084,6 @@ label + input[type=radio] + label {
       font-size:1.2em;
       font-weight:400;
   }
-  label.timeLabel  {
-    font-size:1.4em;
-    padding: 2px 7px;
-  }
-  .radio-group {
-    margin: 7px;
-    border-radius: 3px;
-    width:65%;
-  }
 
   .styled select {
     background-size:90%;
@@ -690,26 +1093,146 @@ label + input[type=radio] + label {
 
 @media (min-width: 769px ) and (max-width: 1024px) {
   body { background-color: pink; }
+
+  .containerCheckBoxes {
+      font-size: 1em;
+  }
+  ul.ks-cboxtags {
+      padding: 5px;
+  }
+
+  .middle input[type="radio"]:checked + .box span {
+ 	 transform: translateY(-60px);
+ }
+  .middle input[type="radio"]:checked + .box span:before {
+ 	 transform: translateY(20px);
+ }
+  .middle .box {
+ 	 width: 75px;
+ 	 height: 75px;
+ }
+  .middle .box:active {
+ 	 transform: translateY(0px);
+ }
+  .middle .box span {
+ 	 transform: translate(0, -72px);
+ 	 font-size: 1em;
+ }
+  .middle .box span:before {
+ 	 font-size: 3em;
+ }
+
+
+
+
   .mobileLocation {
       display:none;
   }
-  label.timeLabel  {
-    font-size:1.2em;
+  .column.height {
+      height:150px;
   }
-  .radio-group {
-    width:65%;
+  .columns.height {
+      height:150px;
+  }
+  .imageSize {
+      height:60%;
+  }
+  .map {
+      height:150px;
+  }
+  .column.mobile {
+      height:200px;
+  }
+  .columns.mobile {
+      height:600px;
+  }
+  .map {
+      height:120px;
+  }
+  .seperator {
+      height:120px;
+  }
+  .eventTitle {
+      font-size:1.5em;
+      font-weight:500;
+  }
+  .flagRotate {
+    content:"";
+    position:absolute;
+    margin:-30px 0px 0px -20px;
+    display:inline-block;
+    -webkit-transform:rotate(-90deg);
+    -moz-transform:rotate(-90deg);
+    -ms-transform:rotate(-90deg);
+    -o-transform:rotate(-90deg);
+    transform:rotate(-90deg);
+  }
+  .textRotate {
+      padding: 20px 10px;
+      color: #111;
+      font-size: 20px;
+      line-height: 30px;
+      font-family: 'Lato', sans-serif;
+  }
+  .big-text {
+      font-size:0.8em;
+  }
+
+  .countdown-item {
+  	font-size: 30px;
+    line-height: 25px;
+    padding-top: 10px;
+  	width: 70px;
+  	height: 70px;
+  }
+
+  .countdown-item span {
+      color: #333;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+  }
+
+  .countdown-svg {
+  	display:none;
+  }
+  .countdown-svgSmall {
+    display:inline;
+  }
+  .fightFont {
+      font-size:1.2em;
+      font-weight:300;
+  }
+  .mobileLocation {
+      display:none;
+  }
+
+  .ufcBackground {
+      background-size:80%;
+  }
+  .bellatorBackground {
+      background-size:60%;
+  }
+  .eventElementBottom {
+      font-size:1.2em;
+      font-weight:400;
+  }
+
+  .styled select {
+    background-size:90%;
   }
 }
 
 @media (min-width: 1025px ) and (max-width: 1324px) {
-    label.timeLabel  {
-      font-size:1.4em;
-    }
-    .radio-group {
-      width:65%;
-    }
+
     .styled select {
-      background-size:75%;
+      background-size:95%;
+    }
+    .map {
+        height:150px;
+    }
+    .seperator {
+        height:150px;
     }
     .countdown-svg {
       display:none;

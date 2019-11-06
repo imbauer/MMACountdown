@@ -11,6 +11,11 @@ router.get('/ufc/event/:eventName', function(req, res) {
     repeatProcess(req.params.eventName);
 });
 
+router.get('/emptyDatabase', function(req, res) {
+    console.log('Running');
+    mongodb.clearData();
+});
+
 function repeatProcess(event) {
     event = event.replace(/\s/g, '\%20').replace(/\+/g, '\%2B');
     var URI = encodeURIComponent(event).replace(/%2520/g, '%20').replace(/%252B/g, '%2B');

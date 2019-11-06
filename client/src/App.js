@@ -42,38 +42,38 @@ class App extends Component {
     }
 
     callUpcoming() {
-        fetch("http://192.168.99.100/graphql/promotions/upcoming")
+        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
     callUpcomingUFC() {
-        fetch("http://192.168.99.100/graphql/promotions/upcoming/ufc")
+        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming/ufc")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
     callUpcomingBellator() {
-        fetch("http://192.168.99.100/graphql/promotions/upcoming/bellator")
+        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming/bellator")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
 
     callPast() {
-        fetch("http://192.168.99.100/graphql/promotions/past")
+        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
     callPastUFC() {
-        fetch("http://192.168.99.100/graphql/promotions/past/ufc")
+        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past/ufc")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
     callPastBellator() {
-        fetch("http://192.168.99.100/graphql/promotions/past/bellator")
+        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past/bellator")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
@@ -172,7 +172,7 @@ class App extends Component {
                         <div className="column" style={{width:30+'%'}}>
                             <div className="seperator">
                                 <img className="imageSize" src={globe} alt={"globe"} />
-                                <h2 className="subtitle has-text-light big-text" style={{color:'white'}}>Filter below based on preferred organizations</h2>
+                                <h2 className="subtitle has-text-light big-text" style={{color:'white',marginLeft:10+'px',marginRight:10+'px'}}>Filter below based on preferred organizations</h2>
                             </div>
                         </div>
 
@@ -180,14 +180,14 @@ class App extends Component {
                         <div className="column is-two-fifths" style={{width:40+'%'}}>
                             <div className="seperator">
                                 <img className="imageSize" src={clock} alt={"clock"} />
-                                <h2 className="subtitle has-text-light big-text" style={{color:'white'}}>Choose your timezone to display events according to local time</h2>
+                                <h2 className="subtitle has-text-light big-text" style={{color:'white',marginLeft:10+'px',marginRight:10+'px'}}>Choose your timezone to display events according to local time</h2>
                             </div>
                         </div>
 
                         <div className="column" style={{width:30+'%'}}>
                             <div className="seperator">
                                 <img className="imageSize" src={arrows} alt={"arrows"} />
-                                <h2 className="subtitle has-text-light big-text" style={{color:'white'}}>View either upcoming events or past events</h2>
+                                <h2 className="subtitle has-text-light big-text" style={{color:'white',marginLeft:10+'px',marginRight:10+'px'}}>View either upcoming events or past events</h2>
                             </div>
                         </div>
 
@@ -214,7 +214,7 @@ class App extends Component {
 
                     <div className="column is-two-fifths" style={{width:40+'%'}}>
                         <div className="seperator">
-                            <div className="map big-text styled" style={{ fontSize:1.7+'em',zIndex:2 }}>
+                            <div className="map big-text styled" style={{ fontSize:1.7+'em',zIndex:2,margin: 0 + " auto" }}>
 
                                 <select id="timeZones" onChange={this.change} value={this.state.value} style={{ color:'white' }}>
                                     <option value="Etc/GMT+12">(GMT-12:00) International Date Line West</option>
@@ -305,12 +305,21 @@ class App extends Component {
                     </div>
 
                     <div className="column" style={{width:30+'%'}}>
-                        <div className="seperator">
-                            <form className="verticalAlign">
-                                <div className="radio-group">
-                                    <input type="radio" id="when-one" checked={this.state.radio1 === "upcoming"} onChange={this.onRadioChange} name="radio1" value="upcoming" /><label className="timeLabel" htmlFor="when-one">UPCOMING</label><input type="radio" id="when-two" name="radio1" value="past" checked={this.state.radio1 === "past"} onChange={this.onRadioChange} /><label className="timeLabel" htmlFor="when-two">PAST</label>
-                                </div>
-                            </form>
+                        <div class="middle">
+                            <label>
+                            <input type="radio" id="when-two" name="radio1" value="past" checked={this.state.radio1 === "past"} onChange={this.onRadioChange} />
+                            <div class="back-end box">
+                              <span>PAST</span>
+                            </div>
+                          </label>
+
+
+                          <label>
+                          <input type="radio" id="when-one" checked={this.state.radio1 === "upcoming"} onChange={this.onRadioChange} name="radio1" value="upcoming" />
+                          <div class="front-end box">
+                            <span>FUTURE</span>
+                          </div>
+                        </label>
                         </div>
                     </div>
 

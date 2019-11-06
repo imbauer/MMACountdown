@@ -63,7 +63,7 @@ class Countdown extends Component {
 
 
         // Mapping the date values to radius values
-        const daysRadius = mapNumber(Math.abs(days), 30, 0, 0, 360);
+        const daysRadius = mapNumber(Math.min(Math.abs(days), 30), 30, 0, 0, 360);
         const hoursRadius = mapNumber(Math.abs(hours), 24, 0, 0, 360);
         const minutesRadius = mapNumber(Math.abs(minutes), 60, 0, 0, 360);
         const secondsRadius = mapNumber(Math.abs(seconds), 60, 0, 0, 360);
