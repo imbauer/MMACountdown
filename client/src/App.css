@@ -58,13 +58,13 @@
 	 left: 0;
 }
  .strips__strip:nth-child(2) {
-	 left: 15vw;
+	 left: 15%;
 }
  .strips__strip:nth-child(4) {
-	 left: 70vw;
+	 left: 70%;
 }
  .strips__strip:nth-child(5) {
-	 left: 85vw;
+	 left: 85%;
 }
  .strips__strip:nth-child(1) .strip__content {
 	 background: #244f75;
@@ -152,34 +152,31 @@
  -webkit-transition: all 0.25s linear;
 }
  @media screen and (max-width: 760px) {
-	 .strips__strip {
-		 min-height: 20vh;
-	}
-	 .strips__strip:nth-child(1) {
-		 top: 0;
-		 left: 0;
-		 width: 100%;
-	}
-	 .strips__strip:nth-child(2) {
-		 top: 20vh;
-		 left: 0;
-		 width: 100%;
-	}
-	 .strips__strip:nth-child(3) {
-		 top: 40vh;
-		 left: 0;
-		 width: 100%;
-	}
-	 .strips__strip:nth-child(4) {
-		 top: 60vh;
-		 left: 0;
-		 width: 100%;
-	}
-	 .strips__strip:nth-child(5) {
-		 top: 80vh;
-		 left: 0;
-		 width: 100%;
-	}
+
+     .strips {
+        min-height: 10vh;
+    }
+     .strips__strip {
+    	 will-change: width, left, z-index, height;
+    	 position: absolute;
+    	 width: 15%;
+    	 min-height: 10vh;
+    	 overflow: hidden;
+    	 cursor: pointer;
+    	 transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .strips__strip:nth-child(1) {
+   	 left: 0;
+   }
+    .strips__strip:nth-child(2) {
+   	 left: 15%;
+   }
+    .strips__strip:nth-child(4) {
+   	 left: 70%;
+   }
+    .strips__strip:nth-child(5) {
+   	 left: 85%;
+   }
 }
  .strips__strip1 {
 	 will-change: width, left, z-index, height;
@@ -191,7 +188,7 @@
 	 transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
  .strips__strip1:nth-child(1) {
-	 left: 30vw;
+	 left: 30%;
 }
  .strips__strip1:nth-child(1) .strip__content {
 	 /* background: #244f75; */
@@ -200,14 +197,14 @@
 	 animation-delay: 0.1s;
 }
  @media screen and (max-width: 760px) {
-	 .strips__strip1 {
-		 min-height: 20vh;
-	}
-	 .strips__strip1:nth-child(1) {
-		 top: 0;
-		 left: 0;
-		 width: 100%;
-	}
+     .strips__strip1 {
+        width: 40%;
+        min-height: 20vh;
+    }
+     .strips__strip1:nth-child(1) {
+        left: 30%;
+    }
+
 }
  .strips .strip__content {
 	 animation-duration: 1s;
@@ -286,9 +283,9 @@
 	 transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
  @media screen and (max-width: 760px) {
-	 .strip__title {
-		 font-size: 28px;
-	}
+     .strip__title {
+         font-size: 2.6vw;
+    }
 }
  .strip__close {
 	 position: absolute;
