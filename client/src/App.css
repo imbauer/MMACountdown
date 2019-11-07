@@ -71,30 +71,35 @@
 	 transform: translate3d(-100%, 0, 0);
 	 animation-name: strip1;
 	 animation-delay: 0.1s;
+     opacity:0.3;
 }
  .strips__strip:nth-child(2) .strip__content {
 	 background: #60bfbf;
 	 transform: translate3d(0, 100%, 0);
 	 animation-name: strip2;
 	 animation-delay: 0.2s;
+     opacity:0.3;
 }
  .strips__strip:nth-child(3) .strip__content {
 	 background: #8c4b7e;
 	 transform: translate3d(0, -100%, 0);
 	 animation-name: strip3;
 	 animation-delay: 0.3s;
+     opacity:0.3;
 }
  .strips__strip:nth-child(4) .strip__content {
 	 background: #f8bb44;
 	 transform: translate3d(0, 100%, 0);
 	 animation-name: strip4;
 	 animation-delay: 0.4s;
+     opacity:0.3;
 }
  .strips__strip:nth-child(5) .strip__content {
 	 background: #f24b4b;
 	 transform: translate3d(-100%, 0, 0);
 	 animation-name: strip5;
 	 animation-delay: 0.5s;
+     opacity:0.3;
 }
 
 .strips__strip input[type="checkbox"]:checked + label {
@@ -102,14 +107,35 @@
     background-color: #D63C3F;
     color: #fff;
     transition: all .2s;
+    opacity:1;
 }
 .strips__content input[type="checkbox"]:checked + label {
     border: 3px solid #D63C3F;
     background-color: #D63C3F;
     color: #fff;
     transition: all .2s;
+    opacity:1;
 }
 .strips__strip input[type="checkbox"]{
+ position: absolute;
+ visibility: hidden;
+}
+
+.strips__strip input[type="radio"]:checked + label {
+    border: 3px solid #D63C3F;
+    background-color: #D63C3F;
+    color: #fff;
+    transition: all .2s;
+    opacity:1;
+}
+.strips__content input[type="radio"]:checked + label {
+    border: 3px solid #D63C3F;
+    background-color: #D63C3F;
+    color: #fff;
+    transition: all .2s;
+    opacity:1;
+}
+.strips__strip input[type="radio"]{
  position: absolute;
  visibility: hidden;
 }
@@ -168,10 +194,6 @@
 	 left: 30vw;
 }
  .strips__strip1:nth-child(1) .strip__content {
-     background-image:url('./images/worldmapteal50.png');
-     background-size:95%;
-     background-repeat:no-repeat;
-     background-position:center;
 	 /* background: #244f75; */
 	 transform: translate3d(-100%, 0, 0);
 	 animation-name: strip1;
@@ -572,8 +594,9 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
     padding-bottom:0;
 }
 .map {
-    height:200px;
-    width:60%;
+    min-height: 50vh;
+    height: 50vh;
+    width:100%;
 }
 
 
@@ -796,8 +819,6 @@ button::before, button::after {
   height: 100%;
   width:100%;
   font-size: 16px;
-  border:1px solid #D63C3F;
-  border-radius: 25px;
   /* color:white; */
   transition: background 0.4s;
 }

@@ -265,7 +265,93 @@ class App extends Component {
             <section class="strips" style={{backgroundColor:'#282c34'}}>
               <article class="strips__strip1">
                 <div class="strip__content">
-                  <h1 class="strip__title" data-name="Lorem">UFC</h1>
+
+                <div className="map big-text styled" style={{ fontSize:1.7+'em',zIndex:2,margin: 0 + " auto" }}>
+                    <select id="timeZones" onChange={this.change} value={this.state.value} style={{ color:'white',fontSize: 1.5+'vw',fontWeight: 300, border: 'none' }}>
+                        <option value="Etc/GMT+12">(GMT-12:00) International Date Line West</option>
+                        <option value="Pacific/Midway">(GMT-11:00) Midway Island, Samoa</option>
+                        <option value="Pacific/Honolulu">(GMT-10:00) Hawaii</option>
+                        <option value="US/Alaska">(GMT-09:00) Alaska</option>
+                        <option value="America/Los_Angeles">(GMT-08:00) Pacific Time (US & Canada)</option>
+                        <option value="America/Tijuana">(GMT-08:00) Tijuana, Baja California</option>
+                        <option value="US/Arizona">(GMT-07:00) Arizona</option>
+                        <option value="America/Chihuahua">(GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
+                        <option value="US/Mountain">(GMT-07:00) Mountain Time (US & Canada)</option>
+                        <option value="America/Managua">(GMT-06:00) Central America</option>
+                        <option value="US/Central">(GMT-06:00) Central Time (US & Canada)</option>
+                        <option value="America/Mexico_City">(GMT-06:00) Guadalajara, Mexico City, Monterrey</option>
+                        <option value="Canada/Saskatchewan">(GMT-06:00) Saskatchewan</option>
+                        <option value="America/Bogota">(GMT-05:00) Bogota, Lima, Quito, Rio Branco</option>
+                        <option value="US/Eastern">(GMT-05:00) Eastern Time (US & Canada)</option>
+                        <option value="US/East-Indiana">(GMT-05:00) Indiana (East)</option>
+                        <option value="Canada/Atlantic">(GMT-04:00) Atlantic Time (Canada)</option>
+                        <option value="America/Caracas">(GMT-04:00) Caracas, La Paz</option>
+                        <option value="America/Manaus">(GMT-04:00) Manaus</option>
+                        <option value="America/Santiago">(GMT-04:00) Santiago</option>
+                        <option value="Canada/Newfoundland">(GMT-03:30) Newfoundland</option>
+                        <option value="America/Sao_Paulo">(GMT-03:00) Brasilia</option>
+                        <option value="America/Argentina/Buenos_Aires">(GMT-03:00) Buenos Aires, Georgetown</option>
+                        <option value="America/Godthab">(GMT-03:00) Greenland</option>
+                        <option value="America/Montevideo">(GMT-03:00) Montevideo</option>
+                        <option value="America/Noronha">(GMT-02:00) Mid-Atlantic</option>
+                        <option value="Atlantic/Cape_Verde">(GMT-01:00) Cape Verde Is.</option>
+                        <option value="Atlantic/Azores">(GMT-01:00) Azores</option>
+                        <option value="Africa/Casablanca">(GMT+00:00) Casablanca, Monrovia, Reykjavik</option>
+                        <option value="Etc/Greenwich">(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London</option>
+                        <option value="Europe/Amsterdam">(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna</option>
+                        <option value="Europe/Belgrade">(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague</option>
+                        <option value="Europe/Brussels">(GMT+01:00) Brussels, Copenhagen, Madrid, Paris</option>
+                        <option value="Europe/Sarajevo">(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb</option>
+                        <option value="Africa/Lagos">(GMT+01:00) West Central Africa</option>
+                        <option value="Asia/Amman">(GMT+02:00) Amman</option>
+                        <option value="Europe/Athens">(GMT+02:00) Athens, Bucharest, Istanbul</option>
+                        <option value="Asia/Beirut">(GMT+02:00) Beirut</option>
+                        <option value="Africa/Cairo">(GMT+02:00) Cairo</option>
+                        <option value="Africa/Harare">(GMT+02:00) Harare, Pretoria</option>
+                        <option value="Europe/Helsinki">(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius</option>
+                        <option value="Asia/Jerusalem">(GMT+02:00) Jerusalem</option>
+                        <option value="Europe/Minsk">(GMT+02:00) Minsk</option>
+                        <option value="Africa/Windhoek">(GMT+02:00) Windhoek</option>
+                        <option value="Asia/Kuwait">(GMT+03:00) Kuwait, Riyadh, Baghdad</option>
+                        <option value="Europe/Moscow">(GMT+03:00) Moscow, St. Petersburg, Volgograd</option>
+                        <option value="Africa/Nairobi">(GMT+03:00) Nairobi</option>
+                        <option value="Asia/Tbilisi">(GMT+03:00) Tbilisi</option>
+                        <option value="Asia/Tehran">(GMT+03:30) Tehran</option>
+                        <option value="Asia/Muscat">(GMT+04:00) Abu Dhabi, Muscat</option>
+                        <option value="Asia/Baku">(GMT+04:00) Baku</option>
+                        <option value="Asia/Yerevan">(GMT+04:00) Yerevan</option>
+                        <option value="Asia/Kabul">(GMT+04:30) Kabul</option>
+                        <option value="Asia/Yekaterinburg">(GMT+05:00) Yekaterinburg</option>
+                        <option value="Asia/Karachi">(GMT+05:00) Islamabad, Karachi, Tashkent</option>
+                        <option value="Asia/Calcutta">(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
+                        <option value="Asia/Calcutta">(GMT+05:30) Sri Jayawardenapura</option>
+                        <option value="Asia/Katmandu">(GMT+05:45) Kathmandu</option>
+                        <option value="Asia/Almaty">(GMT+06:00) Almaty, Novosibirsk</option>
+                        <option value="Asia/Dhaka">(GMT+06:00) Astana, Dhaka</option>
+                        <option value="Asia/Rangoon">(GMT+06:30) Yangon (Rangoon)</option>
+                        <option value="Asia/Bangkok">(GMT+07:00) Bangkok, Hanoi, Jakarta</option>
+                        <option value="Asia/Krasnoyarsk">(GMT+07:00) Krasnoyarsk</option>
+                        <option value="Asia/Hong_Kong">(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi</option>
+                        <option value="Asia/Kuala_Lumpur">(GMT+08:00) Kuala Lumpur, Singapore</option>
+                        <option value="Asia/Irkutsk">(GMT+08:00) Irkutsk, Ulaan Bataar</option>
+                        <option value="Australia/Perth">(GMT+08:00) Perth</option>
+                        <option value="Asia/Taipei">(GMT+08:00) Taipei</option>
+                        <option value="Asia/Tokyo">(GMT+09:00) Osaka, Sapporo, Tokyo</option>
+                        <option value="Asia/Seoul">(GMT+09:00) Seoul</option>
+                        <option value="Asia/Yakutsk">(GMT+09:00) Yakutsk</option>
+                        <option value="Australia/Adelaide">(GMT+09:30) Adelaide</option>
+                        <option value="Australia/Darwin">(GMT+09:30) Darwin</option>
+                        <option value="Australia/Brisbane">(GMT+10:00) Brisbane</option>
+                        <option value="Australia/Canberra">(GMT+10:00) Canberra, Melbourne, Sydney</option>
+                        <option value="Australia/Hobart">(GMT+10:00) Hobart</option>
+                        <option value="Pacific/Guam">(GMT+10:00) Guam, Port Moresby</option>
+                        <option value="Asia/Vladivostok">(GMT+10:00) Vladivostok</option>
+                        <option value="Asia/Magadan">(GMT+11:00) Magadan, Solomon Is., New Caledonia</option>
+                        <option value="Pacific/Auckland">(GMT+12:00) Auckland, Wellington</option>
+                        <option value="Pacific/Fiji">(GMT+12:00) Fiji, Kamchatka, Marshall Is.</option>
+                        <option value="Pacific/Tongatapu">(GMT+13:00) Nuku'alofa</option>
+                    </select>
+                </div>
 
                 </div>
               </article>
@@ -287,20 +373,19 @@ class App extends Component {
                   <h1 class="strip__title" data-name="Sit">Prelim</h1>
                 </div>
               </article>
+
+
               <article class="strips__strip">
-                <div class="strip__content">
-                  <h1 class="strip__title" data-name="Amet">Main</h1>
-                </div>
+              <input type="checkbox" name="main" id="checkboxZero" checked={this.state.main} onChange={this.onCheckChange} />
+              <label className="strip__content" htmlFor="checkboxZero"><h1 class="strip__title">Main</h1></label>
               </article>
 
               <i class="fa fa-close strip__close"></i>
             </section>
             <section class="strips" style={{backgroundColor:'#282c34'}}>
 
-              <article class="strips__strip">
-                <div class="strip__content">
-                  <h1 class="strip__title" data-name="Ipsum">ONE FC</h1>
-                </div>
+              <article class="strips__strip" style={{display:"hidden"}}>
+
               </article>
               <article class="strips__strip">
                 <div class="strip__content">
@@ -309,188 +394,23 @@ class App extends Component {
               </article>
               <article class="strips__strip">
                 <div class="strip__content">
-                  <h1 class="strip__title" data-name="Sit">Prelim</h1>
+                  <h1 class="strip__title" data-name="Sit">ONE FC</h1>
                 </div>
               </article>
+
               <article class="strips__strip">
-                <div class="strip__content">
-                  <h1 class="strip__title" data-name="Amet">Past</h1>
-                </div>
+              <input type="radio" id="when-two" name="radio1" value="past" checked={this.state.radio1 === "past"} onChange={this.onRadioChange} />
+              <label className="strip__content" htmlFor="when-two"><h1 class="strip__title">Past</h1></label>
               </article>
+
                 <article class="strips__strip">
-                <div class="strip__content">
-                  <h1 class="strip__title" data-name="Amet">Future</h1>
-                </div>
+                <input type="radio" id="when-one" checked={this.state.radio1 === "upcoming"} onChange={this.onRadioChange} name="radio1" value="upcoming" />
+                <label className="strip__content" htmlFor="when-one"><h1 class="strip__title">Upcoming</h1></label>
               </article>
 
               <i class="fa fa-close strip__close"></i>
             </section>
 
-
-                <div>
-
-
-
-
-
-                    <div className="columns is-vcentered is-mobile is-gapless" style={{textAlign:'center',position:'relative',backgroundColor:'#282c34',paddingTop:20+'px'}}>
-
-                        <div className="column" style={{width:30+'%'}}>
-                            <div className="seperator">
-                                <img className="imageSize" src={globe} alt={"globe"} />
-                                <h2 className="subtitle has-text-light big-text mobileLocation" style={{color:'white',marginLeft:10+'px',marginRight:10+'px'}}>Filter below based on preferred organizations</h2>
-                            </div>
-                        </div>
-
-
-                        <div className="column is-two-fifths" style={{width:40+'%'}}>
-                            <div className="seperator">
-                                <img className="imageSize" src={clock} alt={"clock"} />
-                                <h2 className="subtitle has-text-light big-text mobileLocation" style={{color:'white',marginLeft:10+'px',marginRight:10+'px'}}>Choose your timezone to display events according to local time</h2>
-                            </div>
-                        </div>
-
-                        <div className="column" style={{width:30+'%'}}>
-                            <div className="seperator">
-                                <img className="imageSize" src={arrows} alt={"arrows"} />
-                                <h2 className="subtitle has-text-light big-text mobileLocation" style={{color:'white',marginLeft:10+'px',marginRight:10+'px'}}>View either upcoming events or past events</h2>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-
-
-                <div className="columns is-vcentered is-mobile is-gapless" style={{textAlign:'center',position:'relative',backgroundColor:'#282c34',paddingBottom:20+'px'}}>
-
-                    <div className="column" style={{width:30+'%'}}>
-                        <div className="seperator">
-                            <div className="containerCheckBoxes verticalAlign">
-                                <ul className="ks-cboxtags">
-                                    <li><input type="checkbox" name="main" id="checkboxZero" checked={this.state.main} onChange={this.onCheckChange} /><label htmlFor="checkboxZero">Main</label></li>
-                                    <li><input type="checkbox" name="ufc" id="checkboxOne" checked={this.state.ufc} onChange={this.onCheckChange} /><label htmlFor="checkboxOne">UFC</label></li>
-                                    <li><input type="checkbox" name="bellator" id="checkboxTwo" checked={this.state.bellator} onChange={this.onCheckChange} /><label htmlFor="checkboxTwo">Bellator</label></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div className="column is-two-fifths" style={{width:40+'%'}}>
-                        <div className="seperator">
-                            <div className="map big-text styled" style={{ fontSize:1.7+'em',zIndex:2,margin: 0 + " auto" }}>
-
-                                <select id="timeZones" onChange={this.change} value={this.state.value} style={{ color:'white' }}>
-                                    <option value="Etc/GMT+12">(GMT-12:00) International Date Line West</option>
-                                    <option value="Pacific/Midway">(GMT-11:00) Midway Island, Samoa</option>
-                                    <option value="Pacific/Honolulu">(GMT-10:00) Hawaii</option>
-                                    <option value="US/Alaska">(GMT-09:00) Alaska</option>
-                                    <option value="America/Los_Angeles">(GMT-08:00) Pacific Time (US & Canada)</option>
-                                    <option value="America/Tijuana">(GMT-08:00) Tijuana, Baja California</option>
-                                    <option value="US/Arizona">(GMT-07:00) Arizona</option>
-                                    <option value="America/Chihuahua">(GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
-                                    <option value="US/Mountain">(GMT-07:00) Mountain Time (US & Canada)</option>
-                                    <option value="America/Managua">(GMT-06:00) Central America</option>
-                                    <option value="US/Central">(GMT-06:00) Central Time (US & Canada)</option>
-                                    <option value="America/Mexico_City">(GMT-06:00) Guadalajara, Mexico City, Monterrey</option>
-                                    <option value="Canada/Saskatchewan">(GMT-06:00) Saskatchewan</option>
-                                    <option value="America/Bogota">(GMT-05:00) Bogota, Lima, Quito, Rio Branco</option>
-                                    <option value="US/Eastern">(GMT-05:00) Eastern Time (US & Canada)</option>
-                                    <option value="US/East-Indiana">(GMT-05:00) Indiana (East)</option>
-                                    <option value="Canada/Atlantic">(GMT-04:00) Atlantic Time (Canada)</option>
-                                    <option value="America/Caracas">(GMT-04:00) Caracas, La Paz</option>
-                                    <option value="America/Manaus">(GMT-04:00) Manaus</option>
-                                    <option value="America/Santiago">(GMT-04:00) Santiago</option>
-                                    <option value="Canada/Newfoundland">(GMT-03:30) Newfoundland</option>
-                                    <option value="America/Sao_Paulo">(GMT-03:00) Brasilia</option>
-                                    <option value="America/Argentina/Buenos_Aires">(GMT-03:00) Buenos Aires, Georgetown</option>
-                                    <option value="America/Godthab">(GMT-03:00) Greenland</option>
-                                    <option value="America/Montevideo">(GMT-03:00) Montevideo</option>
-                                    <option value="America/Noronha">(GMT-02:00) Mid-Atlantic</option>
-                                    <option value="Atlantic/Cape_Verde">(GMT-01:00) Cape Verde Is.</option>
-                                    <option value="Atlantic/Azores">(GMT-01:00) Azores</option>
-                                    <option value="Africa/Casablanca">(GMT+00:00) Casablanca, Monrovia, Reykjavik</option>
-                                    <option value="Etc/Greenwich">(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London</option>
-                                    <option value="Europe/Amsterdam">(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna</option>
-                                    <option value="Europe/Belgrade">(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague</option>
-                                    <option value="Europe/Brussels">(GMT+01:00) Brussels, Copenhagen, Madrid, Paris</option>
-                                    <option value="Europe/Sarajevo">(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb</option>
-                                    <option value="Africa/Lagos">(GMT+01:00) West Central Africa</option>
-                                    <option value="Asia/Amman">(GMT+02:00) Amman</option>
-                                    <option value="Europe/Athens">(GMT+02:00) Athens, Bucharest, Istanbul</option>
-                                    <option value="Asia/Beirut">(GMT+02:00) Beirut</option>
-                                    <option value="Africa/Cairo">(GMT+02:00) Cairo</option>
-                                    <option value="Africa/Harare">(GMT+02:00) Harare, Pretoria</option>
-                                    <option value="Europe/Helsinki">(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius</option>
-                                    <option value="Asia/Jerusalem">(GMT+02:00) Jerusalem</option>
-                                    <option value="Europe/Minsk">(GMT+02:00) Minsk</option>
-                                    <option value="Africa/Windhoek">(GMT+02:00) Windhoek</option>
-                                    <option value="Asia/Kuwait">(GMT+03:00) Kuwait, Riyadh, Baghdad</option>
-                                    <option value="Europe/Moscow">(GMT+03:00) Moscow, St. Petersburg, Volgograd</option>
-                                    <option value="Africa/Nairobi">(GMT+03:00) Nairobi</option>
-                                    <option value="Asia/Tbilisi">(GMT+03:00) Tbilisi</option>
-                                    <option value="Asia/Tehran">(GMT+03:30) Tehran</option>
-                                    <option value="Asia/Muscat">(GMT+04:00) Abu Dhabi, Muscat</option>
-                                    <option value="Asia/Baku">(GMT+04:00) Baku</option>
-                                    <option value="Asia/Yerevan">(GMT+04:00) Yerevan</option>
-                                    <option value="Asia/Kabul">(GMT+04:30) Kabul</option>
-                                    <option value="Asia/Yekaterinburg">(GMT+05:00) Yekaterinburg</option>
-                                    <option value="Asia/Karachi">(GMT+05:00) Islamabad, Karachi, Tashkent</option>
-                                    <option value="Asia/Calcutta">(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
-                                    <option value="Asia/Calcutta">(GMT+05:30) Sri Jayawardenapura</option>
-                                    <option value="Asia/Katmandu">(GMT+05:45) Kathmandu</option>
-                                    <option value="Asia/Almaty">(GMT+06:00) Almaty, Novosibirsk</option>
-                                    <option value="Asia/Dhaka">(GMT+06:00) Astana, Dhaka</option>
-                                    <option value="Asia/Rangoon">(GMT+06:30) Yangon (Rangoon)</option>
-                                    <option value="Asia/Bangkok">(GMT+07:00) Bangkok, Hanoi, Jakarta</option>
-                                    <option value="Asia/Krasnoyarsk">(GMT+07:00) Krasnoyarsk</option>
-                                    <option value="Asia/Hong_Kong">(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi</option>
-                                    <option value="Asia/Kuala_Lumpur">(GMT+08:00) Kuala Lumpur, Singapore</option>
-                                    <option value="Asia/Irkutsk">(GMT+08:00) Irkutsk, Ulaan Bataar</option>
-                                    <option value="Australia/Perth">(GMT+08:00) Perth</option>
-                                    <option value="Asia/Taipei">(GMT+08:00) Taipei</option>
-                                    <option value="Asia/Tokyo">(GMT+09:00) Osaka, Sapporo, Tokyo</option>
-                                    <option value="Asia/Seoul">(GMT+09:00) Seoul</option>
-                                    <option value="Asia/Yakutsk">(GMT+09:00) Yakutsk</option>
-                                    <option value="Australia/Adelaide">(GMT+09:30) Adelaide</option>
-                                    <option value="Australia/Darwin">(GMT+09:30) Darwin</option>
-                                    <option value="Australia/Brisbane">(GMT+10:00) Brisbane</option>
-                                    <option value="Australia/Canberra">(GMT+10:00) Canberra, Melbourne, Sydney</option>
-                                    <option value="Australia/Hobart">(GMT+10:00) Hobart</option>
-                                    <option value="Pacific/Guam">(GMT+10:00) Guam, Port Moresby</option>
-                                    <option value="Asia/Vladivostok">(GMT+10:00) Vladivostok</option>
-                                    <option value="Asia/Magadan">(GMT+11:00) Magadan, Solomon Is., New Caledonia</option>
-                                    <option value="Pacific/Auckland">(GMT+12:00) Auckland, Wellington</option>
-                                    <option value="Pacific/Fiji">(GMT+12:00) Fiji, Kamchatka, Marshall Is.</option>
-                                    <option value="Pacific/Tongatapu">(GMT+13:00) Nuku'alofa</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="column" style={{width:30+'%'}}>
-                        <div className="middle">
-                            <label>
-                            <input type="radio" id="when-two" name="radio1" value="past" checked={this.state.radio1 === "past"} onChange={this.onRadioChange} />
-                            <div className="back-end box">
-                              <span>PAST</span>
-                            </div>
-                          </label>
-
-
-                          <label>
-                          <input type="radio" id="when-one" checked={this.state.radio1 === "upcoming"} onChange={this.onRadioChange} name="radio1" value="upcoming" />
-                          <div className="front-end box">
-                            <span>FUTURE</span>
-                          </div>
-                        </label>
-                        </div>
-                    </div>
-
-                </div>
 
 
 
