@@ -11,7 +11,7 @@ module.exports =
         var weightClasses = /(?=\^)|(?=Women)|(?=(?<!Women..\s)Fly)|(?=(?<!Women..\s)Bantam)|(?=Featherweight)|(?=Lightweight)|(?=Welterweight)|(?=Middleweight)|(?=(?<!Light )Heavyweight)|(?=Light Heavyweight)/g;
         var fightSlots = /(?:vs\.)|weight/g;
         var eventDetailsParsing = /(?:.*UFC mixed martial arts event in \d{4})|Promotion(?=\w)|Information|Date|(?<!\s)\(|(?<=\d)-(?=\d)|\)Venue|(?<!\s)City|Event\schronology/g;
-        var eventParsing = /(?:was a.*?==Results==)|(?:is an upcoming.*?==Fight\scard==)|(?=promotion=)|(?:{{MMAevent end.*)|(?===Fight card==)|(?=== Fight card==)|(?===Fight card ==)|(?=== Fight card ==)|(city=\s\[\[.*?previousevent)|(city=\s\[\[.*?attendance)|(city=\[\[.*?attendance)|(?=venue)|(?=date\|\d{4}\|\d{2}\|\d{2})|(followingevent.*?\}})|(?=\^)|(?:attendance=\|gate=\|)|(?:{\"batchcomplete.*?name)/g;
+        var eventParsing = /(?:was a.*?==Results==)|(?:is an upcoming.*?==Fight\scard==)|(?=promotion=)|(?=promotion\s=)|(?:{{MMAevent end.*)|(?===Fight card==)|(?=== Fight card==)|(?===Fight card ==)|(?=== Fight card ==)|(city=\[\[.*?previousevent)|(city=\s\[\[.*?previousevent)|(city=\s\[\[.*?attendance)|(city=\[\[.*?attendance)|(?=date\|df.*?\|)|(?=venue)|(?=date=Cancelled)|(?=date=.*?\s\d{1},\s\d{4}\|)|(?=date=\s.*?\s\d{1},\s\d{4}\|)|(?=date=.*?\s\d{2},\s\d{4}\|)|(?=date=\s.*?\s\d{2},\s\d{4}\|)|(?=date=\s\d{4}\|\d{2}\|\d{2})|(?=date\|\d{4}\|\d{2}\|\d{2})|(?=date\|\d{4}\|\d{2}\|\d{1})|(followingevent.*?\}\})|(?=\^)|(?:attendance=\|gate=\|)|(?:{\"batchcomplete.*?\|name)/g;
         //  (?=city).*?\|   (?=(city=\[\[.*?\|))
         var splitEvents = /(?:MMAevent\scard\|)|(?:MMAevent\scard\s\|)/g;
         var splitFights = /(?:MMAevent\sbout\|)|(?:MMAevent\sbout\s\|)/g;
@@ -21,11 +21,21 @@ module.exports =
         var event = {};
         var fightsTotal = [];
 
-        body = body.replace(/<[^>]*>/g,'').replace(/\\n/g,'').replace(/\s\s+/g, ' ');
+        body = body.replace(/<[^>]*>/g,'').replace(/\\n/g,'').replace(/\s\s+/g, ' ').replace(/\{\{Cite web.*?(\}\}\|)|\{\{Cite news.*?(\}\}\|)|(\{\"batchcomplete.*?\|name)/g,'');
         if (body.includes('#REDIRECT')) {
             var redirect = body.replace(/(.*REDIRECT.*\[)|(\].*)/g, '');
             return redirect;
         }
+        console.log();
+        console.log();
+        console.log();
+        console.log();
+        console.log();
+        console.log();
+        console.log();
+        console.log();
+        console.log();
+        console.log();
         var info = body.split(eventParsing);
         info = info.filter(function(e){return e});
         console.log(info);
@@ -58,7 +68,7 @@ module.exports =
 //                fightCard[i][j] = fightCard[i][j].replace(/(\|\|\|\|.*|\[|\]|\|header.*)/g, '').replace(/(\s\|)/g, '|');
 //                console.log(fightCard[i][j]);
                 //.replace(/(weight\|.*\(fighter\))/g, 'weight')
-                fightCard[i][j] = fightCard[i][j].replace(/(\|def\.\|.*\(fighter\)\|)|(\|def\.\|.*\(fighter\)\s\|)|(\|def\.\|.*\(grappler\)\|)|(\|def\.\|.*\(grappler\)\s\|)/g, '|def.|').replace(/(\|vs\.\|.*\(fighter\)\|)|(\|vs\.\|.*\(fighter\)\s\|)|(\|vs\.\|.*\(grappler\)\|)|(\|vs\.\|.*\(grappler\)\s\|)/g, '|vs.|').replace(/(weight\|.*?\(fighter\)\|)|(weight\s\|.*?\(fighter\)\|)|(weight\s\|.*?\(fighter\)\s\|)|(weight\|.*?\(fighter\)\s\|)|(weight\|.*?\(grappler\)\|)|(weight\s\|.*?\(grappler\)\|)|(weight\|.*?\(grappler\)\s\|)|(weight\s\|.*?\(grappler\)\s\|)/g, 'weight|').replace(/(\[)|(\])/g, '').split('|');
+                fightCard[i][j] = fightCard[i][j].replace(/(\|def\.\|.*\(mixed martial artist\)\|)|(\|def\.\|.*\(mixed martial artist\)\s\|)|(\|def\.\|.*\(martial artist\)\|)|(\|def\.\|.*\(martial artist\)\s\|)|(\|def\.\|.*\(middleweight fighter\)\|)|(\|def\.\|.*\(middleweight fighter\)\s\|)|(\|def\.\|.*\(wrestler\)\|)|(\|def\.\|.*\(wrestler\)\s\|)|(\|def\.\|.*\(fighter\)\|)|(\|def\.\|.*\(fighter\)\s\|)|(\|def\.\|.*\(grappler\)\|)|(\|def\.\|.*\(grappler\)\s\|)/g, '|def.|').replace(/(\|vs\.\|.*\(martial artist\)\|)|(\|vs\.\|.*\(martial artist\)\s\|)|(\|vs\.\|.*\(wrestler\)\|)|(\|vs\.\|.*\(wrestler\)\s\|)|(\|vs\.\|.*\(middleweight fighter\)\|)|(\|vs\.\|.*\(middleweight fighter\)\s\|)|(\|vs\.\|.*\(fighter\)\|)|(\|vs\.\|.*\(fighter\)\s\|)|(\|vs\.\|.*\(grappler\)\|)|(\|vs\.\|.*\(grappler\)\s\|)|(\|vs\.\|.*\(mixed martial artist\)\|)|(\|vs\.\|.*\(mixed martial artist\)\s\|)/g, '|vs.|').replace(/(weight\|.*?\(martial artist\)\|)|(weight\s\(.*?\)\s\|.*?\(fighter\)\|)|(weight\s\(.*?\)\|.*?\(fighter\)\|)|(weight\s\|.*?\(martial artist\)\|)|(weight\s\|.*?\(martial artist\)\s\|)|(weight\|.*?\(martial artist\)\s\|)|(weight\|.*?\(fighter\)\|)|(weight\s\|.*?\(fighter\)\|)|(weight\s\|.*?\(fighter\)\s\|)|(weight\|.*?\(fighter\)\s\|)|(weight\|.*?\(grappler\)\|)|(weight\s\|.*?\(grappler\)\|)|(weight\|.*?\(grappler\)\s\|)|(weight\s\|.*?\(grappler\)\s\|)|(weight\|.*?\(mixed martial artist\)\|)|(weight\s\|.*?\(mixed martial artist\)\|)|(weight\s\|.*?\(mixed martial artist\)\s\|)|(weight\|.*?\(mixed martial artist\)\s\|)|(weight\|.*?\(wrestler\)\|)|(weight\s\|.*?\(wrestler\)\|)|(weight\s\|.*?\(wrestler\)\s\|)|(weight\|.*?\(wrestler\)\s\|)|(weight\|.*?\(middleweight fighter\)\|)|(weight\s\|.*?\(middleweight fighter\)\|)|(weight\s\|.*?\(middleweight fighter\)\s\|)|(weight\|.*?\(middleweight fighter\)\s\|)/g, 'weight|').replace(/(\[)|(\])/g, '').split('|');
 //                console.log('=======================================      AFTER REPLACE      ===============================================');
 //                console.log(fightCard[i][j]);
 //                console.log('=======================================  ====== REPLACE ======     ============================================');
@@ -81,10 +91,18 @@ module.exports =
         info[1] = info[1].replace(/(.*=\[\[)/g, '');
         info[2] = info[2].replace(/(date\|)|(\}.*)/g, '').split('|');
 //        info[3] = info[3].replace(/(venue=)|(\[)|(\])/g, '').replace(/(.*=)|(.*\|)/g, '');
-        info[3] = info[3].replace(/(\[)|(\])|(.*=)|(\|)/g, '').trim();
-        info[4] = info[4].replace(/(city\s=)|(city=)|(\[)|(\])|(\|attendance.*)/g, '').replace(/(,.*\(state\)\|)/g, ', ');
-        info[5] = info[5].replace(/(.*=\[\[)|(\|.*)/g, '');
-        info[6] = info[6].replace(/(.*=\[\[)|(\|.*)/g, '');
+        if (info[3] !== undefined) {
+            info[3] = info[3].replace(/(\[)|(\])|(.*=)|(\|)/g, '').trim();
+        }
+        if (info[4] !== undefined) {
+            info[4] = info[4].replace(/(city\s=)|(city=)|(\[)|(\])|(\|attendance.*)/g, '').replace(/(,.*\(state\)\|)/g, ', ');
+        }
+        if (info[5] !== undefined) {
+            info[5] = info[5].replace(/(.*=\[\[)|(\|.*)/g, '');
+        }
+        if (info[6] !== undefined) {
+            info[6] = info[6].replace(/(.*=\s\[\[)|(.*=\[\[)|(\|.*)|(\].*)|(#.*)/g, '');
+        }
         // console.log('......................................................................');
         // console.log(info[7]);
         if (info[7] !== undefined) {

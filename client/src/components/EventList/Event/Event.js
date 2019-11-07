@@ -37,7 +37,7 @@ class Event extends Component {
 
 
     componentDidMount() {
-        const eventDate = this.props.result.when.weekDay.substring(0, 3) + ' ' + this.props.result.when.monthString.substring(0, 3) + ' ' + this.props.result.when.day +
+        const eventDate = (this.props.result.when.weekDay || "").substring(0, 3) + ' ' + (this.props.result.when.monthString || "").substring(0, 3) + ' ' + this.props.result.when.day +
         ' ' + this.props.result.when.year + ' ' + this.props.result.when.hour + ':' + this.props.result.when.minute + ':00 ' + ' ' + this.props.result.when.offset;
         const selectValue = this.props.selectValue;
         this.setState({ selectValue: selectValue },
@@ -53,7 +53,7 @@ class Event extends Component {
 
 
     componentDidUpdate(oldProps) {
-        const eventDate = this.props.result.when.weekDay.substring(0, 3) + ' ' + this.props.result.when.monthString.substring(0, 3) + ' ' + this.props.result.when.day +
+        const eventDate = (this.props.result.when.weekDay || "").substring(0, 3) + ' ' + (this.props.result.when.monthString || "").substring(0, 3) + ' ' + this.props.result.when.day +
         ' ' + this.props.result.when.year + ' ' + this.props.result.when.hour + ':' + this.props.result.when.minute + ':00 ' + ' ' + this.props.result.when.offset;
         const selectValue = this.props.selectValue;
         const result = this.props.result;
@@ -67,7 +67,7 @@ class Event extends Component {
         }
 
         if(oldProps.result !== result) {
-            this.setState({ eventDate: this.props.result.when.weekDay.substring(0, 3) + ' ' + this.props.result.when.monthString.substring(0, 3) + ' ' + this.props.result.when.day +
+            this.setState({ eventDate: (this.props.result.when.weekDay || "").substring(0, 3) + ' ' + (this.props.result.when.monthString || "").substring(0, 3) + ' ' + this.props.result.when.day +
             ' ' + this.props.result.when.year + ' ' + this.props.result.when.hour + ':' + this.props.result.when.minute + ':00 ' + ' ' + this.props.result.when.offset},
             function() {
                 this.changeTimezone();

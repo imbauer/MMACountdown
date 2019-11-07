@@ -96,7 +96,7 @@ class Fight extends Component {
                         <div className="column is-1 fightFont" style={{color:'black',fontFamily: 'Work Sans'}}>
                             &nbsp;{record1}&nbsp;
                         </div>
-                        <div className="column is-4 big-text" style={{backgroundColor:'gray'}}>
+                        <div className="column is-4 big-text">
                             <h1 className="" style={{fontSize:1+'em',color:'black',fontWeight:200}}>
                                 {this.state.fight[0]}
                             </h1>

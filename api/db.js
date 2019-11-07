@@ -544,6 +544,75 @@ module.exports = {
         });
     },
 
+    renderPastUFCMainEvents: function(res) {
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = ("0" + (today.getMonth() + 1)).slice(-2);
+        var day = ("0" + (today.getDate())).slice(-2);
+
+        Events.find({
+            $or : [
+                { $and : [ { 'when.year': { $lt: parseInt(year) } }, { promotion: "Ultimate Fighting Championship" }, { title: /^((?!Prelim).)*$/i } ] },
+                { $and : [ { 'when.year': { $lte: parseInt(year) } }, { 'when.month': { $lt: month } }, { promotion: "Ultimate Fighting Championship" }, { title: /^((?!Prelim).)*$/i } ] },
+                { $and : [ { 'when.year': { $lte: parseInt(year) } }, { 'when.month': { $lte: month } }, { 'when.day': { $lt: day } }, { promotion: "Ultimate Fighting Championship" }, { title: /^((?!Prelim).)*$/i } ] }
+            ]
+        })
+        .sort( { 'when.year': -1, 'when.month': -1, 'when.day': -1, 'when.hour': -1 } )
+        .exec(function(err, results) {
+            if (!err) {
+                res.send({results: results});
+            } else {
+                // error handling
+            };
+        });
+    },
+
+    renderPastBellatorMainEvents: function(res) {
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = ("0" + (today.getMonth() + 1)).slice(-2);
+        var day = ("0" + (today.getDate())).slice(-2);
+
+        Events.find({
+            $or : [
+                { $and : [ { 'when.year': { $lt: parseInt(year) } }, { promotion: "Bellator" }, { title: /^((?!Prelim).)*$/i } ] },
+                { $and : [ { 'when.year': { $lte: parseInt(year) } }, { 'when.month': { $lt: month } }, { promotion: "Bellator" }, { title: /^((?!Prelim).)*$/i } ] },
+                { $and : [ { 'when.year': { $lte: parseInt(year) } }, { 'when.month': { $lte: month } }, { 'when.day': { $lt: day } }, { promotion: "Bellator" }, { title: /^((?!Prelim).)*$/i } ] }
+            ]
+        })
+        .sort( { 'when.year': -1, 'when.month': -1, 'when.day': -1, 'when.hour': -1 } )
+        .exec(function(err, results) {
+            if (!err) {
+                res.send({results: results});
+            } else {
+                // error handling
+            };
+        });
+    },
+
+    renderPastMainEvents: function(res) {
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = ("0" + (today.getMonth() + 1)).slice(-2);
+        var day = ("0" + (today.getDate())).slice(-2);
+
+        Events.find({
+            $or : [
+                { $and : [ { 'when.year': { $lt: parseInt(year) } }, { title: /^((?!Prelim).)*$/i } ] },
+                { $and : [ { 'when.year': { $lte: parseInt(year) } }, { 'when.month': { $lt: month } }, { title: /^((?!Prelim).)*$/i } ] },
+                { $and : [ { 'when.year': { $lte: parseInt(year) } }, { 'when.month': { $lte: month } }, { 'when.day': { $lt: day } }, { title: /^((?!Prelim).)*$/i } ] }
+            ]
+        })
+        .sort( { 'when.year': -1, 'when.month': -1, 'when.day': -1, 'when.hour': -1 } )
+        .exec(function(err, results) {
+            if (!err) {
+                res.send({results: results});
+            } else {
+                // error handling
+            };
+        });
+    },
+
     renderPastBellatorEvents: function(res) {
         var today = new Date();
         var year = today.getFullYear();
@@ -647,6 +716,75 @@ module.exports = {
                 { $and : [ { 'when.year': { $gt: parseInt(year) } } ] },
                 { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gt: month } } ] },
                 { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gte: month } }, { 'when.day': { $gte: day } } ] }
+            ]
+        })
+        .sort( { 'when.year': 1, 'when.month': 1, 'when.day': 1, 'when.hour': 1 } )
+        .exec(function(err, results) {
+            if (!err) {
+                res.send({results: results});
+            } else {
+                // error handling
+            };
+        });
+    },
+
+    renderUpcomingUFCMainEvents: function(res) {
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = ("0" + (today.getMonth() + 1)).slice(-2);
+        var day = ("0" + (today.getDate())).slice(-2);
+
+        Events.find({
+            $or : [
+                { $and : [ { 'when.year': { $gt: parseInt(year) } }, { promotion: "Ultimate Fighting Championship" }, { title: /^((?!Prelim).)*$/i } ] },
+                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gt: month } }, { promotion: "Ultimate Fighting Championship" }, { title: /^((?!Prelim).)*$/i } ] },
+                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gte: month } }, { 'when.day': { $gt: day } }, { promotion: "Ultimate Fighting Championship" }, { title: /^((?!Prelim).)*$/i } ] }
+            ]
+        })
+        .sort( { 'when.year': 1, 'when.month': 1, 'when.day': 1, 'when.hour': 1 } )
+        .exec(function(err, results) {
+            if (!err) {
+                res.send({results: results});
+            } else {
+                // error handling
+            };
+        });
+    },
+
+    renderUpcomingBellatorMainEvents: function(res) {
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = ("0" + (today.getMonth() + 1)).slice(-2);
+        var day = ("0" + (today.getDate())).slice(-2);
+
+        Events.find({
+            $or : [
+                { $and : [ { 'when.year': { $gt: parseInt(year) } }, { promotion: "Bellator" }, { title: /^((?!Prelim).)*$/i } ] },
+                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gt: month } }, { promotion: "Bellator" }, { title: /^((?!Prelim).)*$/i } ] },
+                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gte: month } }, { 'when.day': { $gt: day } }, { promotion: "Bellator" }, { title: /^((?!Prelim).)*$/i } ] }
+            ]
+        })
+        .sort( { 'when.year': 1, 'when.month': 1, 'when.day': 1, 'when.hour': 1 } )
+        .exec(function(err, results) {
+            if (!err) {
+                res.send({results: results});
+            } else {
+                // error handling
+            };
+        });
+    },
+
+    renderUpcomingMainEvents: function(res) {
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = ("0" + (today.getMonth() + 1)).slice(-2);
+        var day = ("0" + (today.getDate())).slice(-2);
+
+        Events.find({
+            $or : [
+                { $and : [ { 'when.year': { $gt: parseInt(year) } }, { title: /^((?!Prelim).)*$/i } ] },
+                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gt: month } }, { title: /^((?!Prelim).)*$/i } ] },
+                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gte: month } }, { 'when.day': { $gt: day } }, { title: /^((?!Prelim).)*$/i } ] }
             ]
         })
         .sort( { 'when.year': 1, 'when.month': 1, 'when.day': 1, 'when.hour': 1 } )

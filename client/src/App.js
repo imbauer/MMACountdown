@@ -16,12 +16,21 @@ class App extends Component {
         this.callUpcoming = this.callUpcoming.bind(this);
         this.callUpcomingUFC = this.callUpcomingUFC.bind(this);
         this.callUpcomingBellator = this.callUpcomingBellator.bind(this);
+        this.callUpcomingMainUFC = this.callUpcomingMainUFC.bind(this);
+        this.callUpcomingMainBellator = this.callUpcomingMainBellator.bind(this);
+        this.callUpcomingMain = this.callUpcomingMain.bind(this);
         this.callPast = this.callPast.bind(this);
         this.callPastUFC = this.callPastUFC.bind(this);
         this.callPastBellator = this.callPastBellator.bind(this);
+
+        this.callPastMainUFC = this.callPastMainUFC.bind(this);
+        this.callPastMainBellator = this.callPastMainBellator.bind(this);
+        this.callPastMain = this.callPastMain.bind(this);
+
         this.callNothing = this.callNothing.bind(this);
         this.state = {
             value: "",
+            main: true,
             ufc: true,
             bellator: false,
             radio1: "upcoming",
@@ -60,6 +69,25 @@ class App extends Component {
             .catch(err => err);
     }
 
+    callUpcomingMainUFC() {
+        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming/ufc/main")
+            .then(res => res.json())
+            .then(res => this.setState({ dbResponse: res.results }))
+            .catch(err => err);
+    }
+    callUpcomingMainBellator() {
+        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming/bellator/main")
+            .then(res => res.json())
+            .then(res => this.setState({ dbResponse: res.results }))
+            .catch(err => err);
+    }
+    callUpcomingMain() {
+        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming/main")
+            .then(res => res.json())
+            .then(res => this.setState({ dbResponse: res.results }))
+            .catch(err => err);
+    }
+
     callPast() {
         fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past")
             .then(res => res.json())
@@ -78,6 +106,26 @@ class App extends Component {
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
+
+    callPastMainUFC() {
+        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past/ufc/main")
+            .then(res => res.json())
+            .then(res => this.setState({ dbResponse: res.results }))
+            .catch(err => err);
+    }
+    callPastMainBellator() {
+        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past/bellator/main")
+            .then(res => res.json())
+            .then(res => this.setState({ dbResponse: res.results }))
+            .catch(err => err);
+    }
+    callPastMain() {
+        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past/main")
+            .then(res => res.json())
+            .then(res => this.setState({ dbResponse: res.results }))
+            .catch(err => err);
+    }
+
     callNothing() {
         this.setState({ dbResponse: [] })
     }
@@ -89,26 +137,53 @@ class App extends Component {
         },
         function() {
             console.log('radio1 ' + this.state.radio1);
+            console.log('main ' + this.state.main);
             console.log('ufc ' + this.state.ufc);
             console.log('bellator ' + this.state.bellator);
-            if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "upcoming") {
+            if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "upcoming" && this.state.main === false) {
                 this.callUpcoming();
             }
-            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "upcoming") {
+
+            else if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "upcoming" && this.state.main === true) {
+                this.callUpcomingMain();
+            }
+
+            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "upcoming" && this.state.main === true) {
+                this.callUpcomingMainUFC();
+            }
+
+            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "upcoming" && this.state.main === true) {
+                this.callUpcomingMainBellator();
+            }
+
+            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "upcoming" && this.state.main === false) {
                 this.callUpcomingUFC();
             }
-            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "upcoming") {
+            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "upcoming" && this.state.main === false) {
                 this.callUpcomingBellator();
             }
-            else if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "past") {
+            else if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "past" && this.state.main === false) {
                 this.callPast();
             }
-            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "past") {
+            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "past" && this.state.main === false) {
                 this.callPastUFC();
             }
-            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "past") {
+            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "past" && this.state.main === false) {
                 this.callPastBellator();
             }
+
+            else if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "past" && this.state.main === true) {
+                this.callPastMain();
+            }
+
+            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "past" && this.state.main === true) {
+                this.callPastMainUFC();
+            }
+
+            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "past" && this.state.main === true) {
+                this.callPastMainBellator();
+            }
+
             else if (this.state.ufc !== true && this.state.bellator !== true) {
                 this.callNothing();
             }
@@ -124,24 +199,50 @@ class App extends Component {
             console.log('radio1 ' + this.state.radio1);
             console.log('ufc ' + this.state.ufc);
             console.log('bellator ' + this.state.bellator);
-            if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "upcoming") {
+            if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "upcoming" && this.state.main === false) {
                 this.callUpcoming();
             }
-            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "upcoming") {
+
+            else if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "upcoming" && this.state.main === true) {
+                this.callUpcomingMain();
+            }
+
+            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "upcoming" && this.state.main === true) {
+                this.callUpcomingMainUFC();
+            }
+
+            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "upcoming" && this.state.main === true) {
+                this.callUpcomingMainBellator();
+            }
+
+            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "upcoming" && this.state.main === false) {
                 this.callUpcomingUFC();
             }
-            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "upcoming") {
+            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "upcoming" && this.state.main === false) {
                 this.callUpcomingBellator();
             }
-            else if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "past") {
+            else if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "past" && this.state.main === false) {
                 this.callPast();
             }
-            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "past") {
+            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "past" && this.state.main === false) {
                 this.callPastUFC();
             }
-            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "past") {
+            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "past" && this.state.main === false) {
                 this.callPastBellator();
             }
+
+            else if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "past" && this.state.main === true) {
+                this.callPastMain();
+            }
+
+            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "past" && this.state.main === true) {
+                this.callPastMainUFC();
+            }
+
+            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "past" && this.state.main === true) {
+                this.callPastMainBellator();
+            }
+
             else if (this.state.ufc !== true && this.state.bellator !== true) {
                 this.callNothing();
             }
@@ -153,7 +254,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this.callUpcomingUFC();
+        this.callUpcomingMainUFC();
         this.initTimezone();
     }
 
@@ -161,9 +262,74 @@ class App extends Component {
         return (
             <div className="App">
 
+            <section class="strips" style={{backgroundColor:'#282c34'}}>
+              <article class="strips__strip1">
+                <div class="strip__content">
+                  <h1 class="strip__title" data-name="Lorem">UFC</h1>
+
+                </div>
+              </article>
+
+
+              <article class="strips__strip">
+              <input type="checkbox" name="ufc" id="checkboxOne" checked={this.state.ufc} onChange={this.onCheckChange} />
+              <label className="strip__content" htmlFor="checkboxOne"><h1 class="strip__title">UFC</h1></label>
+              </article>
+
+
+              <article class="strips__strip">
+              <input type="checkbox" name="bellator" id="checkboxTwo" checked={this.state.bellator} onChange={this.onCheckChange} />
+              <label className="strip__content" htmlFor="checkboxTwo"><h1 class="strip__title">Bellator</h1></label>
+              </article>
+
+              <article class="strips__strip">
+                <div class="strip__content">
+                  <h1 class="strip__title" data-name="Sit">Prelim</h1>
+                </div>
+              </article>
+              <article class="strips__strip">
+                <div class="strip__content">
+                  <h1 class="strip__title" data-name="Amet">Main</h1>
+                </div>
+              </article>
+
+              <i class="fa fa-close strip__close"></i>
+            </section>
+            <section class="strips" style={{backgroundColor:'#282c34'}}>
+
+              <article class="strips__strip">
+                <div class="strip__content">
+                  <h1 class="strip__title" data-name="Ipsum">ONE FC</h1>
+                </div>
+              </article>
+              <article class="strips__strip">
+                <div class="strip__content">
+                  <h1 class="strip__title" data-name="Dolor">PFL</h1>
+                </div>
+              </article>
+              <article class="strips__strip">
+                <div class="strip__content">
+                  <h1 class="strip__title" data-name="Sit">Prelim</h1>
+                </div>
+              </article>
+              <article class="strips__strip">
+                <div class="strip__content">
+                  <h1 class="strip__title" data-name="Amet">Past</h1>
+                </div>
+              </article>
+                <article class="strips__strip">
+                <div class="strip__content">
+                  <h1 class="strip__title" data-name="Amet">Future</h1>
+                </div>
+              </article>
+
+              <i class="fa fa-close strip__close"></i>
+            </section>
 
 
                 <div>
+
+
 
 
 
@@ -172,7 +338,7 @@ class App extends Component {
                         <div className="column" style={{width:30+'%'}}>
                             <div className="seperator">
                                 <img className="imageSize" src={globe} alt={"globe"} />
-                                <h2 className="subtitle has-text-light big-text" style={{color:'white',marginLeft:10+'px',marginRight:10+'px'}}>Filter below based on preferred organizations</h2>
+                                <h2 className="subtitle has-text-light big-text mobileLocation" style={{color:'white',marginLeft:10+'px',marginRight:10+'px'}}>Filter below based on preferred organizations</h2>
                             </div>
                         </div>
 
@@ -180,14 +346,14 @@ class App extends Component {
                         <div className="column is-two-fifths" style={{width:40+'%'}}>
                             <div className="seperator">
                                 <img className="imageSize" src={clock} alt={"clock"} />
-                                <h2 className="subtitle has-text-light big-text" style={{color:'white',marginLeft:10+'px',marginRight:10+'px'}}>Choose your timezone to display events according to local time</h2>
+                                <h2 className="subtitle has-text-light big-text mobileLocation" style={{color:'white',marginLeft:10+'px',marginRight:10+'px'}}>Choose your timezone to display events according to local time</h2>
                             </div>
                         </div>
 
                         <div className="column" style={{width:30+'%'}}>
                             <div className="seperator">
                                 <img className="imageSize" src={arrows} alt={"arrows"} />
-                                <h2 className="subtitle has-text-light big-text" style={{color:'white',marginLeft:10+'px',marginRight:10+'px'}}>View either upcoming events or past events</h2>
+                                <h2 className="subtitle has-text-light big-text mobileLocation" style={{color:'white',marginLeft:10+'px',marginRight:10+'px'}}>View either upcoming events or past events</h2>
                             </div>
                         </div>
 
@@ -204,6 +370,7 @@ class App extends Component {
                         <div className="seperator">
                             <div className="containerCheckBoxes verticalAlign">
                                 <ul className="ks-cboxtags">
+                                    <li><input type="checkbox" name="main" id="checkboxZero" checked={this.state.main} onChange={this.onCheckChange} /><label htmlFor="checkboxZero">Main</label></li>
                                     <li><input type="checkbox" name="ufc" id="checkboxOne" checked={this.state.ufc} onChange={this.onCheckChange} /><label htmlFor="checkboxOne">UFC</label></li>
                                     <li><input type="checkbox" name="bellator" id="checkboxTwo" checked={this.state.bellator} onChange={this.onCheckChange} /><label htmlFor="checkboxTwo">Bellator</label></li>
                                 </ul>
@@ -305,10 +472,10 @@ class App extends Component {
                     </div>
 
                     <div className="column" style={{width:30+'%'}}>
-                        <div class="middle">
+                        <div className="middle">
                             <label>
                             <input type="radio" id="when-two" name="radio1" value="past" checked={this.state.radio1 === "past"} onChange={this.onRadioChange} />
-                            <div class="back-end box">
+                            <div className="back-end box">
                               <span>PAST</span>
                             </div>
                           </label>
@@ -316,7 +483,7 @@ class App extends Component {
 
                           <label>
                           <input type="radio" id="when-one" checked={this.state.radio1 === "upcoming"} onChange={this.onRadioChange} name="radio1" value="upcoming" />
-                          <div class="front-end box">
+                          <div className="front-end box">
                             <span>FUTURE</span>
                           </div>
                         </label>
