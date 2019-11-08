@@ -90,7 +90,7 @@ class Event extends Component {
             <div>
                 <div className="columns height is-vcentered work__list-item is-mobile is-gapless" onClick={this.changeHiddenDiv} style={{ textAlign:'center',position: 'relative',marginTop:1+'px',marginBottom:1+'px' }}>
 
-                    <div className="column height countdown-wrapper" style={{ fontSize:1.7+'em',textAlign:'center' }}>
+                    <div className="column height countdown-wrapper" style={{ midWidth:30+'%',fontSize:1.7+'em',textAlign:'center' }}>
                         {this.state.eventDate !== undefined &&
                             <Countdown timeTillDate={dDate} timeFormat="ddd MMM DD YYYY HH:mm" timezone={timezone} />
                         }
@@ -104,8 +104,8 @@ class Event extends Component {
                     }
 
                     {this.props.result.location !== undefined &&
-                        <div className="column height">
-                            <div className="verticalAlign textRotate inner">
+                        <div className="column height" style={{ maxWidth: 30+'%' }}>
+                            <div className="verticalAlign textRotate inner" style={{ overflow: 'hidden' }}>
                                 {this.state.eventDate}
                             </div>
                             <div className={`flag-icon-background flag-icon-${this.props.result.location.co}`} style={{ zIndex:-1,opacity:0.4,backgroundSize:'cover',fontSize:1.7+'em',fontWeight:600,position:'absolute',right:0,top:0,width:100+'%',height:100+'%' }}>
