@@ -266,8 +266,8 @@ class App extends Component {
               <article class="strips__strip1">
                 <div class="strip__content">
 
-                <div className="map big-text styled" style={{ fontSize:1.7+'em',zIndex:2,margin: 0 + " auto" }}>
-                    <select id="timeZones" onChange={this.change} value={this.state.value} style={{ color:'white',fontSize: 1.5+'vw',fontWeight: 300, border: 'none' }}>
+                <div className="map styled" style={{ zIndex:2,margin: 0 + " auto" }}>
+                    <select id="timeZones" className="vwFont" onChange={this.change} value={this.state.value} style={{ color:'white',fontWeight: 300, border: 'none' }}>
                         <option value="Etc/GMT+12">(GMT-12:00) International Date Line West</option>
                         <option value="Pacific/Midway">(GMT-11:00) Midway Island, Samoa</option>
                         <option value="Pacific/Honolulu">(GMT-10:00) Hawaii</option>
@@ -384,26 +384,26 @@ class App extends Component {
             </section>
             <section class="strips" style={{backgroundColor:'#282c34'}}>
 
-              <article class="strips__strip" style={{display:"hidden"}}>
+              <article class="strips__strip__0" style={{display:"hidden"}}>
 
               </article>
-              <article class="strips__strip">
+              <article class="strips__strip__0">
                 <div class="strip__content">
                   <h1 class="strip__title" data-name="Dolor">PFL</h1>
                 </div>
               </article>
-              <article class="strips__strip">
+              <article class="strips__strip__0">
                 <div class="strip__content">
                   <h1 class="strip__title" data-name="Sit">ONE FC</h1>
                 </div>
               </article>
 
-              <article class="strips__strip">
+              <article class="strips__strip__0">
               <input type="radio" id="when-two" name="radio1" value="past" checked={this.state.radio1 === "past"} onChange={this.onRadioChange} />
               <label className="strip__content" htmlFor="when-two"><h1 class="strip__title">Past</h1></label>
               </article>
 
-                <article class="strips__strip">
+                <article class="strips__strip__0">
                 <input type="radio" id="when-one" checked={this.state.radio1 === "upcoming"} onChange={this.onRadioChange} name="radio1" value="upcoming" />
                 <label className="strip__content" htmlFor="when-one"><h1 class="strip__title">Upcoming</h1></label>
               </article>

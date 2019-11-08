@@ -73,12 +73,52 @@
 	 animation-delay: 0.1s;
      opacity:0.3;
 }
+.strips__strip:nth-child(1) input[type="checkbox"]:checked + label {
+    background: #244f75;
+    transform: translate3d(-100%, 0, 0);
+    animation-delay: 0.1s;
+    opacity:1;
+}
+.strips__strip:nth-child(1) input[type="checkbox"]{
+ position: absolute;
+ visibility: hidden;
+}
+.strips__strip:nth-child(1) input[type="radio"]:checked + label {
+    background: #244f75;
+    transform: translate3d(-100%, 0, 0);
+    animation-delay: 0.1s;
+    opacity:1;
+}
+.strips__strip:nth-child(1) input[type="radio"]{
+ position: absolute;
+ visibility: hidden;
+}
  .strips__strip:nth-child(2) .strip__content {
 	 background: #60bfbf;
 	 transform: translate3d(0, 100%, 0);
 	 animation-name: strip2;
 	 animation-delay: 0.2s;
      opacity:0.3;
+}
+.strips__strip:nth-child(2) input[type="checkbox"]:checked + label {
+    background: #60bfbf;
+    transform: translate3d(-100%, 0, 0);
+    animation-delay: 0.1s;
+    opacity:1;
+}
+.strips__strip:nth-child(2) input[type="checkbox"]{
+ position: absolute;
+ visibility: hidden;
+}
+.strips__strip:nth-child(2) input[type="radio"]:checked + label {
+    background: #60bfbf;
+    transform: translate3d(-100%, 0, 0);
+    animation-delay: 0.1s;
+    opacity:1;
+}
+.strips__strip:nth-child(2) input[type="radio"]{
+ position: absolute;
+ visibility: hidden;
 }
  .strips__strip:nth-child(3) .strip__content {
 	 background: #8c4b7e;
@@ -87,12 +127,52 @@
 	 animation-delay: 0.3s;
      opacity:0.3;
 }
+.strips__strip:nth-child(3) input[type="checkbox"]:checked + label {
+    background: #8c4b7e;
+    transform: translate3d(-100%, 0, 0);
+    animation-delay: 0.1s;
+    opacity:1;
+}
+.strips__strip:nth-child(3) input[type="checkbox"]{
+ position: absolute;
+ visibility: hidden;
+}
+.strips__strip:nth-child(3) input[type="radio"]:checked + label {
+    background: #8c4b7e;
+    transform: translate3d(-100%, 0, 0);
+    animation-delay: 0.1s;
+    opacity:1;
+}
+.strips__strip:nth-child(3) input[type="radio"]{
+ position: absolute;
+ visibility: hidden;
+}
  .strips__strip:nth-child(4) .strip__content {
-	 background: #f8bb44;
+	 background: #EC942A;
 	 transform: translate3d(0, 100%, 0);
 	 animation-name: strip4;
 	 animation-delay: 0.4s;
      opacity:0.3;
+}
+.strips__strip:nth-child(4) input[type="checkbox"]:checked + label {
+    background: #EC942A;
+    transform: translate3d(-100%, 0, 0);
+    animation-delay: 0.1s;
+    opacity:1;
+}
+.strips__strip:nth-child(4) input[type="checkbox"]{
+ position: absolute;
+ visibility: hidden;
+}
+.strips__strip:nth-child(4) input[type="radio"]:checked + label {
+    background: #EC942A;
+    transform: translate3d(-100%, 0, 0);
+    animation-delay: 0.1s;
+    opacity:1;
+}
+.strips__strip:nth-child(4) input[type="radio"]{
+ position: absolute;
+ visibility: hidden;
 }
  .strips__strip:nth-child(5) .strip__content {
 	 background: #f24b4b;
@@ -101,44 +181,212 @@
 	 animation-delay: 0.5s;
      opacity:0.3;
 }
+.strips__strip:nth-child(5) input[type="checkbox"]:checked + label {
+    background: #f24b4b;
+    transform: translate3d(-100%, 0, 0);
+    animation-delay: 0.1s;
+    opacity:1;
+}
+.strips__strip:nth-child(5) input[type="checkbox"]{
+ position: absolute;
+ visibility: hidden;
+}
+.strips__strip:nth-child(5) input[type="radio"]:checked + label {
+    background: #f24b4b;
+    transform: translate3d(-100%, 0, 0);
+    animation-delay: 0.1s;
+    opacity:1;
+}
+.strips__strip:nth-child(5) input[type="radio"]{
+ position: absolute;
+ visibility: hidden;
+}
 
-.strips__strip input[type="checkbox"]:checked + label {
+
+
+
+
+
+
+
+.strips__strip__0 {
+    will-change: width, left, z-index, height;
+    position: absolute;
+    width: 15%;
+    min-height: 25vh;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.strips__strip__0:nth-child(1) {
+    left: 0;
+}
+.strips__strip__0:nth-child(2) {
+    left: 15%;
+}
+.strips__strip__0:nth-child(4) {
+    left: 70%;
+}
+.strips__strip__0:nth-child(5) {
+    left: 85%;
+}
+.strips__strip__0:nth-child(1) .strip__content {
+    background: #f24b4b;
+    transform: translate3d(-100%, 0, 0);
+    animation-name: strip1;
+    animation-delay: 0.1s;
+    opacity:0.3;
+}
+.strips__strip__0:nth-child(1) input[type="checkbox"]:checked + label {
+   background: #f24b4b;
+   transform: translate3d(-100%, 0, 0);
+   animation-delay: 0.1s;
+   opacity:1;
+}
+.strips__strip__0:nth-child(1) input[type="checkbox"]{
+position: absolute;
+visibility: hidden;
+}
+.strips__strip__0:nth-child(1) input[type="radio"]:checked + label {
+   background: #f24b4b;
+   transform: translate3d(-100%, 0, 0);
+   animation-delay: 0.1s;
+   opacity:1;
+}
+.strips__strip__0:nth-child(1) input[type="radio"]{
+position: absolute;
+visibility: hidden;
+}
+.strips__strip__0:nth-child(2) .strip__content {
+    background: #EC942A;
+    transform: translate3d(0, 100%, 0);
+    animation-name: strip2;
+    animation-delay: 0.2s;
+    opacity:0.3;
+}
+.strips__strip__0:nth-child(2) input[type="checkbox"]:checked + label {
+   background: #EC942A;
+   transform: translate3d(-100%, 0, 0);
+   animation-delay: 0.1s;
+   opacity:1;
+}
+.strips__strip__0:nth-child(2) input[type="checkbox"]{
+position: absolute;
+visibility: hidden;
+}
+.strips__strip__0:nth-child(2) input[type="radio"]:checked + label {
+   background: #EC942A;
+   transform: translate3d(-100%, 0, 0);
+   animation-delay: 0.1s;
+   opacity:1;
+}
+.strips__strip__0:nth-child(2) input[type="radio"]{
+position: absolute;
+visibility: hidden;
+}
+.strips__strip__0:nth-child(3) .strip__content {
+    background: #f24b4b;
+    transform: translate3d(0, -100%, 0);
+    animation-name: strip3;
+    animation-delay: 0.3s;
+    opacity:0.3;
+}
+.strips__strip__0:nth-child(3) input[type="checkbox"]:checked + label {
+   background: #f24b4b;
+   transform: translate3d(-100%, 0, 0);
+   animation-delay: 0.1s;
+   opacity:1;
+}
+.strips__strip__0:nth-child(3) input[type="checkbox"]{
+position: absolute;
+visibility: hidden;
+}
+.strips__strip__0:nth-child(3) input[type="radio"]:checked + label {
+   background: #f24b4b;
+   transform: translate3d(-100%, 0, 0);
+   animation-delay: 0.1s;
+   opacity:1;
+}
+.strips__strip__0:nth-child(3) input[type="radio"]{
+position: absolute;
+visibility: hidden;
+}
+.strips__strip__0:nth-child(4) .strip__content {
+    background: #60bfbf;
+    transform: translate3d(0, 100%, 0);
+    animation-name: strip4;
+    animation-delay: 0.4s;
+    opacity:0.3;
+}
+.strips__strip__0:nth-child(4) input[type="checkbox"]:checked + label {
+   background: #60bfbf;
+   transform: translate3d(-100%, 0, 0);
+   animation-delay: 0.1s;
+   opacity:1;
+}
+.strips__strip__0:nth-child(4) input[type="checkbox"]{
+position: absolute;
+visibility: hidden;
+}
+.strips__strip__0:nth-child(4) input[type="radio"]:checked + label {
+   background: #60bfbf;
+   transform: translate3d(-100%, 0, 0);
+   animation-delay: 0.1s;
+   opacity:1;
+}
+.strips__strip__0:nth-child(4) input[type="radio"]{
+position: absolute;
+visibility: hidden;
+}
+.strips__strip__0:nth-child(5) .strip__content {
+    background: #8C4B7E;
+    transform: translate3d(-100%, 0, 0);
+    animation-name: strip5;
+    animation-delay: 0.5s;
+    opacity:0.3;
+}
+.strips__strip__0:nth-child(5) input[type="checkbox"]:checked + label {
+   background: #8C4B7E;
+   transform: translate3d(-100%, 0, 0);
+   animation-delay: 0.1s;
+   opacity:1;
+}
+.strips__strip__0:nth-child(5) input[type="checkbox"]{
+position: absolute;
+visibility: hidden;
+}
+.strips__strip__0:nth-child(5) input[type="radio"]:checked + label {
+   background: #8C4B7E;
+   transform: translate3d(-100%, 0, 0);
+   animation-delay: 0.1s;
+   opacity:1;
+}
+.strips__strip__0:nth-child(5) input[type="radio"]{
+position: absolute;
+visibility: hidden;
+}
+
+
+
+
+
+
+
+
+/* .strips__strip input[type="checkbox"]:checked + label {
     border: 3px solid #D63C3F;
     background-color: #D63C3F;
     color: #fff;
     transition: all .2s;
     opacity:1;
 }
-.strips__content input[type="checkbox"]:checked + label {
-    border: 3px solid #D63C3F;
-    background-color: #D63C3F;
-    color: #fff;
-    transition: all .2s;
-    opacity:1;
-}
+
 .strips__strip input[type="checkbox"]{
  position: absolute;
  visibility: hidden;
-}
+} */
 
-.strips__strip input[type="radio"]:checked + label {
-    border: 3px solid #D63C3F;
-    background-color: #D63C3F;
-    color: #fff;
-    transition: all .2s;
-    opacity:1;
-}
-.strips__content input[type="radio"]:checked + label {
-    border: 3px solid #D63C3F;
-    background-color: #D63C3F;
-    color: #fff;
-    transition: all .2s;
-    opacity:1;
-}
-.strips__strip input[type="radio"]{
- position: absolute;
- visibility: hidden;
-}
+
 
 .strips__strip label{
  display: block;
@@ -165,6 +413,15 @@
     	 cursor: pointer;
     	 transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
     }
+    .strips__strip__0 {
+        will-change: width, left, z-index, height;
+        position: absolute;
+        width: 15%;
+        min-height: 10vh;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+   }
     .strips__strip:nth-child(1) {
    	 left: 0;
    }
@@ -177,6 +434,18 @@
     .strips__strip:nth-child(5) {
    	 left: 85%;
    }
+   .strips__strip__0:nth-child(1) {
+     left: 0;
+  }
+   .strips__strip__0:nth-child(2) {
+     left: 15%;
+  }
+   .strips__strip__0:nth-child(4) {
+     left: 70%;
+  }
+   .strips__strip__0:nth-child(5) {
+     left: 85%;
+  }
 }
  .strips__strip1 {
 	 will-change: width, left, z-index, height;
@@ -596,6 +865,10 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
     width:100%;
 }
 
+.vwFont {
+    font-size: 1.8vw;
+}
+
 
 
 
@@ -815,7 +1088,6 @@ button::before, button::after {
   background-position:center;
   height: 100%;
   width:100%;
-  font-size: 16px;
   /* color:white; */
   transition: background 0.4s;
 }
@@ -974,6 +1246,11 @@ button::before, button::after {
 }
 
 @media (max-width: 320px) {
+
+    .vwFont {
+        font-size: 2.5vw;
+    }
+
   /* body { background-color: red; } */
 
   .containerCheckBoxes {
@@ -1066,6 +1343,10 @@ button::before, button::after {
 
 @media (min-width: 321px ) and (max-width: 375px) {
   /* body { background-color: blue; } */
+
+  .vwFont {
+      font-size: 2.5vw;
+  }
 
     .middle input[type="radio"]:checked + .box span {
    	 transform: translateY(-60px);
@@ -1196,6 +1477,10 @@ button::before, button::after {
 
 @media (min-width: 376px ) and (max-width: 425px) {
   /* body { background-color: orange; } */
+
+  .vwFont {
+      font-size: 2.5vw;
+  }
 
   .middle input[type="radio"]:checked + .box span {
  	 transform: translateY(-60px);
@@ -1328,6 +1613,10 @@ button::before, button::after {
 
 @media (min-width: 426px ) and (max-width: 768px) {
 
+    .vwFont {
+        font-size: 2.5vw;
+    }
+
     .containerCheckBoxes {
         /* max-width: 200px; */
         font-size: 1em;
@@ -1452,6 +1741,10 @@ button::before, button::after {
 }
 
 @media (min-width: 769px ) and (max-width: 1024px) {
+
+    .vwFont {
+        font-size: 2.2vw;
+    }
   /* body { background-color: pink; } */
 
   .containerCheckBoxes {
@@ -1581,6 +1874,10 @@ button::before, button::after {
 }
 
 @media (min-width: 1025px ) and (max-width: 1324px) {
+
+    .vwFont {
+        font-size: 2.2vw;
+    }
 
     .styled select {
       background-size:95%;
