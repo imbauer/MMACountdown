@@ -738,7 +738,7 @@ module.exports = {
             $or : [
                 { $and : [ { 'when.year': { $gt: parseInt(year) } }, { promotion: "Ultimate Fighting Championship" }, { title: /^((?!Prelim).)*$/i } ] },
                 { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gt: month } }, { promotion: "Ultimate Fighting Championship" }, { title: /^((?!Prelim).)*$/i } ] },
-                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gte: month } }, { 'when.day': { $gt: day } }, { promotion: "Ultimate Fighting Championship" }, { title: /^((?!Prelim).)*$/i } ] }
+                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gte: month } }, { 'when.day': { $gte: day } }, { promotion: "Ultimate Fighting Championship" }, { title: /^((?!Prelim).)*$/i } ] }
             ]
         })
         .sort( { 'when.year': 1, 'when.month': 1, 'when.day': 1, 'when.hour': 1 } )
@@ -761,7 +761,7 @@ module.exports = {
             $or : [
                 { $and : [ { 'when.year': { $gt: parseInt(year) } }, { promotion: "Bellator" }, { title: /^((?!Prelim).)*$/i } ] },
                 { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gt: month } }, { promotion: "Bellator" }, { title: /^((?!Prelim).)*$/i } ] },
-                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gte: month } }, { 'when.day': { $gt: day } }, { promotion: "Bellator" }, { title: /^((?!Prelim).)*$/i } ] }
+                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gte: month } }, { 'when.day': { $gte: day } }, { promotion: "Bellator" }, { title: /^((?!Prelim).)*$/i } ] }
             ]
         })
         .sort( { 'when.year': 1, 'when.month': 1, 'when.day': 1, 'when.hour': 1 } )
@@ -784,7 +784,7 @@ module.exports = {
             $or : [
                 { $and : [ { 'when.year': { $gt: parseInt(year) } }, { title: /^((?!Prelim).)*$/i } ] },
                 { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gt: month } }, { title: /^((?!Prelim).)*$/i } ] },
-                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gte: month } }, { 'when.day': { $gt: day } }, { title: /^((?!Prelim).)*$/i } ] }
+                { $and : [ { 'when.year': { $gte: parseInt(year) } }, { 'when.month': { $gte: month } }, { 'when.day': { $gte: day } }, { title: /^((?!Prelim).)*$/i } ] }
             ]
         })
         .sort( { 'when.year': 1, 'when.month': 1, 'when.day': 1, 'when.hour': 1 } )
