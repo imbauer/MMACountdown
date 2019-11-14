@@ -51,76 +51,76 @@ class App extends Component {
     }
 
     callUpcoming() {
-        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming")
+        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
     callUpcomingUFC() {
-        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming/ufc")
+        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming/ufc")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
     callUpcomingBellator() {
-        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming/bellator")
+        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming/bellator")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
 
     callUpcomingMainUFC() {
-        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming/ufc/main")
+        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming/ufc/main")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
     callUpcomingMainBellator() {
-        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming/bellator/main")
+        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming/bellator/main")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
     callUpcomingMain() {
-        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming/main")
+        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming/main")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
 
     callPast() {
-        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past")
+        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
     callPastUFC() {
-        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past/ufc")
+        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past/ufc")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
     callPastBellator() {
-        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past/bellator")
+        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past/bellator")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
 
     callPastMainUFC() {
-        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past/ufc/main")
+        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past/ufc/main")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
     callPastMainBellator() {
-        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past/bellator/main")
+        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past/bellator/main")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
     callPastMain() {
-        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past/main")
+        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past/main")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);

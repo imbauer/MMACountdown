@@ -15,7 +15,7 @@ class Fight extends Component {
 }
 
     callFighter() {
-        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/fighters/fighter/" + this.state.firstFighter)
+        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/fighters/fighter/" + this.state.firstFighter)
             .then(res => res.json())
             .then(res => this.setState({ firstFighterRecord: res.results },
                 function () {
@@ -23,7 +23,7 @@ class Fight extends Component {
                 })
             )
             .catch(err => err);
-        fetch("http://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/fighters/fighter/" + this.state.secondFighter)
+        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/fighters/fighter/" + this.state.secondFighter)
             .then(res => res.json())
             .then(res => this.setState({ secondFighterRecord: res.results },
                 function () {

@@ -102,7 +102,7 @@ function getFighterWikiData(fighter) {
         // console.log('Got to here');
 
         var URI = encodeURIComponent(fighter).replace(/%2520/g, '%20').replace(/%252B/g, '%2B');
-        var url = 'http://' + process.env.INTERNAL_URL + '/graphql/fightersWiki/fighter/data/' + URI;
+        var url = process.env.PROTOCOL + '://' + process.env.INTERNAL_URL + '/graphql/fightersWiki/fighter/data/' + URI;
         request(url, function (err, response, body) {
             if(err){
                 console.log(err + ' ERR: Stopped at ---> ' + url);

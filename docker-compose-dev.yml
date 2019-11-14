@@ -9,6 +9,7 @@ services:
         environment:
           - REACT_APP_INTERNAL_URL=${REACT_APP_INTERNAL_URL}
           - REACT_APP_EXTERNAL_URL=${REACT_APP_EXTERNAL_URL}
+          - REACT_APP_PROTOCOL=${REACT_APP_PROTOCOL}
         ports:
             - "3000:3000"
         volumes:
@@ -36,6 +37,7 @@ services:
           - MONGO_DB=${MONGO_DB}
           - INTERNAL_URL=${INTERNAL_URL}
           - EXTERNAL_URL=${EXTERNAL_URL}
+          - PROTOCOL=${PROTOCOL}
         ports:
             - "9000:9000"
         volumes:
@@ -66,7 +68,7 @@ services:
         ports:
             - "80:80"
         volumes:
-            - ./proxy/conf.d:/etc/nginx/conf.d
+            - ./proxy/conf-dev.d:/etc/nginx/conf.d
         depends_on:
             - client
             - api

@@ -50,7 +50,7 @@ function removeUpcomingEvents() {
 
 function reAddUpcomingUFCEvents() {
     return new Promise(resolve => {
-        var url = 'http://' + process.env.INTERNAL_URL + '/graphql/promotions/ufc/event/UFC%20240';
+        var url = process.env.PROTOCOL + '://' + process.env.INTERNAL_URL + '/graphql/promotions/ufc/event/UFC%20240';
         request(url, function (err, response, body) {
             if(err){
                 console.log(err + ' ERR: Stopped at ---> ' + url);
@@ -67,7 +67,7 @@ function reAddUpcomingUFCEvents() {
 
 function reAddUpcomingBellatorEvents() {
     return new Promise(resolve => {
-        var url = 'http://' + process.env.INTERNAL_URL + '/graphql/promotions/bellator/event/Bellator_MMA_in_2019';
+        var url = process.env.PROTOCOL + '://' + process.env.INTERNAL_URL + '/graphql/promotions/bellator/event/Bellator_MMA_in_2019';
         request(url, function (err, response, body) {
             if(err){
                 console.log(err + ' ERR: Stopped at ---> ' + url);
