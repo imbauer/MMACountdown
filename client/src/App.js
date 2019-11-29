@@ -262,9 +262,9 @@ class App extends Component {
         return (
             <div className="App">
 
-            <section class="strips" style={{backgroundColor:'#282c34'}}>
-              <article class="strips__strip1">
-                <div class="strip__content">
+            <section className="strips" style={{backgroundColor:'#282c34'}}>
+              <article className="strips__strip1">
+                <div className="strip__content">
 
                 <div className="map styled" style={{ zIndex:2,margin: 0 + " auto" }}>
                     <select id="timeZones" className="vwFont" onChange={this.change} value={this.state.value} style={{ color:'white',fontWeight: 300, border: 'none' }}>
@@ -357,58 +357,58 @@ class App extends Component {
               </article>
 
 
-              <article class="strips__strip">
+              <article className="strips__strip">
               <input type="checkbox" name="ufc" id="checkboxOne" checked={this.state.ufc} onChange={this.onCheckChange} />
-              <label className="strip__content" htmlFor="checkboxOne"><h1 class="strip__title">UFC</h1></label>
+              <label className="strip__content" htmlFor="checkboxOne"><h1 className="strip__title">UFC</h1></label>
               </article>
 
 
-              <article class="strips__strip">
+              <article className="strips__strip">
               <input type="checkbox" name="bellator" id="checkboxTwo" checked={this.state.bellator} onChange={this.onCheckChange} />
-              <label className="strip__content" htmlFor="checkboxTwo"><h1 class="strip__title">Bellator</h1></label>
+              <label className="strip__content" htmlFor="checkboxTwo"><h1 className="strip__title">Bellator</h1></label>
               </article>
 
-              <article class="strips__strip">
-                <div class="strip__content">
-                  <h1 class="strip__title" data-name="Sit">Prelim</h1>
+              <article className="strips__strip">
+                <div className="strip__content">
+                  <h1 className="strip__title" data-name="Sit">Prelim</h1>
                 </div>
               </article>
 
 
-              <article class="strips__strip">
+              <article className="strips__strip">
               <input type="checkbox" name="main" id="checkboxZero" checked={this.state.main} onChange={this.onCheckChange} />
-              <label className="strip__content" htmlFor="checkboxZero"><h1 class="strip__title">Main</h1></label>
+              <label className="strip__content" htmlFor="checkboxZero"><h1 className="strip__title">Main</h1></label>
               </article>
 
-              <i class="fa fa-close strip__close"></i>
+              <i className="fa fa-close strip__close"></i>
             </section>
-            <section class="strips" style={{backgroundColor:'#282c34'}}>
+            <section className="strips" style={{backgroundColor:'#282c34'}}>
 
-              <article class="strips__strip__0" style={{display:"hidden"}}>
+              <article className="strips__strip__0" style={{display:"hidden"}}>
 
               </article>
-              <article class="strips__strip__0">
-                <div class="strip__content">
-                  <h1 class="strip__title" data-name="Dolor">PFL</h1>
+              <article className="strips__strip__0">
+                <div className="strip__content">
+                  <h1 className="strip__title" data-name="Dolor">PFL</h1>
                 </div>
               </article>
-              <article class="strips__strip__0">
-                <div class="strip__content">
-                  <h1 class="strip__title" data-name="Sit">ONE FC</h1>
+              <article className="strips__strip__0">
+                <div className="strip__content">
+                  <h1 className="strip__title" data-name="Sit">ONE FC</h1>
                 </div>
               </article>
 
-              <article class="strips__strip__0">
+              <article className="strips__strip__0">
               <input type="radio" id="when-two" name="radio1" value="past" checked={this.state.radio1 === "past"} onChange={this.onRadioChange} />
-              <label className="strip__content" htmlFor="when-two"><h1 class="strip__title">Past</h1></label>
+              <label className="strip__content" htmlFor="when-two"><h1 className="strip__title">Past</h1></label>
               </article>
 
-                <article class="strips__strip__0">
+                <article className="strips__strip__0">
                 <input type="radio" id="when-one" checked={this.state.radio1 === "upcoming"} onChange={this.onRadioChange} name="radio1" value="upcoming" />
-                <label className="strip__content" htmlFor="when-one"><h1 class="strip__title">Upcoming</h1></label>
+                <label className="strip__content" htmlFor="when-one"><h1 className="strip__title">Upcoming</h1></label>
               </article>
 
-              <i class="fa fa-close strip__close"></i>
+              <i className="fa fa-close strip__close"></i>
             </section>
 
 

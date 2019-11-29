@@ -2,6 +2,10 @@
 const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
 
+var Events = require('./models/event.js');
+var EventTimes = require('./models/eventTime.js');
+var Fighters = require('./models/fighter.js');
+
 const {
     MONGO_USERNAME,
     MONGO_PASSWORD,
@@ -17,71 +21,6 @@ const options = {
     connectTimeoutMS: 10000,
 };
 
-var fighterSchema = new mongoose.Schema({
-    "_id": false,
-    name: String,
-    birth_place: String,
-    other_names: String,
-    nationality: String,
-    weight: String,
-    weight_class: String,
-    residence: String,
-    reach_in: String,
-    stance: String,
-    wrestling: String,
-    style: String,
-    fighting_out_of: String,
-    team: String,
-    fighting_out_of: String,
-    years_active: String,
-    mma_kowin: String,
-    mma_subwin: String,
-    mma_decwin: String,
-    mma_koloss: String,
-    mma_subloss: String,
-    mma_decloss: String,
-    age: Number,
-    country: String,
-    co: String,
-    fightRecord: Array
-});
-
-var eventSchema = new mongoose.Schema({
-    "_id": false,
-    name: String,
-    title: String,
-    event: String,
-    otherName: String,
-    promotion: String,
-    nextEvent: String,
-    location: {
-        name: String,
-        city: String,
-        provState: String,
-        country: String,
-        co: String
-    },
-    when: {
-        offset: String,
-        year: String,
-        month: String,
-        monthString: String,
-        day: String,
-        weekDay: String,
-        hour: String,
-        minute: String
-    },
-    fightCard: Array
-});
-
-var eventTimeSchema = new mongoose.Schema({
-    "_id": false,
-    name: String,
-    title: String,
-    event: String,
-    hour: String,
-    minute: String
-});
 
 var dict = {
   'Afghanistan': 'af', 'Aland Islands': 'ax', 'Albania': 'al','Albanian': 'al', 'Algeria': 'dz','Algerian': 'dz', 'American Samoa': 'as', 'Andorra': 'ad', 'Angola': 'ao', 'Anguilla': 'ai',
@@ -111,17 +50,6 @@ var dict = {
   'Venezuela':'ve', 'Vietnam':'vn', 'Wales':'gb-wls', 'Western Sahara':'eh', 'Yemen':'ye', 'Zambia':'zm', 'Zimbabwe':'zw'
 };
 
-eventSchema.index({name: 1, title: 1, event: 1}, {unique: true});
-
-fighterSchema.index({name: 1}, {unique: true});
-
-eventTimeSchema.index({name: 1, title: 1}, {unique: true});
-
-var Events = mongoose.model('events', eventSchema);
-
-var EventTimes = mongoose.model('eventTimes', eventTimeSchema);
-
-var Fighters = mongoose.model('fighters', fighterSchema);
 
 const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
 // const url = "mongodb://admin:your_password@db:27017/mmaInfo?authSource=admin";
@@ -129,76 +57,6 @@ const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${M
 
 
 module.exports = {
-
-    addSampleData: function() {
-        var bellator225 = new Events ({
-            name: 'Bellator 225',
-            title: 'MITRIONE VS KHARITONOV II',
-            event: 'Bellator 225: MITRIONE VS KHARITONOV II',
-            when: {
-                offset: 'EST',
-                year: '2019',
-                month: 'August',
-                day: '24',
-                weekDay: 'Sat',
-                hour: '08',
-                minute: '00',
-            },
-            location: {
-                name: 'Webster Bank Arena',
-                city: 'Bridgeport',
-                provState: 'Connecticut',
-                country: 'United States',
-                co: 'US'
-            }
-        });
-        var bellator226 = new Events ({
-            name: 'Bellator 226',
-            title: 'BADER VS KONGO',
-            event: 'Bellator 226: BADER VS KONGO',
-            when: {
-                offset: 'EST',
-                year: '2019',
-                month: 'August',
-                day: '24',
-                weekDay: 'Sat',
-                hour: '08',
-                minute: '00',
-            },
-            location: {
-                name: 'Webster Bank Arena',
-                city: 'Bridgeport',
-                provState: 'Connecticut',
-                country: 'United States',
-                co: 'US'
-            }
-        });
-        Events.findOneAndUpdate(
-            {'name':bellator226.name, 'title':bellator226.title, 'event': bellator226.event},
-            bellator226,
-            {upsert:true, new: true},
-            function(err, doc){
-                if (err){console.log(err)}
-                else {
-                    // console.log('Event already exists in DB ---> Checking fight order and refreshing');
-                }
-            }
-        );
-        Events.findOneAndUpdate(
-            {'name':bellator225.name, 'title':bellator225.title, 'event': bellator225.event},
-            bellator225,
-            {upsert:true, new: true},
-            function(err, doc){
-                if (err){console.log(err)}
-                else {
-                    // console.log('Event already exists in DB ---> Checking fight order and refreshing');
-                }
-            }
-        );
-        // console.log('================================DATA SAVED===================================');
-    },
-
-
 
     connectDB: function() {
         mongoose.connect(url, options).then( function() {
@@ -250,40 +108,22 @@ module.exports = {
 
         Events.find({}, function(err, events) {
 
-            console.log(events);
-
             events.forEach(function(event) {
-                console.log('[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]');
-                console.log("EventYear " + event.when.year);
-                console.log("Year " + year);
-                console.log(typeof event.when.year);
-                console.log(typeof year);
-                console.log("EventMonth " + event.when.month);
-                console.log("Month " + month);
-                console.log(typeof event.when.month);
-                console.log(typeof month);
-                console.log("EventDay " + event.when.day);
-                console.log("Day " + day);
-                console.log(typeof event.when.day);
-                console.log(typeof day);
-                console.log(event.when.year > year || (event.when.year === year && event.when.month > month) || (event.when.year === year && event.when.month === month && event.when.day > day));
-                console.log('[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]');
+
                 if (event.when.year > year) {
                     Events.deleteOne({ name:event.name, title: event.title, event: event.event }, function (err) {});
-                    console.log('Deleted at year');
                 }
                 else if (event.when.year === year) {
                     if (event.when.month > month) {
                         Events.deleteOne({ name:event.name, title: event.title, event: event.event }, function (err) {});
-                        console.log('Deleted at month');
                     }
                     else if (event.when.month === month) {
                         if (event.when.day > day) {
                             Events.deleteOne({ name:event.name, title: event.title, event: event.event }, function (err) {});
-                            console.log('Deleted at day');
                         }
                     }
                 }
+
             });
 
         });
@@ -343,11 +183,6 @@ module.exports = {
                   return err;
                 }
 
-
-
-                console.log('------------------------- Found Specific Fighter -------------------------');
-                console.log(fighter);
-                console.log('--------------------------------------------------------------------------');
                 return resolve(fighter);
 
             });
@@ -356,17 +191,11 @@ module.exports = {
     },
 
     addFighter: function(fighter) {
-        console.log('**************************************************************************************************');
-        console.log('**************************************************************************************************');
-        console.log('**************************************************************************************************');
-        console.log(fighter.name);
-        console.log('**************************************************************************************************');
-        console.log('**************************************************************************************************');
-        console.log('**************************************************************************************************');
+
         if (fighter !== undefined) {
 
             if (fighter.birth_place !== undefined) {
-                console.log('HAS BIRTHPLACE');
+
                 var countryOptions = fighter.birth_place.replace(/\(|\)|today\s/g, '').replace(/,\s/g, ' ').replace(/,/g, ' ').split(' ');
                 console.log(countryOptions);
                 for (var i = countryOptions.length - 1; i >= 0; i--) {
@@ -428,20 +257,15 @@ module.exports = {
         function getEventTime(event) {
             return EventTimes.findOne({name:event.name, title: event.title, event: event.event})
             .then((eventTime) => {
-                // console.log('====== FOUND EVENT TIME ==========');
+
                 if (eventTime !== null) {
-                    // console.log(eventTime.hour);
-                    // console.log(eventTime.minute);
-                    // console.log(eventTime);
                     event.when.hour = ("0" + eventTime.hour).slice(-2);
                     event.when.minute = ("0" + eventTime.minute).slice(-2);
-                    // console.log(event.when);
                 }
                 console.log('About to run CHECKER');
                 getOldEvent(event);
             })
             .catch((err) => {
-                // console.log('========= DIDNT FIND EVENT TIME >:C ============');
                 getOldEvent(event);
                 console.log(err);
             });
@@ -451,7 +275,6 @@ module.exports = {
 
 
         function getOldEvent(event) {
-            console.log('Running Checker');
             console.log(event.name);
             console.log(event.title);
             console.log(event.event);
@@ -459,11 +282,6 @@ module.exports = {
             .lean()
             .exec()
             .then((previousEvent) => {
-                console.log(event.name);
-                console.log('New');
-                console.log(event.fightCard[2][3]);
-                console.log('Old');
-                console.log(previousEvent.fightCard[2][1]);
 
                 if (previousEvent.fightCard !== undefined || previousEvent.fightCard !== null || previousEvent.fightCard !== []) {
                     for (var i = 0; i < previousEvent.fightCard.length; i++) {

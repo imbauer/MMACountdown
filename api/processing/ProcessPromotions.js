@@ -106,7 +106,7 @@ module.exports =
         // console.log('......................................................................');
         // console.log(info[7]);
         if (info[7] !== undefined) {
-            info[7] = info[7].replace(/(.*?\()|([^a-zA-Z]or.*)|([^a-zA-Z]and.*)|(also known as )|(also known as)|(\))/g, '').replace(/(\')\1+/g, '').trim();
+            info[7] = info[7].replace(/\'\).*/g, '').replace(/(.*?\()|([^a-zA-Z]or.*)|([^a-zA-Z]and.*)|(also known as )|(also known as)|(\))/g, '').replace(/(\')\1+/g, '').trim();
         }
         // console.log(info[7]);
         // console.log('......................................................................');
