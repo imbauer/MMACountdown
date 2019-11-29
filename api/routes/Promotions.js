@@ -80,65 +80,8 @@ router.get('/', function(req, res) {
     // mongodb.renderPastEvents(res);
 });
 
-router.get('/upcoming/ufc', function(req, res) {
-    mongodb.renderUpcomingUFCEvents(res);
-});
-
-router.get('/upcoming/bellator', function(req, res) {
-    mongodb.renderUpcomingBellatorEvents(res);
-});
-
-router.get('/upcoming/ufc/main', function(req, res) {
-    mongodb.renderUpcomingUFCMainEvents(res);
-});
-
-router.get('/upcoming/bellator/main', function(req, res) {
-    mongodb.renderUpcomingBellatorMainEvents(res);
-});
-
-router.get('/upcoming/main', function(req, res) {
-    mongodb.renderUpcomingMainEvents(res);
-});
-
-
-router.get('/upcoming', function(req, res) {
-    mongodb.renderUpcomingEvents(res);
-});
-
-router.get('/past/ufc', function(req, res) {
-    mongodb.renderPastUFCEvents(res);
-});
-
-router.get('/past/ufc/main', function(req, res) {
-    mongodb.renderPastUFCMainEvents(res);
-});
-
-router.get('/past/ufc/prelims', function(req, res) {
-    mongodb.renderPastUFCPrelimEvents(res);
-});
-
-router.get('/past/bellator', function(req, res) {
-    mongodb.renderPastBellatorEvents(res);
-});
-
-router.get('/past/ufc/main', function(req, res) {
-    mongodb.renderPastUFCMainEvents(res);
-});
-
-router.get('/past/bellator/main', function(req, res) {
-    mongodb.renderPastBellatorMainEvents(res);
-});
-
-router.get('/past/main', function(req, res) {
-    mongodb.renderPastMainEvents(res);
-});
-
-router.get('/past', function(req, res) {
-    mongodb.renderPastEvents(res);
-});
-
-router.get('/sampleData', function(req, res) {
-    mongodb.addSampleData();
+router.get('/event/:when/:promotion/:slot', function(req, res) {
+    mongodb.renderAll(res, req.params.when, req.params.promotion, req.params.slot);
 });
 
 module.exports = router;

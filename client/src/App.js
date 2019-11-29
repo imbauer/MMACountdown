@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { EventList } from './components'
 import "./App.css";
-import globe from './images/globeresize.png';
-import clock from './images/clockwhiteoutline.png';
-import arrows from './images/arrows2.png';
 
 class App extends Component {
     constructor(props) {
@@ -13,19 +10,10 @@ class App extends Component {
         this.change = this.change.bind(this);
         this.onCheckChange = this.onCheckChange.bind(this);
         this.onRadioChange = this.onRadioChange.bind(this);
-        this.callUpcoming = this.callUpcoming.bind(this);
-        this.callUpcomingUFC = this.callUpcomingUFC.bind(this);
-        this.callUpcomingBellator = this.callUpcomingBellator.bind(this);
-        this.callUpcomingMainUFC = this.callUpcomingMainUFC.bind(this);
-        this.callUpcomingMainBellator = this.callUpcomingMainBellator.bind(this);
-        this.callUpcomingMain = this.callUpcomingMain.bind(this);
-        this.callPast = this.callPast.bind(this);
-        this.callPastUFC = this.callPastUFC.bind(this);
-        this.callPastBellator = this.callPastBellator.bind(this);
 
-        this.callPastMainUFC = this.callPastMainUFC.bind(this);
-        this.callPastMainBellator = this.callPastMainBellator.bind(this);
-        this.callPastMain = this.callPastMain.bind(this);
+
+        this.renderAll = this.renderAll.bind(this);
+
 
         this.callNothing = this.callNothing.bind(this);
         this.state = {
@@ -44,87 +32,17 @@ class App extends Component {
         this.setState({ dbResponse: [{name:'HEY', title:'YOU'}] })
     }
 
-
-
     initTimezone() {
         this.setState({value: 'US/Eastern'});
     }
 
-    callUpcoming() {
-        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming")
-            .then(res => res.json())
-            .then(res => this.setState({ dbResponse: res.results }))
-            .catch(err => err);
-    }
-    callUpcomingUFC() {
-        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming/ufc")
-            .then(res => res.json())
-            .then(res => this.setState({ dbResponse: res.results }))
-            .catch(err => err);
-    }
-    callUpcomingBellator() {
-        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming/bellator")
+    renderAll(when, promotion, slot) {
+        fetch(`${process.env.REACT_APP_PROTOCOL}://${process.env.REACT_APP_EXTERNAL_URL}/graphql/promotions/event/${when}/${promotion}/${slot}`)
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
 
-    callUpcomingMainUFC() {
-        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming/ufc/main")
-            .then(res => res.json())
-            .then(res => this.setState({ dbResponse: res.results }))
-            .catch(err => err);
-    }
-    callUpcomingMainBellator() {
-        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming/bellator/main")
-            .then(res => res.json())
-            .then(res => this.setState({ dbResponse: res.results }))
-            .catch(err => err);
-    }
-    callUpcomingMain() {
-        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/upcoming/main")
-            .then(res => res.json())
-            .then(res => this.setState({ dbResponse: res.results }))
-            .catch(err => err);
-    }
-
-    callPast() {
-        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past")
-            .then(res => res.json())
-            .then(res => this.setState({ dbResponse: res.results }))
-            .catch(err => err);
-    }
-    callPastUFC() {
-        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past/ufc")
-            .then(res => res.json())
-            .then(res => this.setState({ dbResponse: res.results }))
-            .catch(err => err);
-    }
-    callPastBellator() {
-        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past/bellator")
-            .then(res => res.json())
-            .then(res => this.setState({ dbResponse: res.results }))
-            .catch(err => err);
-    }
-
-    callPastMainUFC() {
-        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past/ufc/main")
-            .then(res => res.json())
-            .then(res => this.setState({ dbResponse: res.results }))
-            .catch(err => err);
-    }
-    callPastMainBellator() {
-        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past/bellator/main")
-            .then(res => res.json())
-            .then(res => this.setState({ dbResponse: res.results }))
-            .catch(err => err);
-    }
-    callPastMain() {
-        fetch(process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_EXTERNAL_URL + "/graphql/promotions/past/main")
-            .then(res => res.json())
-            .then(res => this.setState({ dbResponse: res.results }))
-            .catch(err => err);
-    }
 
     callNothing() {
         this.setState({ dbResponse: [] })
@@ -140,51 +58,27 @@ class App extends Component {
             console.log('main ' + this.state.main);
             console.log('ufc ' + this.state.ufc);
             console.log('bellator ' + this.state.bellator);
-            if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "upcoming" && this.state.main === false) {
-                this.callUpcoming();
+            var prom = "";
+            var mainn = "";
+            if (this.state.ufc === true) {
+                prom = "Ultimate Fighting Championship";
+            }
+            if (this.state.bellator === true) {
+                prom = "Bellator";
+            }
+            if (this.state.ufc === true && this.state.bellator === true) {
+                prom = "(Ultimate Fighting Championship)|(Bellator)";
+            }
+            if (this.state.main === true) {
+                mainn = "main";
+            }
+            if (this.state.main === false) {
+                mainn = "other";
             }
 
-            else if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "upcoming" && this.state.main === true) {
-                this.callUpcomingMain();
-            }
+            this.renderAll(this.state.radio1, prom, mainn);
 
-            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "upcoming" && this.state.main === true) {
-                this.callUpcomingMainUFC();
-            }
-
-            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "upcoming" && this.state.main === true) {
-                this.callUpcomingMainBellator();
-            }
-
-            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "upcoming" && this.state.main === false) {
-                this.callUpcomingUFC();
-            }
-            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "upcoming" && this.state.main === false) {
-                this.callUpcomingBellator();
-            }
-            else if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "past" && this.state.main === false) {
-                this.callPast();
-            }
-            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "past" && this.state.main === false) {
-                this.callPastUFC();
-            }
-            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "past" && this.state.main === false) {
-                this.callPastBellator();
-            }
-
-            else if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "past" && this.state.main === true) {
-                this.callPastMain();
-            }
-
-            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "past" && this.state.main === true) {
-                this.callPastMainUFC();
-            }
-
-            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "past" && this.state.main === true) {
-                this.callPastMainBellator();
-            }
-
-            else if (this.state.ufc !== true && this.state.bellator !== true) {
+            if (this.state.ufc !== true && this.state.bellator !== true) {
                 this.callNothing();
             }
         });
@@ -199,51 +93,28 @@ class App extends Component {
             console.log('radio1 ' + this.state.radio1);
             console.log('ufc ' + this.state.ufc);
             console.log('bellator ' + this.state.bellator);
-            if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "upcoming" && this.state.main === false) {
-                this.callUpcoming();
+            var prom = "";
+            var mainn = "";
+            if (this.state.ufc === true) {
+                prom = "Ultimate Fighting Championship";
+            }
+            if (this.state.bellator === true) {
+                prom = "Bellator";
+            }
+            if (this.state.ufc === true && this.state.bellator === true) {
+                prom = "(Ultimate Fighting Championship)|(Bellator)";
+            }
+            if (this.state.main === true) {
+                mainn = "main";
+            }
+            if (this.state.main === false) {
+                mainn = "other";
             }
 
-            else if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "upcoming" && this.state.main === true) {
-                this.callUpcomingMain();
-            }
+            this.renderAll(this.state.radio1, prom, mainn);
 
-            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "upcoming" && this.state.main === true) {
-                this.callUpcomingMainUFC();
-            }
 
-            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "upcoming" && this.state.main === true) {
-                this.callUpcomingMainBellator();
-            }
-
-            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "upcoming" && this.state.main === false) {
-                this.callUpcomingUFC();
-            }
-            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "upcoming" && this.state.main === false) {
-                this.callUpcomingBellator();
-            }
-            else if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "past" && this.state.main === false) {
-                this.callPast();
-            }
-            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "past" && this.state.main === false) {
-                this.callPastUFC();
-            }
-            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "past" && this.state.main === false) {
-                this.callPastBellator();
-            }
-
-            else if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "past" && this.state.main === true) {
-                this.callPastMain();
-            }
-
-            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "past" && this.state.main === true) {
-                this.callPastMainUFC();
-            }
-
-            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "past" && this.state.main === true) {
-                this.callPastMainBellator();
-            }
-
-            else if (this.state.ufc !== true && this.state.bellator !== true) {
+            if (this.state.ufc !== true && this.state.bellator !== true) {
                 this.callNothing();
             }
         });
@@ -254,7 +125,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this.callUpcomingMainUFC();
+        this.renderAll('upcoming', 'Ultimate Fighting Championship', 'main');
         this.initTimezone();
     }
 

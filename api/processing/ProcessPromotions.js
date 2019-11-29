@@ -186,6 +186,9 @@ module.exports =
             event.when = when;
             event.location = location;
             event.fightCard = fightCard[m];
+            if (event.title === null || event.title === undefined) {
+                event.title = "";
+            }
             events.push(event);
         }
        // console.log('============================================================================================================');
@@ -369,6 +372,9 @@ module.exports =
                 event.when = when;
                 event.location = location;
                 event.fightCard = fightCard[m];
+                if (event.title === null || event.title === undefined) {
+                    event.title = "";
+                }
                 events.push(event);
             }
 
