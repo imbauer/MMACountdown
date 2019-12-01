@@ -21,7 +21,7 @@ module.exports =
         var event = {};
         var fightsTotal = [];
 
-        body = body.replace(/<[^>]*>/g,'').replace(/\\n/g,'').replace(/\s\s+/g, ' ').replace(/\{\{Cite web.*?(\}\}\|)|\{\{Cite news.*?(\}\}\|)|(\{\"batchcomplete.*?\|name)/g,'');
+        body = body.replace(/<[^>]*>/g,'').replace(/\\n/g,'').replace(/\s\s+/g, ' ').replace(/\{\{Cite web.*?(\}\}\|)|\{\{Cite news.*?(\}\}\|)|(\{\"batchcomplete.*?\|name)|(date=\{\{start\s)|(date=\s\{\{start\s)|(date\s=\s\{\{start\s)|(date\s=\{\{start\s)/g,'');
         if (body.includes('#REDIRECT')) {
             var redirect = body.replace(/(.*REDIRECT.*\[)|(\].*)/g, '');
             return redirect;
@@ -29,8 +29,9 @@ module.exports =
         console.log();
         console.log();
         console.log();
-        console.log();
-        console.log();
+        console.log('========= BODY =========');
+        console.log(body);
+        console.log('========================');
         console.log();
         console.log();
         console.log();
@@ -38,7 +39,13 @@ module.exports =
         console.log();
         var info = body.split(eventParsing);
         info = info.filter(function(e){return e});
+        console.log();
+        console.log();
+        console.log('========= INFO =========');
         console.log(info);
+        console.log('========================');
+        console.log();
+        console.log();
         if (info[3].includes('date|')) {
             info.splice(3,1);
         }
