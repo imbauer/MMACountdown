@@ -11,7 +11,7 @@ module.exports =
         var weightClasses = /(?=\^)|(?=Women)|(?=(?<!Women..\s)Fly)|(?=(?<!Women..\s)Bantam)|(?=Featherweight)|(?=Lightweight)|(?=Welterweight)|(?=Middleweight)|(?=(?<!Light )Heavyweight)|(?=Light Heavyweight)/g;
         var fightSlots = /(?:vs\.)|weight/g;
         var eventDetailsParsing = /(?:.*UFC mixed martial arts event in \d{4})|Promotion(?=\w)|Information|Date|(?<!\s)\(|(?<=\d)-(?=\d)|\)Venue|(?<!\s)City|Event\schronology/g;
-        var eventParsing = /(?:was a.*?==Results==)|(?:is an upcoming.*?==Fight\scard==)|(?=promotion=)|(?=promotion\s=)|(?:{{MMAevent end.*)|(?===Fight card==)|(?=== Fight card==)|(?===Fight card ==)|(?=== Fight card ==)|(city=\[\[.*?previousevent)|(city=\s\[\[.*?previousevent)|(city=\s\[\[.*?attendance)|(city=\[\[.*?attendance)|(?=date\|df.*?\|)|(?=venue)|(?=date=Cancelled)|(?=date=.*?\s\d{1},\s\d{4}\|)|(?=date=\s.*?\s\d{1},\s\d{4}\|)|(?=date=.*?\s\d{2},\s\d{4}\|)|(?=date=\s.*?\s\d{2},\s\d{4}\|)|(?=date=\s\d{4}\|\d{2}\|\d{2})|(?=date\|\d{4}\|\d{2}\|\d{2})|(?=date\|\d{4}\|\d{2}\|\d{1})|(followingevent.*?\}\})|(?=\^)|(?:attendance=\|gate=\|)|(?:{\"batchcomplete.*?\|name)/g;
+        var eventParsing = /(?:was a.*?==Results==)|(?:is an upcoming.*?==Fight\scard==)|(?=promotion=)|(?=promotion\s=)|(?:{{MMAevent end.*)|(?===Fight card==)|(?=== Fight card==)|(?===Fight card ==)|(?=== Fight card ==)|(city=\[\[.*?previousevent)|(city=\s\[\[.*?previousevent)|(city=\s\[\[.*?attendance)|(city=\[\[.*?attendance)|(?=date\|df.*?\|)|(city=.*?\|)|(?=venue)|(?=date=Cancelled)|(?=date=.*?\s\d{1},\s\d{4}\|)|(?=date=\s.*?\s\d{1},\s\d{4}\|)|(?=date=.*?\s\d{2},\s\d{4}\|)|(?=date=\s.*?\s\d{2},\s\d{4}\|)|(?=date=.*?\d{4})|(?=date=\s\d{4}\|\d{2}\|\d{2})|(?=date\|\d{4}\|\d{2}\|\d{2})|(?=date\|\d{4}\|\d{2}\|\d{1})|(followingevent.*?\}\})|(?=\^)|(?:attendance=\|gate=\|)|(?:{\"batchcomplete.*?\|name)/g;
         //  (?=city).*?\|   (?=(city=\[\[.*?\|))
         var splitEvents = /(?:MMAevent\scard\|)|(?:MMAevent\scard\s\|)/g;
         var splitFights = /(?:MMAevent\sbout\|)|(?:MMAevent\sbout\s\|)/g;
@@ -96,7 +96,23 @@ module.exports =
 //        console.log();
         info[0] = info[0].replace(/(\|.*)|(=\s)|(=)/g, '');
         info[1] = info[1].replace(/(.*=\[\[)/g, '');
-        info[2] = info[2].replace(/(date\|)|(\}.*)/g, '').split('|');
+        info[2] = info[2].replace(/(date\|)|(date=)|(\}.*)|(\|$)/g, '').split('|');
+
+        var weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+        var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+        if (info[2].length === 1) {
+            info[2] = info[2][0].split(' ');
+            var swapArrayElements = function(arr, indexA, indexB) {
+                var temp = arr[indexA];
+                arr[indexA] = arr[indexB];
+                arr[indexB] = temp;
+            };
+            swapArrayElements(info[2], 0, 2)
+            info[2][1] = months.indexOf(info[2][1]) + 1;
+        }
+        console.log("PPPPP");
+        console.log(info[2]);
+        console.log("PPPPP");
 //        info[3] = info[3].replace(/(venue=)|(\[)|(\])/g, '').replace(/(.*=)|(.*\|)/g, '');
         if (info[3] !== undefined) {
             info[3] = info[3].replace(/(\[)|(\])|(.*=)|(\|)/g, '').trim();
@@ -167,8 +183,10 @@ module.exports =
                 location.provState = locationCombined[1];
                 location.country = locationCombined[2];
             }
-            var weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-            var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+            console.log('========= INFO =========');
+            console.log(info);
+            console.log('========================');
             var d = new Date(info[2][0], info[2][1] - 1, info[2][2]);
             var hour;
             if (m === 0) {

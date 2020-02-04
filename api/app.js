@@ -52,7 +52,7 @@ function reAddUpcomingUFCEvents() {
     return new Promise(resolve => {
         var url = process.env.PROTOCOL + '://' + process.env.INTERNAL_URL + '/graphql/promotions/ufc/event/UFC%20240';
         request(url, function (err, response, body) {
-            if(err){
+            if(err) {
                 console.log(err + ' ERR: Stopped at ---> ' + url);
             } else {
                 console.log('Called UFC successfully');
@@ -82,7 +82,7 @@ function reAddUpcomingBellatorEvents() {
     });
 }
 
-cron.schedule('48 * * * *', () => {
+cron.schedule('9 * * * *', () => {
     removeUpcomingEvents().then(() => reAddUpcomingUFCEvents()).then(() => reAddUpcomingBellatorEvents());
     console.log('==============================================================');
     console.log('Runs at the number in the hour');

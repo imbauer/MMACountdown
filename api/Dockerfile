@@ -11,6 +11,8 @@ COPY package*.json /api/
 # install dependencies
 RUN npm install
 
+RUN npm install -g nodemon
+
 # Copy the current directory contents into the container at /api
 COPY . /api/
 
@@ -18,4 +20,4 @@ COPY . /api/
 EXPOSE 80
 
 # Run the app when the container launches
-CMD ["npm", "start"]
+CMD ["nodemon", "start"]
