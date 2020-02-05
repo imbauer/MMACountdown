@@ -7,7 +7,10 @@ pipeline {
     stages {
         stage('Build docker image') {
             steps {
-                sh 'rm -R MMACountdown'
+                sh '''
+                    set +e
+                    rm -R MMACountdown
+                '''
                 sh 'git clone https://github.com/imbauer/MMACountdown.git'
                 sh 'ls MMACountdown'
                 withCredentials([string(credentialsId: 'AWS_ACCOUNT_ID', variable: 'SECRET')]) { //set SECRET with the credential content
