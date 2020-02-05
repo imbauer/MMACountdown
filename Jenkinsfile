@@ -9,18 +9,22 @@ pipeline {
             steps {
                 sh '''
                     set +e
-                    rm -R MMACountdown
+                    rm -R JenkinsMMACountdown
                     set -e
                 '''
-                sh 'git clone https://github.com/imbauer/MMACountdown.git'
+                sh 'git clone https://github.com/imbauer/JenkinsMMACountdown.git'
                 sh 'ls MMACountdown'
                 withCredentials([string(credentialsId: 'AWS_ACCOUNT_ID', variable: 'SECRET')]) { //set SECRET with the credential content
-                    sh 'docker build MMACountdown/client/ -t ${SECRET}.dkr.ecr.us-east-2.amazonaws.com/client:latest'
-                    sh 'docker build MMACountdown/api/ -t ${SECRET}.dkr.ecr.us-east-2.amazonaws.com/api:latest'
+                    sh '''
+                        set +e
+                        docker build JenkinsMMACountdown/jenkins/ -t ${SECRET}.dkr.ecr.us-east-2.amazonaws.com/jenkins:latest
+                        docker build JenkinsMMACountdown/nginx/ -t ${SECRET}.dkr.ecr.us-east-2.amazonaws.com/nginx:latest
+                        set -e
+                    '''
                 }
             }
         }
-        stage('AWS ') {
+        stage('AWS ECR Repositories') {
             agent {
                 docker { image 'garland/aws-cli-docker' }
             }
@@ -28,10 +32,10 @@ pipeline {
                 withAWS(credentials:'push_docker_to_ecr') {
                     sh '''
                         set +e
-                        aws ecr describe-repositories --repository-names client --region us-east-2 && aws ecr delete-repository --force --repository-name client --region us-east-2
-                        aws ecr describe-repositories --repository-names client --region us-east-2 || aws ecr create-repository --repository-name client --region us-east-2
-                        aws ecr describe-repositories --repository-names api --region us-east-2 && aws ecr delete-repository --force --repository-name api --region us-east-2
-                        aws ecr describe-repositories --repository-names api --region us-east-2 || aws ecr create-repository --repository-name api --region us-east-2
+                        aws ecr describe-repositories --repository-names jenkins --region us-east-2 && aws ecr delete-repository --force --repository-name jenkins --region us-east-2
+                        aws ecr describe-repositories --repository-names jenkins --region us-east-2 || aws ecr create-repository --repository-name jenkins --region us-east-2
+                        aws ecr describe-repositories --repository-names nginx --region us-east-2 && aws ecr delete-repository --force --repository-name nginx --region us-east-2
+                        aws ecr describe-repositories --repository-names nginx --region us-east-2 || aws ecr create-repository --repository-name nginx --region us-east-2
                         set -e
                     '''
                     script {
@@ -44,8 +48,8 @@ pipeline {
             steps {
                 sh OUTPUT
                 withCredentials([string(credentialsId: 'AWS_ACCOUNT_ID', variable: 'SECRET')]) { //set SECRET with the credential content
-                    sh 'docker push ${SECRET}.dkr.ecr.us-east-2.amazonaws.com/client:latest'
-                    sh 'docker push ${SECRET}.dkr.ecr.us-east-2.amazonaws.com/api:latest'
+                    sh 'docker push ${SECRET}.dkr.ecr.us-east-2.jenkins.com/client:latest'
+                    sh 'docker push ${SECRET}.dkr.ecr.us-east-2.nginx.com/api:latest'
                 }
                 sh 'docker images'
             }
