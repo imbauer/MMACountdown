@@ -48,8 +48,8 @@ pipeline {
             steps {
                 sh OUTPUT
                 withCredentials([string(credentialsId: 'AWS_ACCOUNT_ID', variable: 'SECRET')]) { //set SECRET with the credential content
-                    sh 'docker push ${SECRET}.dkr.ecr.us-east-2.jenkins.com/client:latest'
-                    sh 'docker push ${SECRET}.dkr.ecr.us-east-2.nginx.com/api:latest'
+                    sh 'docker push ${SECRET}.dkr.ecr.us-east-2.amazonaws.com/jenkins:latest'
+                    sh 'docker push ${SECRET}.dkr.ecr.us-east-2.amazonaws.com/nginx:latest'
                 }
                 sh 'docker images'
             }
