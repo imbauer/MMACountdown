@@ -24,7 +24,7 @@ pipeline {
                 }
             }
         }
-        stage('AWS ECR Repositories') {
+        stage('AWS ECR Repositories push') {
             agent {
                 docker { image 'garland/aws-cli-docker' }
             }
