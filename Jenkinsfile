@@ -7,9 +7,9 @@ pipeline {
     stages {
         stage('Build docker image') {
             steps {
-                sh 'rm -R JenkinsMMACountdown'
+                sh 'rm -R MMACountdown'
                 sh 'git clone https://github.com/imbauer/MMACountdown.git'
-                sh 'ls JenkinsMMACountdown'
+                sh 'ls MMACountdown'
                 withCredentials([string(credentialsId: 'AWS_ACCOUNT_ID', variable: 'SECRET')]) { //set SECRET with the credential content
                     sh 'docker build MMACountdown/client/ -t ${SECRET}.dkr.ecr.us-east-2.amazonaws.com/client:latest'
                     sh 'docker build MMACountdown/api/ -t ${SECRET}.dkr.ecr.us-east-2.amazonaws.com/api:latest'
