@@ -10,6 +10,7 @@ pipeline {
                 sh '''
                     set +e
                     rm -R MMACountdown
+                    set -e
                 '''
                 sh 'git clone https://github.com/imbauer/MMACountdown.git'
                 sh 'ls MMACountdown'
