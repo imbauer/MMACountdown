@@ -32,7 +32,7 @@ module.exports =
                     personalDetails.shift();
                     personalDetails = personalDetails.filter(function(e){return e});
                     // console.log(personalDetails);
-                    // console.log('JIFREGJRETGYREHJEJNHJREIOHGRE');
+                    console.log('JIFREGJRETGYREHJEJNHJREIOHGRE');
                     // console.log(personalDetails);
                     // console.log('JIFREGJRETGYREHJEJNHJREIOHGRE');
                     for (var p = 0; p < personalDetails.length; p++) {
