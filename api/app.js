@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 const cron = require('node-cron');
 var request = require('request');
 var logger = require('morgan');
-var cors = require("cors");
+// var cors = require("cors");
 var indexRouter = require('./routes/index');
 var promotions = require('./routes/Promotions');
 var fighters = require('./routes/Fighters');
@@ -20,7 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

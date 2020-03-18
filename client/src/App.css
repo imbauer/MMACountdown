@@ -626,37 +626,12 @@ visibility: hidden;
 	 margin: 0 0 16px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@import url('https://fonts.googleapis.com/css?family=Dax:400,900');
  .middle {
 	 width: 100%;
 	 text-align: center;
      overflow:hidden;
 }
  .middle h1 {
-	 font-family: 'Dax', sans-serif;
 	 color: #fff;
 }
  .middle input[type="radio"] {
@@ -690,7 +665,6 @@ visibility: hidden;
 	 text-align: center;
 	 cursor: pointer;
 	 position: relative;
-	 font-family: 'Dax', sans-serif;
 	 font-weight: 900;
 }
  .middle .box:active {

@@ -24,7 +24,8 @@ yarn-debug.log*
 yarn-error.log*
 
 
-
+main.tf
+*terraform*
 
 
 
