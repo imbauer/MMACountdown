@@ -35,14 +35,14 @@ app.use("/fightersWiki", fightersWiki);
 app.use("/promotionsWiki", promotionsWiki);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+    next(createError(404));
 });
 
 function removeUpcomingEvents() {
     return new Promise(resolve => {
-      mongodb.clearData();
-      console.log("ClearData Section");
-      resolve();
+        mongodb.clearData();
+        console.log("ClearData Section");
+        resolve();
     }).catch( function(err) {
         console.log(err);
     });
@@ -82,7 +82,7 @@ function reAddUpcomingBellatorEvents() {
     });
 }
 
-cron.schedule('9 * * * *', () => {
+cron.schedule('45 * * * *', () => {
     removeUpcomingEvents().then(() => reAddUpcomingUFCEvents()).then(() => reAddUpcomingBellatorEvents());
     console.log('==============================================================');
     console.log('Runs at the number in the hour');
@@ -91,13 +91,13 @@ cron.schedule('9 * * * *', () => {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 module.exports = app;
